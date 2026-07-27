@@ -4,6 +4,10 @@
 - Milestone/task: M1-01 — local fail-closed admission boundary for schedule and OSM geometry sources
 - Scope: no external request, download, source import, geometry, map packaging, GPS or realtime work
 
+> Historical M1-01 evidence. The schedule portion was superseded on 2026-07-28 by the owner-approved
+> public/cache-only Yandex API contract in `M1-yandex-cache-contract.md`; immutable schedule import
+> remains prohibited.
+
 ## Inputs and source state
 
 `data/reference/source_manifest.yaml` preserves the M0 source references and introduces an empty
@@ -51,6 +55,6 @@ requires `© OpenStreetMap contributors`, `ODbL 1.0` and a false public-tile pro
 
 ## Limitation and next gate
 
-This artifact proves a local reject path, not the quality or availability of an external source.
-The next task is to obtain and lawfully admit immutable schedule and OSM geometry snapshots before
-creating a graph, map or stop pattern.
+This artifact proves the immutable import reject path, not the quality or availability of an external
+source. The next task is to obtain a versioned OSM geometry snapshot and implement the separate
+cache-only Yandex schedule adapter without converting its responses into a dataset.

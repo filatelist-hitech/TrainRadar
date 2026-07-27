@@ -13,8 +13,12 @@
 - [ ] Идентифицировать официальный infrastructure registry/source и права использования.
 - [x] Выполнить read-only CPPK map cross-check: 42 current records имеют map match с ID/координатами;
   `32 км` остаётся schedule-only (2026-07-28, checksum в manifest).
-- [ ] Получить immutable lawful schedule snapshot с source version, SHA-256 и import rights; до
-  admission он не попадает в graph, map или stop patterns.
+- [x] Выбрать M1 schedule source: public/free Яндекс.Расписания API в cache-only режиме; persistent
+  import, disk cache и offline schedule запрещены (owner authorization 2026-07-28, official terms reviewed).
+- [ ] Перед runtime enablement подтвердить текущие API limits/terms и настроить server-side secret;
+  ключ не хранить в Git/mobile/evidence.
+- [ ] Получить sourced ordinary/accelerated/express patterns через runtime API contract; до этого
+  не создавать persistent stop patterns из API response.
 - [ ] Получить versioned OSM corridor extract с replication/version, SHA-256, ODbL attribution и
   topology review; до admission он не попадает в graph или map.
 - [ ] Законно импортировать или independently re-check coordinates, object type, kilometer,

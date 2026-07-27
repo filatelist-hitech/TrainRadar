@@ -50,7 +50,7 @@ module TrainRadar
       REQUIRED_CPPK_SOURCE_REFS + [KOTLYAKOVO_DECISION_REF, CPPK_MAP_SOURCE_REF]
     ).freeze
     M1_REQUIRED_SOURCE_ROLES = {
-      "schedule" => "carrier_schedule",
+      "schedule_cache" => "yandex_rasp_api",
       "osm_geometry" => "osm_corridor_extract"
     }.freeze
     SHA256_PATTERN = /\Asha256:[0-9a-f]{64}\z/
@@ -285,8 +285,10 @@ module TrainRadar
       end
 
       importable_refs = admission["importable_source_refs"]
-      unless importable_refs.is_a?(Array) && importable_refs.uniq == importable_refs
-        errors << "m1_source_admission.importable_source_refs must be a unique array"
+      cache_only_refs = admission["cache_only_source_refs"]
+      unless importable_refs.is_a?(Array) && importable_refs.uniq == importable_refs &&
+             cache_only_refs.is_a?(Array) && cache_only_refs.uniq == cache_only_refs
+        errors << "m1_source_admission source-reference lists must be unique arrays"
         return
       end
 
@@ -298,11 +300,12 @@ module TrainRadar
 
       roles = entries.map { |entry| entry.is_a?(Hash) ? entry["role"] : nil }
       unless roles == M1_REQUIRED_SOURCE_ROLES.keys
-        errors << "m1_source_admission.required_source_roles must be schedule then osm_geometry"
+        errors << "m1_source_admission.required_source_roles must be schedule_cache then osm_geometry"
         return
       end
 
       admitted_refs = []
+      cache_only_role_refs = []
       entries.each do |entry|
         role = entry["role"]
         source_ref = M1_REQUIRED_SOURCE_ROLES.fetch(role)
@@ -318,9 +321,10 @@ module TrainRadar
         end
 
         admitted = entry["admission_status"] == "admitted"
+        cache_only = entry["admission_status"] == "cache_only"
         blocked = entry["admission_status"] == "blocked"
-        unless admitted || blocked
-          errors << "M1 #{role} admission_status must be blocked or admitted"
+        unless admitted || cache_only || blocked
+          errors << "M1 #{role} admission_status must be blocked, cache_only or admitted"
           next
         end
 
@@ -333,6 +337,14 @@ module TrainRadar
           next
         end
 
+        if cache_only
+          cache_only_role_refs << source_ref
+          errors << "cache-only M1 #{role} source must not be importable" if importable_refs.include?(source_ref)
+          errors << "cache-only M1 #{role} source must be listed as cache-only" unless cache_only_refs.include?(source_ref)
+          validate_cache_only_m1_source(role, source, errors)
+          next
+        end
+
         admitted_refs << source_ref
         errors << "admitted M1 #{role} source must be listed as importable" unless importable_refs.include?(source_ref)
         validate_admitted_m1_source(role, source, errors)
@@ -340,6 +352,9 @@ module TrainRadar
 
       unless importable_refs == admitted_refs
         errors << "m1_source_admission.importable_source_refs must list exactly admitted sources"
+      end
+      unless cache_only_refs == cache_only_role_refs
+        errors << "m1_source_admission.cache_only_source_refs must list exactly cache-only sources"
       end
 
       expected_status = if importable_refs.empty?
@@ -350,6 +365,32 @@ module TrainRadar
                           "partially_admitted"
                         end
       errors << "m1_source_admission.status must match importable_source_refs" unless admission["status"] == expected_status
+    end
+
+    def validate_cache_only_m1_source(role, source, errors)
+      unless role == "schedule_cache"
+        errors << "M1 #{role} cannot use a cache-only source"
+        return
+      end
+
+      errors << "cache-only M1 schedule source must be approved_m1_cache_only" unless
+        source["verification_status"] == "approved_m1_cache_only"
+      errors << "cache-only M1 schedule source requires explicit API terms" unless
+        source["license"] == "Yandex Schedule API terms"
+      errors << "cache-only M1 schedule source requires Yandex attribution" unless
+        source["attribution"] == "Данные предоставлены сервисом Яндекс.Расписания"
+
+      expected_policy = {
+        "storage" => "memory_only",
+        "maximum_ttl_seconds" => 300,
+        "persist_to_disk" => false,
+        "serve_when_offline" => false,
+        "api_key_environment_variable" => "YANDEX_RASP_API_KEY"
+      }
+      expected_policy.each do |key, value|
+        errors << "cache-only M1 schedule policy.#{key} must equal #{value.inspect}" unless
+          source.dig("cache_policy", key) == value
+      end
     end
 
     def validate_admitted_m1_source(role, source, errors)

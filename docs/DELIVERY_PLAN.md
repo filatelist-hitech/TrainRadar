@@ -6,7 +6,7 @@
 | Milestone | User outcome | Automated gate | Manual/field gate | Degradation |
 |---|---|---|---|---|
 | M0 Discovery | проверяемый startup package без ложных данных | `make check`, 44/44 registry validator; planned stop disabled | source/legal review pending | всё внешнее `pending` |
-| M1 Offline rail map | текущий usable corridor виден offline | registry 44/44; graph/map 43 enabled; planned-stop exclusion; topology; attribution | visual corridor/source check | last valid versioned dataset |
+| M1 Offline rail map + cached schedule | публичный usable corridor offline, schedule online | registry 44/44; graph/map 43 enabled; planned-stop exclusion; topology; OSM attribution; Yandex cache-only contract | visual corridor/source check | last valid OSM dataset; schedule unavailable |
 | M2 Single rider track | пользователь видит свой local track | consent state, synthetic replay, encrypted retention | physical iOS/Android/GPS | local-only, no public confirm |
 | M3 Multi-rider matching | наблюдения безопасно агрегируются | spoof/replay/independence/map ambiguity | controlled group run | estimate/unmatched <3 |
 | M4 Live train view | public truth state + freshness via SSE | contract/reconnect/stale/accessibility | comprehension test | explicit stale/offline |
@@ -19,7 +19,7 @@
 flowchart LR
     M0 --> M1 --> M2 --> M3 --> M4 --> M5 --> M6
     Legal["Legal/privacy gate"] --> M2
-    Sources["Verified sources/licences"] --> M1
+    Sources["Versioned OSM + Yandex API terms"] --> M1
     KMS["Russian KMS + delete design"] --> M2
 ```
 
@@ -34,11 +34,13 @@ Owner accepted M0 on 2026-07-28 and separately authorized M1. M2–M6 по-пр�
 
 ### M1
 
-M1 начат с fail-closed source admission boundary: allowlist пуст, пока не пройдут rights, immutable
-snapshot/version и checksum gate. Depends on verified carrier/infrastructure/OSM sources. Acceptance: 44/44 registry slots accounted
-for, 43 current stops in operational graph/map/QA, `Котляково` excluded until activation; forbidden
-branches absent; ODbL visible; reproducible extract checksum. Field: source owner reviews special
-stops. Rollback: serve previous versioned offline dataset.
+M1 публичен только как read-only map/schedule surface: аккаунты, GPS и все M2–M6 остаются закрыты.
+Яндекс.Расписания API не становится dataset: только server-side, in-memory cache ≤300 seconds,
+mandatory attribution и no schedule offline. Depends on versioned OSM source. Acceptance: 44/44
+registry slots accounted for, 43 current stops in operational graph/map/QA, `Котляково` excluded
+until activation; forbidden branches absent; ODbL visible; reproducible extract checksum; schedule
+unavailable without network/API. Rollback: serve previous versioned offline OSM dataset and hide
+schedule with an explicit unavailable state.
 
 ### M2
 

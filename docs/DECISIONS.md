@@ -20,5 +20,7 @@
 | D-016 | M0 discovery package accepted by owner on 2026-07-28 | accepted | completed predecessor for M1 |
 | D-017 | M1 Offline rail map authorized by owner on 2026-07-28 | accepted | M1 only; M2–M6 remain blocked pending separate authorization |
 | D-018 | M1 source admission is an explicit fail-closed allowlist | accepted | no schedule/OSM import until immutable snapshot, SHA-256, rights and OSM attribution gates pass |
+| D-019 | M1 is public read-only map/schedule; M2–M6 remain invite-only | accepted | no account, GPS, track or pilot capability enters M1 |
+| D-020 | Яндекс.Расписания API is M1 cache-only, not an imported dataset | accepted | backend-only key; in-memory TTL ≤300s; attribution required; no disk/offline schedule |
 
 Architecture rationale is expanded in `docs/adr/`.

@@ -106,11 +106,11 @@ class ReferenceValidatorTest < Minitest::Test
 
   def test_rejects_listing_blocked_m1_source_as_importable
     manifest = deep_copy(@manifest)
-    manifest["m1_source_admission"]["importable_source_refs"] << "carrier_schedule"
+    manifest["m1_source_admission"]["importable_source_refs"] << "osm_corridor_extract"
 
     assert_includes(
       @validator.validate_manifest(manifest).join("\n"),
-      "blocked M1 schedule source must not be importable"
+      "blocked M1 osm_geometry source must not be importable"
     )
   end
 
@@ -123,6 +123,18 @@ class ReferenceValidatorTest < Minitest::Test
       @validator.validate_manifest(manifest).join("\n"),
       "m1_source_admission.importable_source_refs must list exactly admitted sources"
     )
+  end
+
+  def test_rejects_persisting_or_serving_yandex_schedule_offline
+    manifest = deep_copy(@manifest)
+    source = manifest["sources"].find { |candidate| candidate["source_id"] == "yandex_rasp_api" }
+    source["cache_policy"]["persist_to_disk"] = true
+    source["cache_policy"]["serve_when_offline"] = true
+
+    errors = @validator.validate_manifest(manifest).join("\n")
+
+    assert_includes errors, "cache-only M1 schedule policy.persist_to_disk must equal false"
+    assert_includes errors, "cache-only M1 schedule policy.serve_when_offline must equal false"
   end
 
   def test_rejects_admitted_osm_source_without_attribution_or_snapshot

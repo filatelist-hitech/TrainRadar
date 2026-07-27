@@ -282,6 +282,15 @@ documents:
     check_command: ruby scripts/docs_gate.rb check-impact --staged
     update_conditions: M1 source-admission contract or its local verification changes
     auto_stage: false
+  - path: docs/evidence/M1-yandex-cache-contract.md
+    audience: team
+    owner: data-and-qa
+    type: human
+    source_paths: [AGENTS.md, data/reference/source_manifest.yaml, scripts/validate_reference_data.rb, test/validate_reference_data_test.rb, .omx/plans/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: public M1 schedule source, cache boundary, attribution or test contract changes
+    auto_stage: false
   - path: docs/evidence/README.md
     audience: team
     owner: qa

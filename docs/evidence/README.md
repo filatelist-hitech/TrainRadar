@@ -15,5 +15,7 @@ M0 startup evidence находится в `M0-startup.md`; отдельная р
 в `M0-reference-verification.md`; интеграция фирменных assets — в `brand-assets-2026-07-27.md`.
 M1 fail-closed source-admission boundary фиксируется в `M1-source-admission-boundary.md`; он
 подтверждает локальный запрет import, но не заменяет legal/source/map review.
+Переход M1 на public/cache-only Яндекс.Расписания API фиксируется в
+`M1-yandex-cache-contract.md`; это contract decision, а не evidence реального API запроса.
 Не хранить здесь secrets, exact GPS, invites, raw capability IDs, access tokens или personal paths
 вне необходимых локальных source identifiers.

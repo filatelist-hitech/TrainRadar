@@ -76,11 +76,14 @@ Command: `make validate-data` and `ruby test/validate_reference_data_test.rb`.
 - topology degree/direction and endpoint properties;
 - forbidden branch and bounding corridor tests;
 - reproducible OSM extract checksum/version/licence/attribution;
-- sourced stop-pattern contract fixtures for ordinary/accelerated/express;
+- cache-only Яндекс API contract: public/free surface, mandatory attribution, server-side key,
+  in-memory TTL ≤300 seconds, no disk persistence and no schedule when offline;
+- sourced stop-pattern contract fixtures for ordinary/accelerated/express, когда их возвращает API;
 - map golden/accessibility/offline tests and manual source/map review.
 
 Exit: 44/44 registry slots accounted for, 43 enabled current stops across operational layers,
-planned `Котляково` visibly fail-closed, and no pending field required by M1 acceptance.
+planned `Котляково` visibly fail-closed; offline map не выдаёт расписание, а online schedule всегда
+показывает attribution и freshness. Не требуется immutable schedule snapshot.
 
 ## M2 suites
 

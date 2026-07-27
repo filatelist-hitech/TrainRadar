@@ -13,6 +13,7 @@ flowchart LR
     Rider["Приглашённый пассажир"] --> Mobile["TrainRadar Mobile"]
     Mobile --> API["TrainRadar API"]
     API --> Carrier["Официальные расписания/телеметрия (если доступны)"]
+    API --> Yandex["Яндекс.Расписания API\nM1 cache-only"]
     API --> OSM["Versioned OSM extract"]
     Owner["Владелец пилота / оператор ПД"] --> API
     Tutu["Tutu MCP"] -. "только ручная point-check сверка" .-> Owner
@@ -35,7 +36,9 @@ flowchart TB
     Raw -. "hard delete + key destruction" .-> Keys
 ```
 
-В M0 API не подключён к БД и SSE отвечает `501`. Compose проверяет только изоляцию dev stores.
+В M0 API не подключён к БД и SSE отвечает `501`. В M1 future schedule adapter использует
+Яндекс.Расписания API через Go backend: ключ только server-side, in-memory cache ≤300 секунд,
+без persistence и без offline schedule. Compose проверяет только изоляцию dev stores.
 Локальный volume сам по себе не является production encryption-at-rest.
 
 ## Модули backend

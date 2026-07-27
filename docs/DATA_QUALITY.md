@@ -23,12 +23,17 @@ official commissioning evidence and a separate owner decision.
 
 ## M1 source admission quality gate
 
-Ни schedule, ни OSM geometry не могут попасть в offline graph/map по одному display-source check.
-`m1_source_admission` fail-closed: blocked source не включается в `importable_source_refs`; admitted
-source требует immutable version/reference, SHA-256, reviewed import rights и `verified_m1_import`.
+Ни persistent schedule, ни OSM geometry не могут попасть в offline graph/map по одному display-source
+check. `m1_source_admission` fail-closed: blocked source не включается в `importable_source_refs`;
+admitted source требует immutable version/reference, SHA-256, reviewed import rights и
+`verified_m1_import`.
 Для OSM обязательны `ODbL 1.0`, visible attribution и запрет public OSM tiles как production backend.
 При checksum/right/topology failure слой не обновляется: остаётся последняя valid version либо слой
 отключается. На 2026-07-28 список admitted sources пуст.
+
+Исключение M1 — Яндекс.Расписания API: это не import, а public read-only cache-only adapter. Response
+держится только в памяти не более 300 секунд, не пишется на диск и не выдаётся при отсутствии сети.
+UI показывает mandatory Yandex attribution и время обновления; API key доступен только backend.
 
 ## Freshness buckets
 

@@ -7,13 +7,11 @@ policy:
 m1_source_admission:
   status: no_sources_admitted
   importable_source_refs: []
+  cache_only_source_refs: [yandex_rasp_api]
   required_source_roles:
-    - role: schedule
-      source_ref: carrier_schedule
-      admission_status: blocked
-      blocking_reasons:
-        - carrier rights and licence are not confirmed for import
-        - immutable lawful schedule snapshot with source version and checksum is absent
+    - role: schedule_cache
+      source_ref: yandex_rasp_api
+      admission_status: cache_only
     - role: osm_geometry
       source_ref: osm_corridor_extract
       admission_status: blocked
@@ -45,6 +43,24 @@ sources:
       - cppk_route_6002_2026-07-27
       - cppk_station_search_kotlyakovo_2026-07-27
     verification_status: reviewed_current_source_with_planned_gap
+  - source_id: yandex_rasp_api
+    url: "https://api.rasp.yandex.net/v3.0/"
+    owner: "ООО «Яндекс»"
+    license: "Yandex Schedule API terms"
+    retrieved_at: "2026-07-28"
+    checksum: null
+    checksum_scope: "No schedule response retained; current API terms are reviewed by URL before runtime enablement"
+    update_method: "HTTPS GET through TrainRadar backend with a locally supplied API key; terms review on every release"
+    allowed_use: "free public M1 read-only schedule display through API functionality with required Yandex attribution and temporary in-memory cache"
+    prohibited_use: [persistent storage, disk cache, offline schedule snapshots, raw-response redistribution, restricted-access use, commercial use]
+    attribution: "Данные предоставлены сервисом Яндекс.Расписания"
+    cache_policy:
+      storage: memory_only
+      maximum_ttl_seconds: 300
+      persist_to_disk: false
+      serve_when_offline: false
+      api_key_environment_variable: YANDEX_RASP_API_KEY
+    verification_status: approved_m1_cache_only
   - source_id: cppk_interactive_map_2026-07-28
     url: "https://central-ppk.ru/new/imap/?searchroute=%D0%9F%D0%B0%D0%B2%D0%B5%D0%BB%D0%B5%D1%86%D0%BA%D0%BE%D0%B5+%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5"
     owner: "АО «Центральная ППК»"
