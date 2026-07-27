@@ -1,0 +1,16 @@
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
+developer_instructions = """
+Read AGENTS.md and docs/EXECUTION_STATE.yaml before work.
+Operate only inside the active TrainRadar milestone. Preserve the 44-stop corridor,
+privacy invariants, evidence discipline, and the single next_action rule.
+Never commit, push, deploy, publish, use paid resources, or collect real GPS without approval.
+"""
+
+[features]
+multi_agent = true
+child_agents_md = true
+
+[agents]
+max_threads = 6
+max_depth = 1

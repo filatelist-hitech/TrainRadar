@@ -1,0 +1,163 @@
+openapi: 3.1.0
+info:
+  title: TrainRadar API
+  version: 0.0.1-m0
+  description: |
+    M0 contract skeleton. It exposes health/status only. The SSE route and event
+    schemas reserve the future contract but return 501 until a later approved milestone.
+servers:
+  - url: http://127.0.0.1:8080
+    description: Local development
+paths:
+  /healthz:
+    get:
+      operationId: getHealth
+      summary: Process health
+      responses:
+        "200":
+          description: Process is healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+  /v1/status:
+    get:
+      operationId: getProjectStatus
+      summary: M0 skeleton and corridor status
+      responses:
+        "200":
+          description: Static M0 status; not live train data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectStatus"
+  /v1/live/events:
+    get:
+      operationId: subscribeLiveEvents
+      summary: Reserved SSE endpoint
+      description: |
+        M0 always returns 501. A later approved milestone may stream typed SSE
+        events whose payload conforms to TrainPositionEvent.
+      responses:
+        "200":
+          description: Reserved future SSE stream; never returned by M0
+          content:
+            text/event-stream:
+              schema:
+                type: string
+              examples:
+                position:
+                  value: |
+                    event: train.position
+                    id: 01J00000000000000000000000
+                    data: {"schema_version":"1","state":"estimated","live_coverage":false}
+        "501":
+          description: Realtime is intentionally not implemented in M0
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Health:
+      type: object
+      required: [status]
+      properties:
+        status:
+          const: ok
+    ProjectStatus:
+      type: object
+      required:
+        - project
+        - milestone
+        - corridor
+        - registered_stops
+        - implemented
+        - not_implemented
+        - realtime_endpoint
+      properties:
+        project:
+          const: TrainRadar
+        milestone:
+          const: M0
+        corridor:
+          const: Москва-Павелецкая → Узуново
+        registered_stops:
+          const: 44
+        implemented:
+          type: array
+          items:
+            type: string
+        not_implemented:
+          type: array
+          items:
+            type: string
+        realtime_endpoint:
+          const: reserved_not_implemented
+    PositionState:
+      type: string
+      enum:
+        - official_actual
+        - crowd_confirmed
+        - estimated
+        - stale_lost
+    TrainPositionEvent:
+      type: object
+      description: Future aggregate train state; never an individual passenger point.
+      required:
+        - schema_version
+        - event_id
+        - occurred_at
+        - vehicle_id
+        - trip_id
+        - state
+        - source_type
+        - contributors
+        - age_seconds
+        - confidence
+        - live_coverage
+      properties:
+        schema_version:
+          type: string
+        event_id:
+          type: string
+        occurred_at:
+          type: string
+          format: date-time
+        vehicle_id:
+          type: string
+        trip_id:
+          type: string
+        state:
+          $ref: "#/components/schemas/PositionState"
+        source_type:
+          type: string
+        contributors:
+          type: integer
+          minimum: 0
+        age_seconds:
+          type: integer
+          minimum: 0
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        live_coverage:
+          type: boolean
+          description: True only for official_actual or crowd_confirmed.
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string

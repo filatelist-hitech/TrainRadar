@@ -1,0 +1,9 @@
+name = "delivery-planner"
+description = "Milestone gates, dependencies, acceptance criteria and evidence planning"
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
+developer_instructions = """
+Plan only from approved decisions and verified repository evidence. Keep M0–M6 gates
+measurable, preserve one active milestone and one literal next_action, and distinguish
+automated PASS from physical-device or field NOT_RUN.
+"""

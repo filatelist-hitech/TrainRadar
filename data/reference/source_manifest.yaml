@@ -1,0 +1,107 @@
+schema_version: 1
+generated_at: "2026-07-27"
+policy:
+  no_unnamed_files: true
+  every_dataset_requires_checksum: true
+  pending_sources_are_not_importable: true
+sources:
+  - source_id: approved_seed_spec
+    identifier: "/Users/filatelist/.codex/attachments/b161d6d6-a249-442e-b4af-2251b046d4a2/pasted-text.txt"
+    owner: "TrainRadar product owner"
+    license: "project input; redistribution not granted"
+    retrieved_at: "2026-07-27"
+    checksum: "sha256:bc0f8ec80c9b8a96d02e36a4d5e40a12d2f675fafd174a0fd4b8fe48e3b0aecf"
+    update_method: "manual owner-approved specification revision"
+    allowed_use: "M0 seed scope, names, ordering and product constraints"
+    prohibited_use: [public redistribution, inference of unlisted facts]
+    verification_status: verified_local_artifact
+  - source_id: carrier_schedule
+    url: "https://www.central-ppk.ru/new/schedule/"
+    owner: "АО «Центральная ППК»"
+    license: null
+    retrieved_at: null
+    checksum: null
+    update_method: "manual primary-source verification; import requires separate legal and technical approval"
+    allowed_use: "planned verification of current passenger service and stop patterns"
+    prohibited_use: [automated import before approval, redistribution before rights review]
+    verification_status: pending
+  - source_id: infrastructure_registry
+    identifier: "official railway infrastructure source for Moscow-Paveletskaya to Uzunovo"
+    owner: null
+    license: null
+    retrieved_at: null
+    checksum: null
+    update_method: "manual source identification and documented snapshot"
+    allowed_use: "planned verification of object type, operational status and kilometer marks"
+    prohibited_use: [fabrication, unsourced merge]
+    verification_status: pending
+  - source_id: osm_corridor_extract
+    url: "https://www.openstreetmap.org/copyright"
+    owner: "OpenStreetMap contributors"
+    license: "ODbL 1.0"
+    retrieved_at: null
+    checksum: null
+    update_method: "versioned corridor extract with timestamp, replication sequence and checksum"
+    allowed_use: "planned rail geometry and object cross-check with visible OSM attribution"
+    prohibited_use: [unversioned production geometry, removal of attribution]
+    verification_status: pending
+  - source_id: osm_tile_policy
+    url: "https://operations.osmfoundation.org/policies/tiles/"
+    owner: "OpenStreetMap Foundation Operations Working Group"
+    license: "policy reference"
+    retrieved_at: "2026-07-27"
+    checksum: null
+    update_method: "manual policy review before map-provider decision"
+    allowed_use: "architecture constraint: public OSM tiles are not the production backend"
+    prohibited_use: [bulk download, offline prefetch, production dependency without provider review]
+    verification_status: reviewed_reference
+  - source_id: gtfs_schedule_reference
+    url: "https://gtfs.org/documentation/schedule/reference/"
+    owner: "MobilityData / GTFS community"
+    license: "official open-standard documentation"
+    retrieved_at: "2026-07-27"
+    checksum: null
+    update_method: "manual standards review; pin feed versions when a real feed exists"
+    allowed_use: "data-model guidance for stops, trips, service dates and stop_times"
+    prohibited_use: [claim that a TrainRadar carrier feed exists without evidence]
+    verification_status: reviewed_reference
+  - source_id: android_location_guidance
+    url: "https://developer.android.com/develop/sensors-and-location/location/permissions"
+    owner: "Google Android Developers"
+    license: "documentation terms"
+    retrieved_at: "2026-07-27"
+    checksum: null
+    update_method: "manual platform-policy review before implementing permissions"
+    allowed_use: "privacy and UX requirements for contextual foreground/background consent"
+    prohibited_use: [adding permissions in M0, assuming Play approval]
+    verification_status: reviewed_reference
+  - source_id: apple_location_guidance
+    url: "https://developer.apple.com/documentation/corelocation/handling-location-updates-in-the-background"
+    owner: "Apple"
+    license: "documentation terms"
+    retrieved_at: "2026-07-27"
+    checksum: null
+    update_method: "manual platform-policy review before implementing capabilities"
+    allowed_use: "privacy, transparency and battery constraints for future active-trip tracking"
+    prohibited_use: [adding developer account settings in M0, collecting real GPS]
+    verification_status: reviewed_reference
+  - source_id: russian_personal_data_law
+    url: "https://ips.pravo.gov.ru/api/ips/legislation/document?baseid=None&hash=98490812b3409e2a8d78a11ca9010f434ea3d9250a11dbbdb78690cd5551bdd6"
+    owner: "Официальное опубликование правовых актов"
+    license: "official legal text"
+    retrieved_at: "2026-07-27"
+    checksum: null
+    update_method: "legal review against current official text before pilot"
+    allowed_use: "identify operator and privacy compliance questions"
+    prohibited_use: [substitute for legal advice, launch pilot without compliance review]
+    verification_status: reviewed_reference
+  - source_id: tutu_manual_point_check
+    identifier: "Tutu MCP manual point-check"
+    owner: "Tutu.ru"
+    license: null
+    retrieved_at: null
+    checksum: null
+    update_method: "manual human-triggered point-check only"
+    allowed_use: "manual comparison of a small number of already identified facts"
+    prohibited_use: [import, scheduler, cache, redistribution]
+    verification_status: pending

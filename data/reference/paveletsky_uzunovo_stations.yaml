@@ -1,0 +1,739 @@
+schema_version: 1
+corridor_id: tr-pu
+canonical_name: "Москва-Павелецкая → Узуново"
+verification_status: pending
+seed_source_ref: approved_seed_spec
+required_stop_count: 44
+allowed_stop_pattern_states:
+  - scheduled_stop
+  - pass_through
+  - conditional
+  - cancelled
+notes:
+  - "Порядок и названия взяты только из утверждённого seed-ТЗ."
+  - "Все внешние свойства остаются pending до сверки с первичными источниками."
+stops:
+  - stop_id: tr-pu-stop-001
+    canonical_name: "Москва-Павелецкая"
+    aliases:
+      items:
+        - {name: "Павелецкий вокзал", kind: alternative_name, source_refs: [approved_seed_spec], verification_status: pending}
+      verification_status: pending
+      required_for_m0_verification: false
+    ordinal: 1
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: null, next: tr-pu-seg-001-002, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-002
+    canonical_name: "Дербеневская"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 2
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-001-002, next: tr-pu-seg-002-003, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-003
+    canonical_name: "Тульская"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 3
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-002-003, next: tr-pu-seg-003-004, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-004
+    canonical_name: "Верхние Котлы"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 4
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-003-004, next: tr-pu-seg-004-005, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-005
+    canonical_name: "Нагатинская"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 5
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-004-005, next: tr-pu-seg-005-006, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-006
+    canonical_name: "Варшавская"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 6
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-005-006, next: tr-pu-seg-006-007, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-007
+    canonical_name: "Чертаново"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 7
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-006-007, next: tr-pu-seg-007-008, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-008
+    canonical_name: "Котляково"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 8
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-007-008, next: tr-pu-seg-008-009, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-009
+    canonical_name: "Бирюлёво-Товарная"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 9
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-008-009, next: tr-pu-seg-009-010, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-010
+    canonical_name: "Бирюлёво-Пассажирская"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 10
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-009-010, next: tr-pu-seg-010-011, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-011
+    canonical_name: "Булатниково"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 11
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-010-011, next: tr-pu-seg-011-012, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-012
+    canonical_name: "Расторгуево"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 12
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-011-012, next: tr-pu-seg-012-013, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-013
+    canonical_name: "Калинина"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 13
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-012-013, next: tr-pu-seg-013-014, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-014
+    canonical_name: "Ленинская"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 14
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-013-014, next: tr-pu-seg-014-015, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-015
+    canonical_name: "32 км"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: true}
+    ordinal: 15
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: direction_dependent, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-014-015, next: tr-pu-seg-015-016, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "direction dependence noted in approved seed; exact service unknown", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-016
+    canonical_name: "Домодедово"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 16
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-015-016, next: tr-pu-seg-016-017, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-017
+    canonical_name: "Взлётная"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 17
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-016-017, next: tr-pu-seg-017-018, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-018
+    canonical_name: "Востряково"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 18
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-017-018, next: tr-pu-seg-018-019, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-019
+    canonical_name: "Белые Столбы"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 19
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-018-019, next: tr-pu-seg-019-020, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-020
+    canonical_name: "Данилово"
+    aliases:
+      items:
+        - {name: "52 км", kind: former_name, source_refs: [approved_seed_spec], verification_status: pending}
+      verification_status: pending
+      required_for_m0_verification: false
+    ordinal: 20
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-019-020, next: tr-pu-seg-020-021, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed and supplied former name only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-021
+    canonical_name: "Барыбино"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 21
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-020-021, next: tr-pu-seg-021-022, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-022
+    canonical_name: "Вельяминово"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 22
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-021-022, next: tr-pu-seg-022-023, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-023
+    canonical_name: "Привалово"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 23
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-022-023, next: tr-pu-seg-023-024, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-024
+    canonical_name: "Михнево"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 24
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-023-024, next: tr-pu-seg-024-025, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-025
+    canonical_name: "Шугарово"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 25
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-024-025, next: tr-pu-seg-025-026, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-026
+    canonical_name: "85 км"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: true}
+    ordinal: 26
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: direction_dependent, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-025-026, next: tr-pu-seg-026-027, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "direction dependence noted in approved seed; exact service unknown", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-027
+    canonical_name: "Жилёво"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 27
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-026-027, next: tr-pu-seg-027-028, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-028
+    canonical_name: "Ситенка"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 28
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-027-028, next: tr-pu-seg-028-029, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-029
+    canonical_name: "Ступино"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 29
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-028-029, next: tr-pu-seg-029-030, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-030
+    canonical_name: "Акри"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 30
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-029-030, next: tr-pu-seg-030-031, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-031
+    canonical_name: "Белопесоцкий"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 31
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-030-031, next: tr-pu-seg-031-032, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-032
+    canonical_name: "Кашира-Пассажирская"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 32
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-031-032, next: tr-pu-seg-032-033, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-033
+    canonical_name: "Тесна"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 33
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-032-033, next: tr-pu-seg-033-034, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-034
+    canonical_name: "Ожерелье"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 34
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-033-034, next: tr-pu-seg-034-035, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-035
+    canonical_name: "Зубово"
+    aliases:
+      items:
+        - {name: "121 км", kind: former_name, source_refs: [approved_seed_spec], verification_status: pending}
+      verification_status: pending
+      required_for_m0_verification: false
+    ordinal: 35
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-034-035, next: tr-pu-seg-035-036, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed and supplied former name only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-036
+    canonical_name: "Пурлово"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 36
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-035-036, next: tr-pu-seg-036-037, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-037
+    canonical_name: "Колменка"
+    aliases:
+      items:
+        - {name: "131 км", kind: former_name, source_refs: [approved_seed_spec], verification_status: pending}
+      verification_status: pending
+      required_for_m0_verification: false
+    ordinal: 37
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-036-037, next: tr-pu-seg-037-038, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed and supplied former name only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-038
+    canonical_name: "Топканово"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 38
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-037-038, next: tr-pu-seg-038-039, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-039
+    canonical_name: "137 км"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 39
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-038-039, next: tr-pu-seg-039-040, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only; name is not treated as verified kilometer value", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-040
+    canonical_name: "Богатищево"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 40
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-039-040, next: tr-pu-seg-040-041, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-041
+    canonical_name: "146 км"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 41
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-040-041, next: tr-pu-seg-041-042, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only; name is not treated as verified kilometer value", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-042
+    canonical_name: "Коровино"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 42
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-041-042, next: tr-pu-seg-042-043, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-043
+    canonical_name: "Новосёлки"
+    aliases:
+      items:
+        - {name: "152 км", kind: former_name, source_refs: [approved_seed_spec], verification_status: pending}
+      verification_status: pending
+      required_for_m0_verification: false
+    ordinal: 43
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-042-043, next: tr-pu-seg-043-044, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed and supplied former name only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending
+  - stop_id: tr-pu-stop-044
+    canonical_name: "Узуново"
+    aliases: {items: [], verification_status: pending, required_for_m0_verification: false}
+    ordinal: 44
+    coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
+    kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
+    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
+    operational_status: {value: null, source_ref: null, verification_status: pending}
+    fare_status: {value: null, source_ref: null, verification_status: pending}
+    external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
+    neighboring_rail_segments: {previous: tr-pu-seg-043-044, next: null, verification_status: pending}
+    last_verified_at: null
+    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    confidence: 0.0
+    verification_status: pending

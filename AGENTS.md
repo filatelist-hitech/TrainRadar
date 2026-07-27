@@ -1,0 +1,58 @@
+# TrainRadar — правила работы
+
+## Граница MVP
+
+- Единственный коридор: Москва-Павелецкая → Узуново.
+- Канонический registry содержит ровно 44 пассажирских остановочных пункта.
+- Запрещены аэропортовая ветка Домодедово, Большое кольцо, Ожерелье → Узловая и направления за Узуново.
+- Текущий milestone — M0. Не начинать M1–M6 без отдельного решения владельца.
+- Mobile: Flutter для iOS и Android. Backend: Go modular monolith. API: REST + SSE.
+
+## Архитектурные инварианты
+
+- `official_actual`, `crowd_confirmed`, `estimated`, `stale_lost` — разные состояния; fallback всегда видим.
+- `estimated`, `stale_lost` и неизвестное состояние не входят в live coverage.
+- `crowd_confirmed` требует минимум три независимые install-capability.
+- Corridor registry и stop pattern рейса не смешиваются. Допустимые состояния stop pattern:
+  `scheduled_stop`, `pass_through`, `conditional`, `cancelled`.
+- Сырые observations неизменяемы; производные состояния версионируются.
+- Публичная позиция поезда не равна точке пассажира. Индивидуальные GPS-треки не выдаются публичным API.
+- OSM geometry версируется; attribution ODbL обязателен. Публичные OSM tiles не используются как production backend.
+- Tutu MCP разрешён только для ручной point-check сверки. Import, scheduler, cache и redistribution запрещены.
+
+## Приватность
+
+- Пилот accountless, invite-only, 5–15 участников; оператор ПД — владелец как физлицо.
+- Foreground location запрашивается только в контексте активной поездки.
+- Background location — отдельный opt-in, действует только во время активной поездки и явно выключается.
+- Exact raw GPS на сервере хранится зашифрованно не более 24 часов, затем hard delete и уничтожение ключа.
+- Не добавлять SDK геолокации, реальные треки, developer accounts или production secrets без явного разрешения.
+
+## Команды
+
+```bash
+make setup
+make compose-up
+make validate-data
+make lint
+make test
+make check
+git diff --check
+```
+
+## Definition of done для M0
+
+1. Обязательное дерево и два OMX-плана содержательны.
+2. Reference registry проходит автоматическую проверку 44/44 и scope guard.
+3. Go и Flutter skeletons форматируются, анализируются и тестируются.
+4. OpenAPI и Docker Compose синтаксически валидны.
+5. Неизвестные помечены `pending` и перечислены в `docs/research/open-questions.md`.
+6. Команды, дата и результаты сохранены в `docs/evidence/`; физические проверки отмечены `NOT_RUN`.
+7. `docs/EXECUTION_STATE.yaml` содержит ровно один `next_action`.
+
+## Evidence и заявления
+
+- Не называть данные verified без source reference, даты и воспроизводимой проверки.
+- Не называть endpoint realtime-ready, пока он не реализован и не проверен деградационными тестами.
+- После изменения кода, data или решения обновлять соответствующие docs, QA matrix и evidence в том же срезе.
+- Не выполнять commit, push, deploy, публикацию, удаление данных или платные операции без явного разрешения.

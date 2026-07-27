@@ -1,0 +1,51 @@
+name: trainradar
+
+services:
+  operational-db:
+    build:
+      context: .
+      dockerfile: infra/operational/Dockerfile
+    image: trainradar-operational-postgis:17-m0
+    environment:
+      POSTGRES_DB: ${OPERATIONAL_DB_NAME:-trainradar}
+      POSTGRES_USER: ${OPERATIONAL_DB_USER:-trainradar}
+      POSTGRES_PASSWORD: ${OPERATIONAL_DB_PASSWORD:-change-me-operational}
+    ports:
+      - "127.0.0.1:${OPERATIONAL_DB_PORT:-55432}:5432"
+    volumes:
+      - operational-data-m0:/var/lib/postgresql/data
+      - ./infra/operational/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - operational-net
+
+  raw-gps-db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${RAW_GPS_DB_NAME:-trainradar_raw}
+      POSTGRES_USER: ${RAW_GPS_DB_USER:-trainradar_raw}
+      POSTGRES_PASSWORD: ${RAW_GPS_DB_PASSWORD:-change-me-raw}
+    ports:
+      - "127.0.0.1:${RAW_GPS_DB_PORT:-55433}:5432"
+    volumes:
+      - raw-gps-data-m0:/var/lib/postgresql/data
+      - ./infra/raw-store/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - raw-gps-net
+
+volumes:
+  operational-data-m0:
+  raw-gps-data-m0:
+
+networks:
+  operational-net:
+  raw-gps-net:

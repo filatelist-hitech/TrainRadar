@@ -1,0 +1,30 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+coverage/
+
+.idea/
+.vscode/
+
+# OMX runtime state is local; approved plans remain trackable.
+.omx/logs/
+.omx/state/
+.omx/metrics.json
+.omx/*.lock
+
+# Go
+backend/bin/
+backend/coverage.out
+
+# Docker/local data
+.docker/
+data/runtime/
+
+# Flutter root-level artifacts (mobile/.gitignore handles package-local files).
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
