@@ -38,6 +38,15 @@ module TrainRadar
       neighboring_rail_segments last_verified_at provenance confidence
       verification_status
     ].freeze
+    REQUIRED_CPPK_SOURCE_REFS = %w[
+      cppk_route_6001_2026-07-27
+      cppk_route_6002_2026-07-27
+      cppk_station_search_kotlyakovo_2026-07-27
+    ].freeze
+    KOTLYAKOVO_DECISION_REF = "owner_decision_kotlyakovo_2026-07-28"
+    REQUIRED_M0_VERIFICATION_SOURCE_REFS = (
+      REQUIRED_CPPK_SOURCE_REFS + [KOTLYAKOVO_DECISION_REF]
+    ).freeze
 
     def validate_registry(document)
       errors = []
@@ -48,8 +57,10 @@ module TrainRadar
       validate_endpoints(stops, errors)
       validate_stop_pattern_states(document, errors)
       validate_special_stops(stops, errors)
+      validate_planned_unused_stop(stops, errors)
       validate_required_fields(stops, errors)
       validate_forbidden_branches(stops, errors)
+      validate_m0_source_verification(document, errors)
       errors
     end
 
@@ -83,6 +94,7 @@ module TrainRadar
         errors << "source manifest must include tutu_manual_point_check"
       end
 
+      validate_cppk_sources(sources, errors)
       errors
     end
 
@@ -158,6 +170,83 @@ module TrainRadar
         errors << "forbidden branch token present: #{token}" if searchable.include?(token.downcase)
       end
     end
+
+    def validate_m0_source_verification(document, errors)
+      unless document["verification_status"] == "verified_m0_scope_with_planned_exception"
+        errors << "root.verification_status must preserve the approved M0 planned exception"
+      end
+
+      verification = document["verification"]
+      unless verification.is_a?(Hash)
+        errors << "root.verification must describe the M0 source check"
+        return
+      end
+
+      expected = {
+        "verification_status" => "accepted_m0_scope",
+        "registry_stop_count" => EXPECTED_STOP_COUNT,
+        "current_carrier_route_stop_count" => 43,
+        "identity_order_matches" => 43,
+        "current_usable_stop_count" => 43,
+        "planned_unused_stop_ids" => ["tr-pu-stop-008"],
+        "source_refs" => REQUIRED_M0_VERIFICATION_SOURCE_REFS
+      }
+      expected.each do |key, value|
+        errors << "verification.#{key} must equal #{value.inspect}" unless verification[key] == value
+      end
+
+      errors << "verification.checked_at must be an ISO-8601 UTC timestamp" unless
+        verification["checked_at"].is_a?(String) &&
+        verification["checked_at"].match?(/\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\z/)
+    end
+
+    def validate_cppk_sources(sources, errors)
+      carrier = sources.find { |source| source["source_id"] == "carrier_schedule" }
+      unless carrier
+        errors << "source manifest must include carrier_schedule"
+        return
+      end
+
+      unless carrier["snapshot_refs"] == REQUIRED_CPPK_SOURCE_REFS
+        errors << "carrier_schedule.snapshot_refs must identify all M0 CPPK checks"
+      end
+
+      REQUIRED_CPPK_SOURCE_REFS.each do |source_ref|
+        source = sources.find { |candidate| candidate["source_id"] == source_ref }
+        unless source
+          errors << "source manifest missing #{source_ref}"
+          next
+        end
+
+        checksum = source["checksum"]
+        unless checksum.is_a?(String) && checksum.match?(/\Asha256:[0-9a-f]{64}\z/)
+          errors << "#{source_ref} requires a SHA-256 checksum"
+        end
+      end
+
+      decision = sources.find { |source| source["source_id"] == KOTLYAKOVO_DECISION_REF }
+      unless decision &&
+             decision["verification_status"] == "verified_owner_decision" &&
+             decision["checksum"] == "sha256:aefec3e4b2270f8dbbe2e1178f883fd73f2f706808fae3dd245080efe0a4cd35"
+        errors << "#{KOTLYAKOVO_DECISION_REF} must preserve the approved checksum and status"
+      end
+    end
+
+    def validate_planned_unused_stop(stops, errors)
+      stop = stops.find { |candidate| candidate["stop_id"] == "tr-pu-stop-008" }
+      return errors << "missing planned Котляково registry slot" unless stop
+
+      usage = stop["project_usage"]
+      unless stop["canonical_name"] == "Котляково" &&
+             stop.dig("operational_status", "value") == "planned_not_built" &&
+             stop.dig("operational_status", "source_ref") == KOTLYAKOVO_DECISION_REF &&
+             usage.is_a?(Hash) &&
+             usage["enabled"] == false &&
+             usage["state"] == "planned_unused" &&
+             usage["source_ref"] == KOTLYAKOVO_DECISION_REF
+        errors << "Котляково must remain planned_not_built and disabled by owner decision"
+      end
+    end
   end
 
   module ReferenceData
@@ -187,6 +276,8 @@ if $PROGRAM_NAME == __FILE__
 
   pending_count = registry.fetch("stops").count { |stop| stop["verification_status"] == "pending" }
   puts "PASS: corridor registry has 44 unique ordered stops and required scope guards"
-  puts "PASS: source manifest structure and Tutu usage restrictions"
+  puts "PASS: M0 registry scope is 44/44 with Котляково fail-closed as planned_unused"
+  puts "PASS: source manifest structure, CPPK snapshots, owner decision and Tutu restrictions"
   puts "INFO: #{pending_count}/44 stop records remain verification_status=pending"
+  puts "INFO: current carrier surface has 43 usable stops; Котляково activation requires a new approval"
 end

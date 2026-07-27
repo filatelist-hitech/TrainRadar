@@ -16,5 +16,6 @@
 | D-012 | versioned OSM + ODbL attribution; no public tiles in prod | accepted | source/provider gate before M1 |
 | D-013 | four truth states never mixed | accepted | explicit UI/API degradation |
 | D-014 | M0 external stop properties remain pending | accepted | no fabricated coordinates/status/IDs |
+| D-015 | `Котляково` retained as planned but disabled | accepted | registry stays 44; usable corridor stays 43 until commissioning proof and separate owner approval |
 
 Architecture rationale is expanded in `docs/adr/`.

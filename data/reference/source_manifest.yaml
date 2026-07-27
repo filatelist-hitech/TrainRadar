@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: "2026-07-27"
+generated_at: "2026-07-28"
 policy:
   no_unnamed_files: true
   every_dataset_requires_checksum: true
@@ -19,12 +19,60 @@ sources:
     url: "https://www.central-ppk.ru/new/schedule/"
     owner: "АО «Центральная ППК»"
     license: null
-    retrieved_at: null
+    retrieved_at: "2026-07-27T20:43:34Z"
     checksum: null
     update_method: "manual primary-source verification; import requires separate legal and technical approval"
-    allowed_use: "planned verification of current passenger service and stop patterns"
+    allowed_use: "manual discovery and route point-check; no dataset import"
     prohibited_use: [automated import before approval, redistribution before rights review]
-    verification_status: pending
+    snapshot_refs:
+      - cppk_route_6001_2026-07-27
+      - cppk_route_6002_2026-07-27
+      - cppk_station_search_kotlyakovo_2026-07-27
+    verification_status: reviewed_current_source_with_planned_gap
+  - source_id: cppk_route_6001_2026-07-27
+    url: "https://www.central-ppk.ru/new/schedule/schedule.php?stationFrom=%D0%9C%D0%9E%D0%A1%D0%9A%D0%92%D0%90%20(%D0%9F%D0%B0%D0%B2%D0%B5%D0%BB%D0%B5%D1%86%D0%BA%D0%B8%D0%B9%20%D0%B2%D0%BE%D0%BA%D0%B7%D0%B0%D0%BB)&stationTo=%D0%A3%D0%97%D0%A3%D0%9D%D0%9E%D0%92%D0%9E&scheduleId=3333886&date=2026-07-27"
+    owner: "АО «Центральная ППК»"
+    license: null
+    retrieved_at: "2026-07-27T20:43:34Z"
+    checksum: "sha256:aa022372d4ebd56eaa2b8d4cdca518a68fa544c928fefdd9c61c2fe997d65041"
+    checksum_scope: "UTF-8 compact JSON projection: tripId, trainNumber, endpoint IDs, ordered station ID/name/direction/skip; volatile times, delays and fares excluded"
+    update_method: "manual human-triggered route view point-check"
+    allowed_use: "M0 identity/order comparison only"
+    prohibited_use: [scheduler, cache, automated import, redistribution before rights review]
+    verification_status: reviewed_route_projection
+  - source_id: cppk_route_6002_2026-07-27
+    url: "https://www.central-ppk.ru/new/schedule/schedule.php?stationFrom=%D0%A3%D0%97%D0%A3%D0%9D%D0%9E%D0%92%D0%9E&stationTo=%D0%9C%D0%9E%D0%A1%D0%9A%D0%92%D0%90%20(%D0%9F%D0%B0%D0%B2%D0%B5%D0%BB%D0%B5%D1%86%D0%BA%D0%B8%D0%B9%20%D0%B2%D0%BE%D0%BA%D0%B7%D0%B0%D0%BB)&scheduleId=3343569&date=2026-07-27"
+    owner: "АО «Центральная ППК»"
+    license: null
+    retrieved_at: "2026-07-27T20:43:34Z"
+    checksum: "sha256:ca82081638411caf4c5f816d56e88457a3fad08d6c4786025fb3659e982bf708"
+    checksum_scope: "UTF-8 compact JSON projection: tripId, trainNumber, endpoint IDs, ordered station ID/name/direction/skip; volatile times, delays and fares excluded"
+    update_method: "manual human-triggered route view point-check"
+    allowed_use: "M0 reverse identity/order comparison only"
+    prohibited_use: [scheduler, cache, automated import, redistribution before rights review]
+    verification_status: reviewed_route_projection
+  - source_id: cppk_station_search_kotlyakovo_2026-07-27
+    url: "https://www.central-ppk.ru/new/schedule/"
+    owner: "АО «Центральная ППК»"
+    license: null
+    retrieved_at: "2026-07-27T20:43:34Z"
+    checksum: "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    checksum_scope: "UTF-8 response body [] for exact station search query Котляково"
+    update_method: "manual human-triggered station search point-check"
+    allowed_use: "M0 confirmation that the planned station is absent from the current carrier surface"
+    prohibited_use: [scheduler, cache, automated import, redistribution before rights review]
+    verification_status: reviewed_empty_result
+  - source_id: owner_decision_kotlyakovo_2026-07-28
+    identifier: "TrainRadar owner decision recorded in the M0 registry and evidence"
+    owner: "TrainRadar product owner"
+    license: "project input; redistribution not granted"
+    retrieved_at: "2026-07-27T21:14:32Z"
+    checksum: "sha256:aefec3e4b2270f8dbbe2e1178f883fd73f2f706808fae3dd245080efe0a4cd35"
+    checksum_scope: "UTF-8 decision text: Котляково — новая станция, которая ещё не построена; оставить в проекте, но не использовать до отдельного решения."
+    update_method: "manual owner-approved decision revision"
+    allowed_use: "retain registry slot 8 and fail closed until construction verification plus separate owner approval"
+    prohibited_use: [claim current operation, include in active stop patterns, include in live coverage]
+    verification_status: verified_owner_decision
   - source_id: infrastructure_registry
     identifier: "official railway infrastructure source for Moscow-Paveletskaya to Uzunovo"
     owner: null

@@ -47,7 +47,8 @@
 - Actual train/corridor field test: `NOT_RUN`.
 - KMS/HSM encryption, hard-delete worker, key destruction and backup erasure: `NOT_RUN`.
 - Target-user comprehension/accessibility field study: `NOT_RUN`.
-- Carrier/infrastructure/Tutu verification of the 44 records: `NOT_RUN`.
+- Carrier/infrastructure/Tutu verification of the 44 records: `NOT_RUN` in this startup run.
+  A later carrier-only point-check is recorded in `M0-reference-verification.md`.
 
 ## Limitations and residue
 

@@ -2,9 +2,10 @@
 
 | Requirement | Automated evidence | Manual/physical | M0 status |
 |---|---|---|---|
-| 44 unique IDs and ordinals 1..44 | `make validate-data` | source comparison | automated PASS; source `pending` |
-| exact endpoints | validator negative tests | carrier/infrastructure check | automated PASS; source `pending` |
-| aliases/direction for 32/85 | schema guard | exact service rules | data `pending` |
+| 44 unique IDs and ordinals 1..44 | `make validate-data` | carrier + owner decision | registry 44/44 PASS; usable 43; `Котляково` disabled |
+| exact endpoints | validator negative tests | carrier route both directions | automated PASS; carrier PASS |
+| aliases/direction for 32/85 | schema guard | two carrier routes + exact service rules | checkpoints PASS; full aliases/directions `pending` |
+| source manifest provenance | manifest/checksum guards | rights and infrastructure-source review | structure/checksums PASS; rights/source `pending` |
 | allowed stop-pattern states | exact enum test | real trip patterns | enum PASS; patterns `NOT_RUN` |
 | forbidden branches absent | exact seed/scope negative test | map review | automated PASS; map `NOT_RUN` |
 | Go skeleton | `go vet`, `go test`, race/build, HTTP smoke | process smoke | PASS |
@@ -16,4 +17,5 @@
 | no real GPS in M0 | dependency/permission review | device network inspection | static review PASS; physical `NOT_RUN` |
 | single next_action | YAML structural inspection | owner review | PASS |
 
-Source verification cannot be satisfied by the structural validator.
+Structural validation cannot upgrade a source fact. It does enforce the approved fail-closed state:
+`Котляково` remains in registry slot 8 but cannot enter active stop patterns or coverage.

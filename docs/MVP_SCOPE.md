@@ -6,6 +6,10 @@
 `data/reference/paveletsky_uzunovo_stations.yaml`. Изменение количества, порядка или endpoint
 требует проверенного источника и decision/ADR.
 
+`Котляково` входит в 44-slot project registry как `planned_not_built`, но не входит в текущие
+usable stop patterns, routing или coverage. Активация требует официального подтверждения ввода в
+эксплуатацию и отдельного решения владельца.
+
 Запрещены:
 
 - Домодедово → Авиационная → Космос → Аэропорт Домодедово;

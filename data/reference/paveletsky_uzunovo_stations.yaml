@@ -1,9 +1,27 @@
 schema_version: 1
 corridor_id: tr-pu
 canonical_name: "Москва-Павелецкая → Узуново"
-verification_status: pending
+verification_status: verified_m0_scope_with_planned_exception
 seed_source_ref: approved_seed_spec
 required_stop_count: 44
+verification:
+  verification_status: accepted_m0_scope
+  checked_at: "2026-07-27T21:14:32Z"
+  method: "manual current-route point-check against two official CPPK route views; no import or cache"
+  source_refs:
+    - cppk_route_6001_2026-07-27
+    - cppk_route_6002_2026-07-27
+    - cppk_station_search_kotlyakovo_2026-07-27
+    - owner_decision_kotlyakovo_2026-07-28
+  registry_stop_count: 44
+  current_carrier_route_stop_count: 43
+  identity_order_matches: 43
+  current_usable_stop_count: 43
+  planned_unused_stop_ids:
+    - tr-pu-stop-008
+  resolution: "Котляково сохраняется как planned_not_built и выключено из использования до отдельного решения владельца после проверки ввода в эксплуатацию."
+  verified_scope: "M0 registry scope 44/44: 43 текущих пункта в carrier-порядке плюс Котляково как approved planned-unused slot."
+  pending_scope: "Точная дата/геометрия Котляково; aliases; direction service; coordinates; kilometer; infrastructure object type; operational/fare status; OSM/GTFS IDs."
 allowed_stop_pattern_states:
   - scheduled_stop
   - pass_through
@@ -11,7 +29,9 @@ allowed_stop_pattern_states:
   - cancelled
 notes:
   - "Порядок и названия взяты только из утверждённого seed-ТЗ."
-  - "Все внешние свойства остаются pending до сверки с первичными источниками."
+  - "Официальные маршруты ЦППК 6001/6002 подтверждают 43 пункта в seed-порядке после исключения Котляково."
+  - "Котляково остаётся пунктом №8 со статусом planned_not_built и не используется до отдельного owner approval."
+  - "M0 scope 44/44 принят; неподтверждённые внешние свойства отдельных записей остаются pending."
 stops:
   - stop_id: tr-pu-stop-001
     canonical_name: "Москва-Павелецкая"
@@ -135,14 +155,15 @@ stops:
     ordinal: 8
     coordinates: {latitude: null, longitude: null, source_ref: null, verification_status: pending}
     kilometer: {value: null, unit: km, source_ref: null, verification_status: pending}
-    object_type: {value: passenger_stop_point_seed_scope, source_ref: approved_seed_spec, verification_status: pending}
+    object_type: {value: planned_passenger_stop_point, source_ref: owner_decision_kotlyakovo_2026-07-28, verification_status: owner_approved}
     direction_service: {towards_uzunovo: pending, towards_moscow: pending, special_handling: null, verification_status: pending}
-    operational_status: {value: null, source_ref: null, verification_status: pending}
+    operational_status: {value: planned_not_built, source_ref: owner_decision_kotlyakovo_2026-07-28, verification_status: owner_approved}
     fare_status: {value: null, source_ref: null, verification_status: pending}
     external_ids: {osm: null, carrier: null, infrastructure: null, gtfs: null, verification_status: pending}
     neighboring_rail_segments: {previous: tr-pu-seg-007-008, next: tr-pu-seg-008-009, verification_status: pending}
-    last_verified_at: null
-    provenance: {source_refs: [approved_seed_spec], confidence_basis: "approved seed only", verification_status: pending}
+    project_usage: {enabled: false, state: planned_unused, activation_gate: "official construction/commissioning verification plus separate owner approval", source_ref: owner_decision_kotlyakovo_2026-07-28, verification_status: owner_approved}
+    last_verified_at: "2026-07-27T21:14:32Z"
+    provenance: {source_refs: [approved_seed_spec, owner_decision_kotlyakovo_2026-07-28], confidence_basis: "approved seed plus explicit owner decision; no current carrier station", verification_status: partially_verified}
     confidence: 0.0
     verification_status: pending
   - stop_id: tr-pu-stop-009

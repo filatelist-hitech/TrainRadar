@@ -6,7 +6,8 @@
 
 - M0: schema/data validator, negative scope tests, Go units/HTTP smoke, Flutter widget/analyze,
   OpenAPI YAML parse, Compose config, whitespace.
-- M1: 44/44 registry/graph/map integration, OSM attribution and source-version snapshot tests.
+- M1: 44/44 registry accounting, 43 enabled-stop graph/map integration, planned-stop exclusion,
+  OSM attribution and source-version snapshot tests.
 - M2: consent state machine, local synthetic track, encrypted raw retention/delete integration;
   no public confirmed train.
 - M3: contributor independence, replay/spoof/outlier/property tests and ambiguity simulations.

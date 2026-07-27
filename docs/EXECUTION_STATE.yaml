@@ -2,21 +2,24 @@ project: TrainRadar
 phase: discovery
 status: in_progress
 active_milestone: M0
-active_task: startup-package
+active_task: reference-verification
 decisions:
   - "corridor_exactly_44_stops"
   - "flutter_ios_android"
   - "go_modular_monolith"
   - "rest_plus_sse"
   - "separate_encrypted_raw_store_max_24h"
+  - "kotlyakovo_planned_unused_until_construction_verification_and_owner_approval"
 blockers:
-  - "44 stop records and source manifest are not primary-source verified"
+  - "44 stop records still contain pending external fields; source rights and official infrastructure identities are not fully verified"
 risks:
   - "legal and platform gates remain before any real GPS pilot"
+  - "carrier licence and official infrastructure registry remain M1 input gates"
 evidence:
   - "data/reference/paveletsky_uzunovo_stations.yaml"
   - "data/reference/source_manifest.yaml"
   - "docs/evidence/README.md"
   - "docs/evidence/M0-startup.md"
-last_verified_at: "2026-07-27T20:28:23Z"
+  - "docs/evidence/M0-reference-verification.md"
+last_verified_at: "2026-07-27T21:14:32Z"
 next_action: "Верифицировать 44/44 остановочных пункта и source_manifest для M0"

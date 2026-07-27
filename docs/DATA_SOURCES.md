@@ -19,9 +19,16 @@ allowed/prohibited use и verification status. Snapshot получает immutab
 ## Текущее состояние M0
 
 - Seed-ТЗ имеет локальный SHA-256 и даёт только 44 названия, порядок и продуктовые ограничения.
-- Страница ЦППК идентифицирована как кандидат, но snapshot/права/структура не подтверждены.
+- Страница и два route view ЦППК вручную проверены 2026-07-27: 43 пункта совпадают с seed после
+  исключения `Котляково`; стабильные projection checksums записаны в manifest.
+- `Котляково` отсутствует в обоих route view и в текущем station search ЦППК; это согласуется с
+  owner decision о ещё не построенной станции.
+- Owner decision от 2026-07-28 сохраняет `Котляково` в registry, но запрещает использование до
+  подтверждения ввода в эксплуатацию и отдельного разрешения.
+- Лицензия/redistribution rights ЦППК не подтверждены; raw response не сохранён и import запрещён.
 - Official infrastructure source не идентифицирован.
 - OSM data extract не получен; лицензия и tile policy зафиксированы как constraints.
 - Публичный/партнёрский GTFS(-RT) feed для коридора не подтверждён.
 
-Поэтому никакие coordinates, external IDs, stop patterns или operational statuses не считаются verified.
+Поэтому никакие coordinates, external IDs, aliases, полные stop patterns или operational statuses
+не считаются verified. M0 scope принят как 43 текущих пункта плюс один fail-closed planned slot.
