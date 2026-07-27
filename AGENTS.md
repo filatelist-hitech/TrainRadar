@@ -58,3 +58,11 @@ git diff --check
 - Не называть endpoint realtime-ready, пока он не реализован и не проверен деградационными тестами.
 - После изменения кода, data или решения обновлять соответствующие docs, QA matrix и evidence в том же срезе.
 - Не выполнять commit, push, deploy, публикацию, удаление данных или платные операции без явного разрешения.
+
+## Commit and documentation gate
+
+- До завершения задачи определить documentation impact через `docs/CHANGE_IMPACT.yaml` и обновить нужные документы в том же срезе.
+- Generated-блоки не редактировать вручную; после структурных изменений запускать `make docs-sync`, а `docs/PROJECT_MAP.md` менять только генератором.
+- Перед commit запускать `make check-staged`; перед push/PR — `make ready` (или `make check-full`). Актуальность generated docs подтверждает только `make docs-check`.
+- В финальном отчёте указывать обновлённые документы и отдельно разделять автоматический PASS от ручного `NOT_RUN`.
+- Подробный protocol, recovery после конфликта и правила manifest: `docs/CONTRIBUTING.md`.

@@ -1,0 +1,80 @@
+name: quality
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: cd backend && go mod download
+      - run: cd mobile && flutter pub get
+      - run: make format-check lint schema-check
+
+  tests:
+    name: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: cd backend && go mod download
+      - run: cd mobile && flutter pub get
+      - run: make test
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: cd backend && go mod download
+      - run: cd mobile && flutter pub get
+      - run: make build
+
+  docs-drift:
+    name: docs-drift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - run: make docs-check
+
+  brand-assets:
+    name: brand-assets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - run: make brand-assets

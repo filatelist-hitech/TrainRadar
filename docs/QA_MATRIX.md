@@ -15,7 +15,7 @@
 | raw retention ≤24h | Go unit + SQL rejection | KMS/delete/backup drill | policy PASS; drill `NOT_RUN` |
 | truth-state separation | Go unit + schema enum | comprehension test | unit PASS; user test `NOT_RUN` |
 | no real GPS in M0 | dependency/permission review | device network inspection | static review PASS; physical `NOT_RUN` |
-| single next_action | YAML structural inspection | owner review | PASS |
+| single next_action | YAML structural inspection | owner review | PASS; M0 accepted by owner on 2026-07-28 |
 
 Structural validation cannot upgrade a source fact. It does enforce the approved fail-closed state:
 `Котляково` remains in registry slot 8 but cannot enter active stop patterns or coverage.

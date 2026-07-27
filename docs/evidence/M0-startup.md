@@ -31,6 +31,13 @@
 | operational/raw Docker networks | PASS; separate networks |
 | `git diff --check` | PASS in final handoff run |
 
+## Owner review
+
+- Review recorded at: 2026-07-28T01:01:13Z / 2026-07-28 04:01 MSK
+- Owner decision: `M0 принимаю`.
+- Accepted boundary: M0 discovery package only; this does not authorize M1–M6.
+- Automated PASS remains distinct from the physical and field checks listed as `NOT_RUN` below.
+
 ## Defects found and resolved during verification
 
 1. Upstream `postgis/postgis:17-3.5` is amd64-only and failed on Apple arm64.

@@ -30,6 +30,7 @@ flowchart LR
 In: required docs/tree, 44 seed records, manifest, validators, skeletons. Out: all product logic.
 Acceptance: all automated checks pass; exactly one next action; unknowns pending. Evidence:
 `docs/evidence/`. Risk: sources not verified. Rollback: remove no external data because none imported.
+Owner accepted M0 on 2026-07-28; this does not authorize M1–M6.
 
 ### M1
 

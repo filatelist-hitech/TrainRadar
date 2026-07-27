@@ -29,6 +29,37 @@ make compose-up
 docker compose stop
 ```
 
+<!-- BEGIN GENERATED: root-commands-and-configuration -->
+### Проверки
+
+```bash
+make docs-sync
+make docs-check
+make check-staged
+make check-full
+make ready
+```
+
+### Конфигурация
+
+Переменные из `.env.example` (значения и секреты не генерируются):
+- `API_HOST`
+- `API_PORT`
+- `APP_ENV`
+- `OPERATIONAL_DB_HOST`
+- `OPERATIONAL_DB_NAME`
+- `OPERATIONAL_DB_PASSWORD`
+- `OPERATIONAL_DB_PORT`
+- `OPERATIONAL_DB_USER`
+- `RAW_GPS_DB_HOST`
+- `RAW_GPS_DB_NAME`
+- `RAW_GPS_DB_PASSWORD`
+- `RAW_GPS_DB_PORT`
+- `RAW_GPS_DB_USER`
+- `RAW_GPS_KEK_BASE64`
+- `RAW_GPS_RETENTION_HOURS`
+<!-- END GENERATED: root-commands-and-configuration -->
+
 ## Структура
 
 - `mobile/` — Flutter shell;

@@ -1,8 +1,8 @@
 project: TrainRadar
 phase: discovery
-status: ready_for_owner_review
+status: m0_accepted_by_owner
 active_milestone: M0
-active_task: owner-review
+active_task: awaiting_next_milestone_authorization
 decisions:
   - "corridor_exactly_44_stops"
   - "flutter_ios_android"
@@ -20,5 +20,5 @@ evidence:
   - "docs/evidence/README.md"
   - "docs/evidence/M0-startup.md"
   - "docs/evidence/M0-reference-verification.md"
-last_verified_at: "2026-07-27T21:49:22Z"
-next_action: "Провести owner review M0 evidence и решить: принять M0 или вернуть конкретные замечания."
+last_verified_at: "2026-07-28T01:01:13Z"
+next_action: "Получить отдельную авторизацию владельца на конкретный следующий milestone; M1–M6 не авторизованы."
