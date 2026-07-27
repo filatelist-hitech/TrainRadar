@@ -25,6 +25,20 @@ M0 registry scope contains 44 fixed slots. Forty-three are currently usable carr
 `project_usage.enabled: false` and remains excluded until official commissioning evidence and a
 separate owner decision.
 
+## M1 source admission
+
+| Field | Type | Semantics |
+|---|---|---|
+| `m1_source_admission.status` | enum | `no_sources_admitted`, `partially_admitted` или `fully_admitted`; вычисляется из immutable allowlist |
+| `importable_source_refs` | array | только source IDs, прошедшие local admission gate; пустой список означает запрет import |
+| `required_source_roles` | array | exactly `schedule` → `carrier_schedule`, затем `osm_geometry` → `osm_corridor_extract` |
+| `admission_status` | enum | `blocked` или `admitted`; blocked source обязан иметь конкретные reasons |
+| `snapshot` | object | для admitted source: immutable reference и source version |
+| `rights` | object | для admitted source: `import_allowed: true` и дата review |
+
+Admitted OSM geometry требует SHA-256, `ODbL 1.0`, видимого attribution и явного запрета public
+OSM tiles в production. Эти поля не создают geometry и не являются разрешением на external fetch.
+
 ## Public position
 
 | Field | Meaning |

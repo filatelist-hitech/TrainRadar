@@ -23,24 +23,23 @@ usable stop patterns, routing или coverage. Активация требует
 режим «Я в этом поезде», consented GPS, map matching, multi-rider aggregation, delay, интервальный
 ETA, incident detection, историю своей поездки и уведомление о приближении.
 
-## Текущая граница M0
+## Текущая граница M1
 
-M0 принят владельцем 2026-07-28. Любой последующий milestone требует отдельной явной авторизации.
+M0 принят владельцем, M1 отдельно авторизован владельцем 2026-07-28. M2–M6 требуют отдельной
+явной авторизации.
 
 В scope текущего пакета:
 
-- документация решений, рисков, privacy и UX;
-- seed registry 44/44 и manifest источников;
-- автоматический scope/data validator;
-- Flutter/Go/OpenAPI/Compose skeletons;
-- тестовая стратегия и план M0–M6.
+- M1 source admission boundary и воспроизводимые source snapshots;
+- offline rail graph/map только после lawful schedule и versioned OSM admission;
+- 44/44 registry, 43 enabled operational stops и fail-closed `Котляково`;
+- ODbL attribution и provider/render decision без public OSM tiles в production.
 
-Вне scope M0:
+Вне scope M1:
 
-- импорт расписаний или OSM;
-- железнодорожная геометрия и карта;
+- import без source manifest/rights/version/checksum;
 - GPS permissions, SDK, реальные/синтетические треки;
-- map matching, grouping, realtime stream, ETA и notifications;
+- map matching, grouping, realtime stream, ETA и notifications (M2+);
 - production hosting, tiles, KMS/HSM и developer accounts.
 
 ## Stop patterns

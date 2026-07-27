@@ -4,6 +4,22 @@ policy:
   no_unnamed_files: true
   every_dataset_requires_checksum: true
   pending_sources_are_not_importable: true
+m1_source_admission:
+  status: no_sources_admitted
+  importable_source_refs: []
+  required_source_roles:
+    - role: schedule
+      source_ref: carrier_schedule
+      admission_status: blocked
+      blocking_reasons:
+        - carrier rights and licence are not confirmed for import
+        - immutable lawful schedule snapshot with source version and checksum is absent
+    - role: osm_geometry
+      source_ref: osm_corridor_extract
+      admission_status: blocked
+      blocking_reasons:
+        - versioned OSM corridor extract with replication/version and checksum is absent
+        - extract topology and visible ODbL attribution have not been reviewed
 sources:
   - source_id: approved_seed_spec
     identifier: "/Users/filatelist/.codex/attachments/b161d6d6-a249-442e-b4af-2251b046d4a2/pasted-text.txt"

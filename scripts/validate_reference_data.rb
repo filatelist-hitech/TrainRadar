@@ -49,6 +49,11 @@ module TrainRadar
     REQUIRED_M0_VERIFICATION_SOURCE_REFS = (
       REQUIRED_CPPK_SOURCE_REFS + [KOTLYAKOVO_DECISION_REF, CPPK_MAP_SOURCE_REF]
     ).freeze
+    M1_REQUIRED_SOURCE_ROLES = {
+      "schedule" => "carrier_schedule",
+      "osm_geometry" => "osm_corridor_extract"
+    }.freeze
+    SHA256_PATTERN = /\Asha256:[0-9a-f]{64}\z/
 
     def validate_registry(document)
       errors = []
@@ -97,6 +102,7 @@ module TrainRadar
       end
 
       validate_cppk_sources(sources, errors)
+      validate_m1_source_admission(document, sources, errors)
       errors
     end
 
@@ -241,7 +247,7 @@ module TrainRadar
         end
 
         checksum = source["checksum"]
-        unless checksum.is_a?(String) && checksum.match?(/\Asha256:[0-9a-f]{64}\z/)
+        unless checksum.is_a?(String) && checksum.match?(SHA256_PATTERN)
           errors << "#{source_ref} requires a SHA-256 checksum"
         end
       end
@@ -265,6 +271,111 @@ module TrainRadar
              decision["checksum"] == "sha256:aefec3e4b2270f8dbbe2e1178f883fd73f2f706808fae3dd245080efe0a4cd35"
         errors << "#{KOTLYAKOVO_DECISION_REF} must preserve the approved checksum and status"
       end
+    end
+
+    def validate_m1_source_admission(document, sources, errors)
+      admission = document["m1_source_admission"]
+      unless admission.is_a?(Hash)
+        errors << "root.m1_source_admission must describe the fail-closed M1 source boundary"
+        return
+      end
+
+      unless %w[no_sources_admitted partially_admitted fully_admitted].include?(admission["status"])
+        errors << "m1_source_admission.status must be an explicit admission state"
+      end
+
+      importable_refs = admission["importable_source_refs"]
+      unless importable_refs.is_a?(Array) && importable_refs.uniq == importable_refs
+        errors << "m1_source_admission.importable_source_refs must be a unique array"
+        return
+      end
+
+      entries = admission["required_source_roles"]
+      unless entries.is_a?(Array)
+        errors << "m1_source_admission.required_source_roles must be an array"
+        return
+      end
+
+      roles = entries.map { |entry| entry.is_a?(Hash) ? entry["role"] : nil }
+      unless roles == M1_REQUIRED_SOURCE_ROLES.keys
+        errors << "m1_source_admission.required_source_roles must be schedule then osm_geometry"
+        return
+      end
+
+      admitted_refs = []
+      entries.each do |entry|
+        role = entry["role"]
+        source_ref = M1_REQUIRED_SOURCE_ROLES.fetch(role)
+        unless entry["source_ref"] == source_ref
+          errors << "M1 #{role} source_ref must be #{source_ref}"
+          next
+        end
+
+        source = sources.find { |candidate| candidate["source_id"] == source_ref }
+        unless source
+          errors << "M1 #{role} source #{source_ref} is missing from the manifest"
+          next
+        end
+
+        admitted = entry["admission_status"] == "admitted"
+        blocked = entry["admission_status"] == "blocked"
+        unless admitted || blocked
+          errors << "M1 #{role} admission_status must be blocked or admitted"
+          next
+        end
+
+        if blocked
+          reasons = Array(entry["blocking_reasons"])
+          unless reasons.all? { |reason| reason.is_a?(String) && !reason.empty? } && !reasons.empty?
+            errors << "blocked M1 #{role} source requires explicit blocking_reasons"
+          end
+          errors << "blocked M1 #{role} source must not be importable" if importable_refs.include?(source_ref)
+          next
+        end
+
+        admitted_refs << source_ref
+        errors << "admitted M1 #{role} source must be listed as importable" unless importable_refs.include?(source_ref)
+        validate_admitted_m1_source(role, source, errors)
+      end
+
+      unless importable_refs == admitted_refs
+        errors << "m1_source_admission.importable_source_refs must list exactly admitted sources"
+      end
+
+      expected_status = if importable_refs.empty?
+                          "no_sources_admitted"
+                        elsif importable_refs.length == M1_REQUIRED_SOURCE_ROLES.length
+                          "fully_admitted"
+                        else
+                          "partially_admitted"
+                        end
+      errors << "m1_source_admission.status must match importable_source_refs" unless admission["status"] == expected_status
+    end
+
+    def validate_admitted_m1_source(role, source, errors)
+      errors << "admitted M1 #{role} source must be verified_m1_import" unless source["verification_status"] == "verified_m1_import"
+      unless source["license"].is_a?(String) && !source["license"].empty?
+        errors << "admitted M1 #{role} source requires an explicit license"
+      end
+      unless source["checksum"].is_a?(String) && source["checksum"].match?(SHA256_PATTERN)
+        errors << "admitted M1 #{role} source requires a SHA-256 checksum"
+      end
+
+      snapshot = source["snapshot"]
+      unless snapshot.is_a?(Hash) && %w[version immutable_ref].all? { |key| snapshot[key].is_a?(String) && !snapshot[key].empty? }
+        errors << "admitted M1 #{role} source requires immutable snapshot version and reference"
+      end
+
+      rights = source["rights"]
+      unless rights.is_a?(Hash) && rights["import_allowed"] == true && rights["reviewed_at"].is_a?(String)
+        errors << "admitted M1 #{role} source requires reviewed import rights"
+      end
+
+      return unless role == "osm_geometry"
+
+      errors << "admitted M1 OSM geometry must retain ODbL 1.0" unless source["license"] == "ODbL 1.0"
+      errors << "admitted M1 OSM geometry requires visible attribution" unless source["attribution"] == "© OpenStreetMap contributors"
+      errors << "admitted M1 OSM geometry must prohibit public OSM tiles as production backend" unless source.dig("rendering", "public_osm_tiles_production") == false
     end
 
     def validate_planned_unused_stop(stops, errors)

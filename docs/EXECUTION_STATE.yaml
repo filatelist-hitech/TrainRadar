@@ -1,8 +1,8 @@
 project: TrainRadar
-phase: discovery
-status: m0_accepted_by_owner
-active_milestone: M0
-active_task: awaiting_next_milestone_authorization
+phase: delivery
+status: m1_in_progress
+active_milestone: M1
+active_task: m1_lawful_source_snapshot_admission
 decisions:
   - "corridor_exactly_44_stops"
   - "flutter_ios_android"
@@ -23,5 +23,6 @@ evidence:
   - "docs/BRAND.md"
   - "docs/evidence/brand-assets-2026-07-27.md"
   - "docs/evidence/M0-reference-verification.md"
+  - "docs/evidence/M1-source-admission-boundary.md"
 last_verified_at: "2026-07-28T01:01:13Z"
-next_action: "Получить отдельную авторизацию владельца на конкретный следующий milestone; M1–M6 не авторизованы."
+next_action: "M1-02: получить и юридически допустить immutable schedule и OSM geometry snapshots с version, SHA-256, rights и ODbL attribution; до этого import запрещён."

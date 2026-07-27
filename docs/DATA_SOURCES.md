@@ -16,6 +16,15 @@
 allowed/prohibited use и verification status. Snapshot получает immutable source version.
 Неизвестная лицензия блокирует import, но не блокирует запись вопроса.
 
+## M1 admission boundary
+
+`m1_source_admission` в `data/reference/source_manifest.yaml` — единственный локальный allowlist
+для import boundary M1. Сейчас он пуст: `carrier_schedule` и `osm_corridor_extract` имеют статус
+`blocked`. Для admission нужны immutable snapshot reference и version, SHA-256, явные
+проверенные права на import и статус `verified_m1_import`. Для OSM дополнительно обязательны
+`ODbL 1.0`, видимое `© OpenStreetMap contributors` и явный запрет public OSM tiles как production
+backend. Валидатор не допускает blocked source в importable list.
+
 ## Текущее состояние M0
 
 - Seed-ТЗ имеет локальный SHA-256 и даёт только 44 названия, порядок и продуктовые ограничения.
@@ -34,7 +43,8 @@ allowed/prohibited use и verification status. Snapshot получает immutab
 - Tutu MCP выполнил только разрешённую ручную endpoint point-check; промежуточных остановок он
   в ответе не дал и источником registry не является.
 - Official infrastructure source не идентифицирован.
-- OSM data extract не получен; лицензия и tile policy зафиксированы как constraints.
+- OSM data extract не получен; лицензия и tile policy зафиксированы как constraints. M1 admission
+  list остаётся пустым до версии extract, checksum, topology review и ODbL attribution.
 - Публичный/партнёрский GTFS(-RT) feed для коридора не подтверждён.
 
 Поэтому coordinates/IDs из карты считаются только read-only verification evidence, а не импортом;

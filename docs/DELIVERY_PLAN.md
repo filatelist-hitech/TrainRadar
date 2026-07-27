@@ -1,7 +1,7 @@
 # Delivery Plan
 
-Текущая авторизация охватывает только M0. Остальные milestones — утверждённый roadmap, не очередь
-на автоматическое выполнение.
+Текущая авторизация охватывает M1 — Offline rail map. M2–M6 остаются утверждённым roadmap, но не
+очередью на автоматическое выполнение.
 
 | Milestone | User outcome | Automated gate | Manual/field gate | Degradation |
 |---|---|---|---|---|
@@ -30,11 +30,12 @@ flowchart LR
 In: required docs/tree, 44 seed records, manifest, validators, skeletons. Out: all product logic.
 Acceptance: all automated checks pass; exactly one next action; unknowns pending. Evidence:
 `docs/evidence/`. Risk: sources not verified. Rollback: remove no external data because none imported.
-Owner accepted M0 on 2026-07-28; this does not authorize M1–M6.
+Owner accepted M0 on 2026-07-28 and separately authorized M1. M2–M6 по-прежнему не авторизованы.
 
 ### M1
 
-Depends on verified carrier/infrastructure/OSM sources. Acceptance: 44/44 registry slots accounted
+M1 начат с fail-closed source admission boundary: allowlist пуст, пока не пройдут rights, immutable
+snapshot/version и checksum gate. Depends on verified carrier/infrastructure/OSM sources. Acceptance: 44/44 registry slots accounted
 for, 43 current stops in operational graph/map/QA, `Котляково` excluded until activation; forbidden
 branches absent; ODbL visible; reproducible extract checksum. Field: source owner reviews special
 stops. Rollback: serve previous versioned offline dataset.

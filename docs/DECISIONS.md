@@ -17,6 +17,8 @@
 | D-013 | four truth states never mixed | accepted | explicit UI/API degradation |
 | D-014 | M0 external stop properties remain pending | accepted | no fabricated coordinates/status/IDs |
 | D-015 | `Котляково` retained as planned but disabled | accepted | registry stays 44; usable corridor stays 43 until commissioning proof and separate owner approval |
-| D-016 | M0 discovery package accepted by owner on 2026-07-28 | accepted | M1–M6 remain blocked pending a separate, explicit authorization |
+| D-016 | M0 discovery package accepted by owner on 2026-07-28 | accepted | completed predecessor for M1 |
+| D-017 | M1 Offline rail map authorized by owner on 2026-07-28 | accepted | M1 only; M2–M6 remain blocked pending separate authorization |
+| D-018 | M1 source admission is an explicit fail-closed allowlist | accepted | no schedule/OSM import until immutable snapshot, SHA-256, rights and OSM attribution gates pass |
 
 Architecture rationale is expanded in `docs/adr/`.
