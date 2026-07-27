@@ -1,6 +1,6 @@
 SHELL := /bin/sh
 
-.PHONY: setup compose-up validate-data lint test check
+.PHONY: setup compose-up validate-data validate-brand lint test check
 
 setup:
 	command -v go >/dev/null
@@ -16,6 +16,9 @@ compose-up:
 validate-data:
 	ruby scripts/validate_reference_data.rb
 
+validate-brand:
+	ruby scripts/validate_brand_assets.rb
+
 lint:
 	@unformatted="$$(find backend -type f -name '*.go' -exec gofmt -l {} +)"; \
 	test -z "$$unformatted" || { echo "Unformatted Go files:"; echo "$$unformatted"; exit 1; }
@@ -23,6 +26,7 @@ lint:
 	cd mobile && flutter analyze
 	ruby -c scripts/validate_reference_data.rb
 	ruby -c scripts/validate_openapi.rb
+	ruby -c scripts/validate_brand_assets.rb
 	ruby scripts/validate_openapi.rb
 	docker compose config --quiet
 
@@ -31,5 +35,6 @@ test:
 	cd mobile && flutter test
 	ruby test/validate_reference_data_test.rb
 	ruby test/validate_openapi_test.rb
+	ruby test/validate_brand_assets_test.rb
 
-check: validate-data lint test
+check: validate-data validate-brand lint test

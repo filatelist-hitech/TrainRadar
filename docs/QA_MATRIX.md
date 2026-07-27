@@ -9,6 +9,7 @@
 | forbidden branches absent | exact seed/scope negative test | map review | automated PASS; map `NOT_RUN` |
 | Go skeleton | `go vet`, `go test`, race/build, HTTP smoke | process smoke | PASS |
 | Flutter skeleton | analyze/widget + APK/iOS simulator builds | physical iOS/Android | automated PASS; physical `NOT_RUN` |
+| Brand assets concept 05-soft-3d | `make validate-brand`: SHA-256, image dimensions/alpha, iOS catalog, Android XML/manifest and deployment drift | square/round/maskable/small-size inspection; physical iOS/Android launcher | automated PASS; visual asset PASS; physical `NOT_RUN` |
 | OpenAPI skeleton | semantic validator + HTTP tests | client review | PASS |
 | Compose separation | config + clean runtime health | DB schema queries | PASS |
 | raw retention ≤24h | Go unit + SQL rejection | KMS/delete/backup drill | policy PASS; drill `NOT_RUN` |

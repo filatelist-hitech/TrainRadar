@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "brand_name": "TrainRadar",
+  "approved_concept": "05-soft-3d",
+  "integration_date": "2026-07-27",
+  "source": {
+    "archive": "trainradar-icon-production.zip",
+    "archive_sha256": "40e1cfb8cdb529293115656821f93ca06baa586f0dda21047f75d8517df66c0c"
+  },
+  "master": {
+    "path": "assets/brand/trainradar/master/trainradar-icon-master-1254.png",
+    "sha256": "74761a3e5ffc28007f29ba32c4f8c0514ef89c88d276897a61ce1de795dbab2e",
+    "dimensions": [1254, 1254],
+    "alpha": false,
+    "platform": "canonical",
+    "purpose": "Единственный неизменяемый мастер утверждённого концепта 05-soft-3d"
+  },
+  "integrated_platforms": ["ios", "android"],
+  "not_integrated": [
+    {
+      "platform": "web/pwa",
+      "reason": "В Flutter-проекте отсутствует каталог mobile/web; web assets не создавались."
+    }
+  ],
+  "platform_adjustments": [
+    {
+      "platform": "android",
+      "files": "mipmap-*/ic_launcher_round.png",
+      "reason": "Поставленные legacy round PNG визуально содержали только сливовый фон. Каждый round resource сделан byte-identical соответствующему approved launcher PNG; круглую маску применяет Android. Master не менялся, новое изображение не создавалось."
+    },
+    {
+      "platform": "android",
+      "files": "drawable-*/ic_stat_trainradar.png",
+      "reason": "Поставленные notification glyphs детерминированно нормализованы до #FFFFFF с сохранением исходного alpha-канала и силуэта, чтобы выполнить строгий white-alpha contract."
+    }
+  ],
+  "assets": [
+    {"platform": "ios", "purpose": "AppIcon iPhone 20pt @1x; iPad 20pt @1x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-20.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-20.png", "dimensions": [20, 20], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPad 20pt @2x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-20@2x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-20@2x.png", "dimensions": [40, 40], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone/iPad 20pt @2x; iPad 40pt @1x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-40.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-40.png", "dimensions": [40, 40], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone 20pt @3x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-20@3x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-20@3x.png", "dimensions": [60, 60], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone/iPad 29pt @1x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-29.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-29.png", "dimensions": [29, 29], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone/iPad 29pt @2x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-29@2x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-29@2x.png", "dimensions": [58, 58], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone 29pt @3x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-29@3x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-29@3x.png", "dimensions": [87, 87], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone 40pt @2x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-40@2x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-40@2x.png", "dimensions": [80, 80], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone 40pt @3x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-40@3x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-40@3x.png", "dimensions": [120, 120], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone 60pt @2x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-60@2x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-60@2x.png", "dimensions": [120, 120], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPhone 60pt @3x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-60@3x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-60@3x.png", "dimensions": [180, 180], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPad 76pt @1x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-76.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-76.png", "dimensions": [76, 76], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPad 76pt @2x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-76@2x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-76@2x.png", "dimensions": [152, 152], "alpha": false},
+    {"platform": "ios", "purpose": "AppIcon iPad 83.5pt @2x", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-83.5@2x.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-83.5@2x.png", "dimensions": [167, 167], "alpha": false},
+    {"platform": "ios", "purpose": "App Store marketing icon", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/icon-1024.png", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/icon-1024.png", "dimensions": [1024, 1024], "alpha": false},
+    {"platform": "android", "purpose": "Launcher icon mdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-mdpi/ic_launcher.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-mdpi/ic_launcher.png", "dimensions": [48, 48], "alpha": false},
+    {"platform": "android", "purpose": "Round launcher icon mdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-mdpi/ic_launcher_round.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png", "dimensions": [48, 48], "alpha": false},
+    {"platform": "android", "purpose": "Adaptive launcher foreground mdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-mdpi/ic_launcher_foreground.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png", "dimensions": [108, 108], "alpha": false},
+    {"platform": "android", "purpose": "Launcher icon hdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-hdpi/ic_launcher.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-hdpi/ic_launcher.png", "dimensions": [72, 72], "alpha": false},
+    {"platform": "android", "purpose": "Round launcher icon hdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-hdpi/ic_launcher_round.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png", "dimensions": [72, 72], "alpha": false},
+    {"platform": "android", "purpose": "Adaptive launcher foreground hdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-hdpi/ic_launcher_foreground.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png", "dimensions": [162, 162], "alpha": false},
+    {"platform": "android", "purpose": "Launcher icon xhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xhdpi/ic_launcher.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png", "dimensions": [96, 96], "alpha": false},
+    {"platform": "android", "purpose": "Round launcher icon xhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xhdpi/ic_launcher_round.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png", "dimensions": [96, 96], "alpha": false},
+    {"platform": "android", "purpose": "Adaptive launcher foreground xhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xhdpi/ic_launcher_foreground.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png", "dimensions": [216, 216], "alpha": false},
+    {"platform": "android", "purpose": "Launcher icon xxhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xxhdpi/ic_launcher.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png", "dimensions": [144, 144], "alpha": false},
+    {"platform": "android", "purpose": "Round launcher icon xxhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xxhdpi/ic_launcher_round.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png", "dimensions": [144, 144], "alpha": false},
+    {"platform": "android", "purpose": "Adaptive launcher foreground xxhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xxhdpi/ic_launcher_foreground.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png", "dimensions": [324, 324], "alpha": false},
+    {"platform": "android", "purpose": "Launcher icon xxxhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xxxhdpi/ic_launcher.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png", "dimensions": [192, 192], "alpha": false},
+    {"platform": "android", "purpose": "Round launcher icon xxxhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xxxhdpi/ic_launcher_round.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png", "dimensions": [192, 192], "alpha": false},
+    {"platform": "android", "purpose": "Adaptive launcher foreground xxxhdpi", "source_path": "assets/brand/trainradar/platform/android/mipmap-xxxhdpi/ic_launcher_foreground.png", "deployment_path": "mobile/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png", "dimensions": [432, 432], "alpha": false},
+    {"platform": "android", "purpose": "White-alpha notification glyph mdpi", "source_path": "assets/brand/trainradar/platform/android/drawable-mdpi/ic_stat_trainradar.png", "deployment_path": "mobile/android/app/src/main/res/drawable-mdpi/ic_stat_trainradar.png", "dimensions": [24, 24], "alpha": true},
+    {"platform": "android", "purpose": "White-alpha notification glyph hdpi", "source_path": "assets/brand/trainradar/platform/android/drawable-hdpi/ic_stat_trainradar.png", "deployment_path": "mobile/android/app/src/main/res/drawable-hdpi/ic_stat_trainradar.png", "dimensions": [36, 36], "alpha": true},
+    {"platform": "android", "purpose": "White-alpha notification glyph xhdpi", "source_path": "assets/brand/trainradar/platform/android/drawable-xhdpi/ic_stat_trainradar.png", "deployment_path": "mobile/android/app/src/main/res/drawable-xhdpi/ic_stat_trainradar.png", "dimensions": [48, 48], "alpha": true},
+    {"platform": "android", "purpose": "White-alpha notification glyph xxhdpi", "source_path": "assets/brand/trainradar/platform/android/drawable-xxhdpi/ic_stat_trainradar.png", "deployment_path": "mobile/android/app/src/main/res/drawable-xxhdpi/ic_stat_trainradar.png", "dimensions": [72, 72], "alpha": true},
+    {"platform": "android", "purpose": "White-alpha notification glyph xxxhdpi", "source_path": "assets/brand/trainradar/platform/android/drawable-xxxhdpi/ic_stat_trainradar.png", "deployment_path": "mobile/android/app/src/main/res/drawable-xxxhdpi/ic_stat_trainradar.png", "dimensions": [96, 96], "alpha": true}
+  ],
+  "configuration_files": [
+    {"platform": "ios", "purpose": "Xcode AppIcon slot mapping", "source_path": "assets/brand/trainradar/platform/ios/AppIcon.appiconset/Contents.json", "deployment_path": "mobile/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json"},
+    {"platform": "android", "purpose": "Adaptive icon background #2A1B42", "source_path": "assets/brand/trainradar/platform/android/values/colors.xml", "deployment_path": "mobile/android/app/src/main/res/values/colors.xml"},
+    {"platform": "android", "purpose": "Android 8+ adaptive launcher icon", "source_path": "assets/brand/trainradar/platform/android/mipmap-anydpi-v26/ic_launcher.xml", "deployment_path": "mobile/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"},
+    {"platform": "android", "purpose": "Android 8+ adaptive round launcher icon", "source_path": "assets/brand/trainradar/platform/android/mipmap-anydpi-v26/ic_launcher_round.xml", "deployment_path": "mobile/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"},
+    {"platform": "android", "purpose": "Android 13 adaptive launcher icon with monochrome glyph", "source_path": "assets/brand/trainradar/platform/android/mipmap-anydpi-v33/ic_launcher.xml", "deployment_path": "mobile/android/app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml"},
+    {"platform": "android", "purpose": "Android 13 adaptive round launcher icon with monochrome glyph", "source_path": "assets/brand/trainradar/platform/android/mipmap-anydpi-v33/ic_launcher_round.xml", "deployment_path": "mobile/android/app/src/main/res/mipmap-anydpi-v33/ic_launcher_round.xml"}
+  ]
+}
