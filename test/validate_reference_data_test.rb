@@ -104,6 +104,45 @@ class ReferenceValidatorTest < Minitest::Test
     )
   end
 
+  def test_rejects_listing_blocked_m1_source_as_importable
+    manifest = deep_copy(@manifest)
+    manifest["m1_source_admission"]["importable_source_refs"] << "carrier_schedule"
+
+    assert_includes(
+      @validator.validate_manifest(manifest).join("\n"),
+      "blocked M1 schedule source must not be importable"
+    )
+  end
+
+  def test_rejects_unknown_m1_source_in_importable_allowlist
+    manifest = deep_copy(@manifest)
+    manifest["m1_source_admission"]["importable_source_refs"] << "unreviewed_source"
+    manifest["m1_source_admission"]["status"] = "partially_admitted"
+
+    assert_includes(
+      @validator.validate_manifest(manifest).join("\n"),
+      "m1_source_admission.importable_source_refs must list exactly admitted sources"
+    )
+  end
+
+  def test_rejects_admitted_osm_source_without_attribution_or_snapshot
+    manifest = deep_copy(@manifest)
+    entry = manifest["m1_source_admission"]["required_source_roles"].find do |candidate|
+      candidate["role"] == "osm_geometry"
+    end
+    entry["admission_status"] = "admitted"
+    entry.delete("blocking_reasons")
+    manifest["m1_source_admission"]["importable_source_refs"] << "osm_corridor_extract"
+    manifest["m1_source_admission"]["status"] = "partially_admitted"
+
+    errors = @validator.validate_manifest(manifest).join("\n")
+
+    assert_includes errors, "admitted M1 osm_geometry source must be verified_m1_import"
+    assert_includes errors, "admitted M1 osm_geometry source requires a SHA-256 checksum"
+    assert_includes errors, "admitted M1 osm_geometry source requires immutable snapshot version and reference"
+    assert_includes errors, "admitted M1 OSM geometry requires visible attribution"
+  end
+
   private
 
   def deep_copy(value)

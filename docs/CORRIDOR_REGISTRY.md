@@ -9,6 +9,11 @@ Source of truth для машинной проверки:
 станция с `project_usage.enabled: false`. Итого: M0 registry scope 44/44 принят, текущий usable
 corridor содержит 43 пункта.
 
+M1 source admission пока содержит пустой allowlist: это не меняет registry и не создаёт graph/map
+из carrier display checks. Только после lawful schedule и versioned OSM geometry snapshots с
+version, SHA-256, rights и ODbL attribution operational graph/map/QA смогут использовать те же
+43 enabled current stops; `Котляково` останется исключённым.
+
 | # | stop_id | Каноническое имя | Seed alias | Status |
 |---:|---|---|---|---|
 | 1 | tr-pu-stop-001 | Москва-Павелецкая | Павелецкий вокзал | pending |

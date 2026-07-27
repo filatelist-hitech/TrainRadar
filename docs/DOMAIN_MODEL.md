@@ -10,6 +10,7 @@
 | `Route` | пассажирский маршрут | corridor, direction, service class |
 | `Stop` | канонический объект registry | stable ID, aliases, object type, provenance |
 | `RailSegment` | направленное ребро versioned graph | endpoints, geometry version, topology |
+| `SourceSnapshot` | допущенный immutable input M1 | source ref, version, immutable ref, SHA-256, rights review, licence |
 | `Observation` | неизменяемое входное свидетельство | pseudonym, time, encrypted payload, consent |
 | `TrainTrack` | версия агрегированного трека рейса | input refs, algorithm version, uncertainty |
 | `Prediction` | ETA/delay result | checkpoint, interval, confidence, model version |
@@ -37,3 +38,5 @@
 - `Observation` не изменяется; исправления создают новую derived version.
 - `crowd_confirmed` требует три независимые capability после anti-collusion checks.
 - `TrainTrack` не содержит публично доступной связи с участником.
+- `SourceSnapshot` может питать import boundary только после M1 admission; pending или blocked
+  source не создаёт graph, station, platform, tariff object или stop pattern.

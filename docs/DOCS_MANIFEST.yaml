@@ -273,6 +273,15 @@ documents:
     check_command: ruby scripts/docs_gate.rb check-impact --staged
     update_conditions: reproducible M0 startup evidence changes
     auto_stage: false
+  - path: docs/evidence/M1-source-admission-boundary.md
+    audience: team
+    owner: data-and-qa
+    type: human
+    source_paths: [data/reference/source_manifest.yaml, scripts/validate_reference_data.rb, test/validate_reference_data_test.rb]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: M1 source-admission contract or its local verification changes
+    auto_stage: false
   - path: docs/evidence/README.md
     audience: team
     owner: qa

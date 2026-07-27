@@ -13,5 +13,7 @@ Evidence — воспроизводимое доказательство кон�
 
 M0 startup evidence находится в `M0-startup.md`; отдельная ручная сверка reference registry —
 в `M0-reference-verification.md`; интеграция фирменных assets — в `brand-assets-2026-07-27.md`.
+M1 fail-closed source-admission boundary фиксируется в `M1-source-admission-boundary.md`; он
+подтверждает локальный запрет import, но не заменяет legal/source/map review.
 Не хранить здесь secrets, exact GPS, invites, raw capability IDs, access tokens или personal paths
 вне необходимых локальных source identifiers.

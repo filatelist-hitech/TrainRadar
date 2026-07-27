@@ -13,12 +13,15 @@
 - [ ] Идентифицировать официальный infrastructure registry/source и права использования.
 - [x] Выполнить read-only CPPK map cross-check: 42 current records имеют map match с ID/координатами;
   `32 км` остаётся schedule-only (2026-07-28, checksum в manifest).
+- [ ] Получить immutable lawful schedule snapshot с source version, SHA-256 и import rights; до
+  admission он не попадает в graph, map или stop patterns.
+- [ ] Получить versioned OSM corridor extract с replication/version, SHA-256, ODbL attribution и
+  topology review; до admission он не попадает в graph или map.
 - [ ] Законно импортировать или independently re-check coordinates, object type, kilometer,
-  operational/fare status и external IDs перед M1.
+  operational/fare status и external IDs после admission соответствующего source snapshot.
 - [ ] Подтвердить aliases всех пунктов, особенно `32 км` и `85 км`, независимым источником.
 - [ ] Независимо подтвердить owner-supplied one-way platform rule для `32 км` и `85 км`; не
   выводить из него stop pattern каждого рейса.
-- [ ] Получить versioned OSM corridor extract, checksum, replication/version и topology review.
 - [ ] Определить доступность и лицензию GTFS/GTFS-RT/API ЦППК/РЖД.
 - [x] Выполнить разрешённую ручную Tutu endpoint point-check: 9 прямых offers Москва-Павелецкая →
   Узуново на 2026-07-28; промежуточные stops не получены и не импортированы.
