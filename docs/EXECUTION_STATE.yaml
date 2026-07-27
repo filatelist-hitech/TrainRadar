@@ -1,8 +1,8 @@
 project: TrainRadar
 phase: discovery
-status: in_progress
+status: m0_accepted_by_owner
 active_milestone: M0
-active_task: startup-package
+active_task: awaiting_next_milestone_authorization
 decisions:
   - "corridor_exactly_44_stops"
   - "flutter_ios_android"
@@ -10,10 +10,11 @@ decisions:
   - "rest_plus_sse"
   - "separate_encrypted_raw_store_max_24h"
   - "brand_concept_05_soft_3d"
-blockers:
-  - "44 stop records and source manifest are not primary-source verified"
+  - "kotlyakovo_planned_unused_until_construction_verification_and_owner_approval"
+blockers: []
 risks:
   - "legal and platform gates remain before any real GPS pilot"
+  - "carrier licence and official infrastructure registry remain M1 input gates"
 evidence:
   - "data/reference/paveletsky_uzunovo_stations.yaml"
   - "data/reference/source_manifest.yaml"
@@ -21,5 +22,6 @@ evidence:
   - "docs/evidence/M0-startup.md"
   - "docs/BRAND.md"
   - "docs/evidence/brand-assets-2026-07-27.md"
-last_verified_at: "2026-07-27T20:28:23Z"
-next_action: "Верифицировать 44/44 остановочных пункта и source_manifest для M0"
+  - "docs/evidence/M0-reference-verification.md"
+last_verified_at: "2026-07-28T01:01:13Z"
+next_action: "Получить отдельную авторизацию владельца на конкретный следующий milestone; M1–M6 не авторизованы."

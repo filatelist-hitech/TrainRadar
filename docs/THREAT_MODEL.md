@@ -3,7 +3,7 @@
 ## Assets
 
 Exact location/time, trip membership, invite capability, consent state, raw encryption keys,
-rail/schedule source versions, public position integrity и access audit.
+rail/schedule source versions, canonical brand asset integrity, public position integrity и access audit.
 
 ## Trust boundaries
 
@@ -43,6 +43,7 @@ flowchart LR
 | Key/backup retention | undeletable raw data | per-payload DEK destruction, backup policy gate |
 | Log leakage | coordinates in observability | structured allowlist/redaction tests |
 | Source poisoning | wrong graph/schedule | checksums, source versions, licence/provenance review |
+| Brand asset tampering | misleading launcher identity or broken platform rendering | canonical master SHA-256, fixed asset matrix and platform validator |
 | SSE abuse | scraping/DoS | future auth/capability, limits, reconnect policy; not implemented |
 
 ## Abuse cases

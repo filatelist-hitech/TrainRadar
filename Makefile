@@ -1,6 +1,7 @@
 SHELL := /bin/sh
 
-.PHONY: setup compose-up validate-data validate-brand lint test check
+.PHONY: setup compose-up validate-data schema-check format-check lint test build brand-assets validate-brand \
+	docs-sync docs-check check-staged check-full install-hooks ready check
 
 setup:
 	command -v go >/dev/null
@@ -16,25 +17,53 @@ compose-up:
 validate-data:
 	ruby scripts/validate_reference_data.rb
 
-validate-brand:
-	ruby scripts/validate_brand_assets.rb
+schema-check: validate-data
+	ruby scripts/validate_openapi.rb
+	docker compose config --quiet
 
-lint:
+format-check:
 	@unformatted="$$(find backend -type f -name '*.go' -exec gofmt -l {} +)"; \
 	test -z "$$unformatted" || { echo "Unformatted Go files:"; echo "$$unformatted"; exit 1; }
+	cd mobile && dart format --output=none --set-exit-if-changed lib test
+
+lint:
 	cd backend && go vet ./...
 	cd mobile && flutter analyze
 	ruby -c scripts/validate_reference_data.rb
+	ruby -c scripts/verify_corridor_sources.rb
 	ruby -c scripts/validate_openapi.rb
 	ruby -c scripts/validate_brand_assets.rb
-	ruby scripts/validate_openapi.rb
-	docker compose config --quiet
+	ruby -c scripts/docs_gate.rb
 
 test:
 	cd backend && go test ./...
 	cd mobile && flutter test
-	ruby test/validate_reference_data_test.rb
-	ruby test/validate_openapi_test.rb
-	ruby test/validate_brand_assets_test.rb
+	ruby -e 'Dir["test/**/*_test.rb"].sort.each { |file| load file }'
 
-check: validate-data validate-brand lint test
+build:
+	cd backend && mkdir -p bin && go build -o bin/trainradar-api ./cmd/api
+	cd mobile && flutter build apk --debug
+
+brand-assets:
+	ruby scripts/validate_brand_assets.rb
+	ruby scripts/docs_gate.rb brand-assets
+
+validate-brand: brand-assets
+
+docs-sync:
+	ruby scripts/docs_gate.rb sync
+
+docs-check:
+	ruby scripts/docs_gate.rb check
+
+check-staged:
+	ruby scripts/docs_gate.rb pre-commit
+
+check-full: format-check lint test build schema-check brand-assets docs-check
+
+install-hooks:
+	ruby scripts/docs_gate.rb install-hooks
+
+ready: check-full
+
+check: format-check lint test schema-check brand-assets docs-check

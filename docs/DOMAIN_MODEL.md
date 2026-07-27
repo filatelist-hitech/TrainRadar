@@ -26,7 +26,11 @@
 
 ## Инварианты
 
-- 44-stop registry и конкретный trip stop pattern не являются одной таблицей.
+- 44-slot registry и конкретный trip stop pattern не являются одной таблицей.
+- В M0 43 registry-пункта текущие и usable; Котляково (`tr-pu-stop-008`) остаётся
+  `planned_not_built` slot с `project_usage.enabled: false`. Его нельзя включать в `Route`,
+  `Trip` stop pattern или live coverage до официального подтверждения ввода и отдельного
+  решения владельца.
 - `Trip` идентифицируется вместе с `ServiceDate`; время хранится UTC + исходная timezone.
 - `Delay` относится к checkpoint и calculated_at.
 - `Prediction` всегда содержит интервал и версию.

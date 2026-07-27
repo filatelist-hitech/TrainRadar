@@ -59,6 +59,51 @@ class ReferenceValidatorTest < Minitest::Test
     assert_includes @validator.validate_registry(registry).join("\n"), "forbidden branch token"
   end
 
+  def test_rejects_unapproved_source_verification_shape
+    registry = deep_copy(@registry)
+    registry["verification_status"] = "verified"
+    registry["verification"]["verification_status"] = "verified"
+    registry["verification"]["identity_order_matches"] = 44
+    registry["verification"]["planned_unused_stop_ids"] = []
+    errors = @validator.validate_registry(registry).join("\n")
+
+    assert_includes errors, "root.verification_status"
+    assert_includes errors, "verification.verification_status"
+    assert_includes errors, "verification.identity_order_matches"
+    assert_includes errors, "verification.planned_unused_stop_ids"
+  end
+
+  def test_rejects_missing_cppk_snapshot_checksum
+    manifest = deep_copy(@manifest)
+    source = manifest["sources"].find do |candidate|
+      candidate["source_id"] == "cppk_route_6001_2026-07-27"
+    end
+    source["checksum"] = nil
+
+    assert_includes @validator.validate_manifest(manifest).join("\n"), "requires a SHA-256 checksum"
+  end
+
+  def test_rejects_missing_cppk_map_cross_check
+    registry = deep_copy(@registry)
+    registry["verification"].delete("automation")
+
+    assert_includes(
+      @validator.validate_registry(registry).join("\n"),
+      "verification.automation must describe the CPPK map cross-check"
+    )
+  end
+
+  def test_rejects_enabling_unbuilt_kotlyakovo
+    registry = deep_copy(@registry)
+    stop = registry["stops"].find { |candidate| candidate["stop_id"] == "tr-pu-stop-008" }
+    stop["project_usage"]["enabled"] = true
+
+    assert_includes(
+      @validator.validate_registry(registry).join("\n"),
+      "Котляково must remain planned_not_built and disabled"
+    )
+  end
+
   private
 
   def deep_copy(value)

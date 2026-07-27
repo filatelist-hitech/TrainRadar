@@ -42,6 +42,9 @@
 M0 не собирает данные. Dev raw schema только запрещает expiry >24h; delete worker, KMS и production
 encryption не реализованы.
 
+Brand launcher, adaptive и notification assets не содержат GPS, capability, персональный идентификатор
+или telemetry и не добавляют location permission/SDK. Они остаются публичными статическими ресурсами.
+
 ## Encryption and separation
 
 - TLS для transit.

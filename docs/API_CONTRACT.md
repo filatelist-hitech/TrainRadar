@@ -2,6 +2,14 @@
 
 Machine-readable skeleton: `openapi/openapi.yaml`.
 
+<!-- BEGIN GENERATED: api-reference -->
+| Method | Path | Operation ID |
+| --- | --- | --- |
+| `GET` | `/healthz` | `getHealth` |
+| `GET` | `/v1/live/events` | `subscribeLiveEvents` |
+| `GET` | `/v1/status` | `getProjectStatus` |
+<!-- END GENERATED: api-reference -->
+
 ## M0 endpoints
 
 - `GET /healthz` — process health, no dependency/readiness claims.

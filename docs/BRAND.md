@@ -50,8 +50,8 @@
 1. явного подтверждения владельца продукта;
 2. обновления этого документа;
 3. обновления `brand-manifest.json` и SHA-256;
-4. повторной проверки всех платформ через `make validate-brand` и их релевантные сборки;
+4. повторной проверки всех платформ через `make brand-assets` (или совместимый `make validate-brand`) и их релевантные сборки;
 5. фиксации результата в `docs/evidence/` и `docs/QA_MATRIX.md`.
 
 Перед изменением UI, splash screen, launcher assets, favicon или store metadata сначала читать
-этот документ. Проверка: `ruby scripts/validate_brand_assets.rb` или `make validate-brand`.
+этот документ. Проверка: `ruby scripts/validate_brand_assets.rb` или `make brand-assets`.

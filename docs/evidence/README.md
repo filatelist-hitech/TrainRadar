@@ -11,6 +11,7 @@ Evidence — воспроизводимое доказательство кон�
 - ограничения и `NOT_RUN` для physical/field checks;
 - ссылки на code/data/decision version.
 
-M0 startup evidence записывается в `M0-startup.md` после финального прогона. Не хранить здесь
-secrets, exact GPS, invites, raw capability IDs, access tokens или personal paths вне необходимых
-локальных source identifiers.
+M0 startup evidence находится в `M0-startup.md`; отдельная ручная сверка reference registry —
+в `M0-reference-verification.md`; интеграция фирменных assets — в `brand-assets-2026-07-27.md`.
+Не хранить здесь secrets, exact GPS, invites, raw capability IDs, access tokens или personal paths
+вне необходимых локальных source identifiers.

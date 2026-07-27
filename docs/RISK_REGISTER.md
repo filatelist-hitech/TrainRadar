@@ -17,6 +17,6 @@ Scale: probability/impact `L/M/H`. Owners are roles, not assigned people.
 | R11 | insufficient analytics sample | H/M | no public rankings, confidence intervals, explicit sample size | product |
 | R12 | raw delete/key destruction failure | M/H | ≤24h constraint, alert, fail-closed, drill before GPS | security/ops |
 | R13 | owner as individual lacks operational capacity | M/H | compliance/process review before pilot | owner |
-| R14 | 44-stop seed is outdated/inaccurate | H/H | current next_action: triple-source verification | rail data |
+| R14 | planned `Котляково` is accidentally treated as operational | M/H | `planned_unused`, validator fail-closed, commissioning evidence plus separate owner approval | rail data |
 
 No risk is «accepted» merely because M0 skeleton compiles.

@@ -6,7 +6,7 @@ TrainRadar — прототип live-карты пригородных поез�
 ## Текущее состояние
 
 - milestone: `M0 Discovery / startup package`;
-- registry: 44/44 seed-записи из утверждённого ТЗ, внешняя верификация пока `pending`;
+- registry: 44/44 project scope; 43 текущих пункта, `Котляково` planned/disabled;
 - mobile: собираемый Flutter shell для iOS/Android без location permissions и GPS SDK;
 - backend: Go modular monolith с health/status endpoints и зарезервированным SSE endpoint;
 - storage: отдельные dev-контейнеры operational PostGIS и raw-GPS ciphertext store;
@@ -29,6 +29,37 @@ make compose-up
 docker compose stop
 ```
 
+<!-- BEGIN GENERATED: root-commands-and-configuration -->
+### Проверки
+
+```bash
+make docs-sync
+make docs-check
+make check-staged
+make check-full
+make ready
+```
+
+### Конфигурация
+
+Переменные из `.env.example` (значения и секреты не генерируются):
+- `API_HOST`
+- `API_PORT`
+- `APP_ENV`
+- `OPERATIONAL_DB_HOST`
+- `OPERATIONAL_DB_NAME`
+- `OPERATIONAL_DB_PASSWORD`
+- `OPERATIONAL_DB_PORT`
+- `OPERATIONAL_DB_USER`
+- `RAW_GPS_DB_HOST`
+- `RAW_GPS_DB_NAME`
+- `RAW_GPS_DB_PASSWORD`
+- `RAW_GPS_DB_PORT`
+- `RAW_GPS_DB_USER`
+- `RAW_GPS_KEK_BASE64`
+- `RAW_GPS_RETENTION_HOURS`
+<!-- END GENERATED: root-commands-and-configuration -->
+
 ## Структура
 
 - `mobile/` — Flutter shell;
@@ -41,6 +72,7 @@ docker compose stop
 
 ## Главная оговорка M0
 
-Названия и порядок 44 пунктов получены из утверждённого seed-ТЗ. Координаты, километраж,
+Названия и порядок 44 registry slots получены из утверждённого seed-ТЗ. `Котляково` сохраняется как
+ещё не построенная станция и не используется до отдельного решения. Координаты, километраж,
 эксплуатационный/тарифный статус, внешние идентификаторы и direction-specific service ещё не
 подтверждены первичными источниками. UI и API не должны изображать этот registry как live data.

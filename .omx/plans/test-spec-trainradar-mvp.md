@@ -3,7 +3,7 @@
 - Status: Approved
 - Scope: M0–M6 verification contract
 - Current executable subset: M0
-- Date: 2026-07-27
+- Date: 2026-07-28
 
 ## Evidence protocol
 
@@ -29,6 +29,9 @@ actually executed. Test data must be synthetic or irreversibly anonymized and ap
 | DATA-010 | required fields | provenance/coordinate/status placeholders present |
 | DATA-011 | manifest schema | owner/licence/retrieval/checksum/update/use/status keys |
 | DATA-012 | Tutu constraints | import/scheduler/cache/redistribution explicitly forbidden |
+| DATA-013 | planned `Котляково` | slot 8 retained; `planned_not_built`; project usage disabled |
+| DATA-014 | activation guard | owner decision checksum present; enabling planned station fails |
+| DATA-015 | read-only CPPK map cross-check | 42 map matches, `32 км` schedule-only, airport branch objects excluded |
 | DATA-NEG | mutate count/ID/ordinal/state/special/branch | validator fails each mutation |
 
 Command: `make validate-data` and `ruby test/validate_reference_data_test.rb`.
@@ -68,14 +71,16 @@ Command: `make validate-data` and `ruby test/validate_reference_data_test.rb`.
 
 ## M1 suites
 
-- registry/graph/map completeness property: exact same 44 IDs;
+- registry completeness: exact 44 IDs; operational graph/map contain the 43 enabled current stops;
+- explicit exclusion property: `Котляково` cannot enter routing, stop patterns or coverage while disabled;
 - topology degree/direction and endpoint properties;
 - forbidden branch and bounding corridor tests;
 - reproducible OSM extract checksum/version/licence/attribution;
 - sourced stop-pattern contract fixtures for ordinary/accelerated/express;
 - map golden/accessibility/offline tests and manual source/map review.
 
-Exit: 44/44 across all layers, no pending field required by M1 acceptance.
+Exit: 44/44 registry slots accounted for, 43 enabled current stops across operational layers,
+planned `Котляково` visibly fail-closed, and no pending field required by M1 acceptance.
 
 ## M2 suites
 
