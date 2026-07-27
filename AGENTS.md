@@ -30,6 +30,13 @@
 - Exact raw GPS на сервере хранится зашифрованно не более 24 часов, затем hard delete и уничтожение ключа.
 - Не добавлять SDK геолокации, реальные треки, developer accounts или production secrets без явного разрешения.
 
+## Brand invariants
+
+- Перед изменением UI, splash screen, launcher assets, favicon или store metadata читать `docs/BRAND.md`.
+- Использовать только активы из `assets/brand/trainradar/`; не генерировать новую иконку и не заменять
+  концепт №5 без явного запроса владельца.
+- После затрагивающих изменений запускать `make validate-brand` и явно сообщать о любом расхождении checksum.
+
 ## Команды
 
 ```bash

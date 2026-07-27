@@ -10,6 +10,7 @@
 | --- | --- |
 | `.githooks/` | Repo-local pre-commit и pre-push hooks. |
 | `.github/` | CI workflow checks. |
+| `assets/` | Канонические brand assets и платформенные производные. |
 | `backend/` | Go modular-monolith API и доменная логика. |
 | `data/` | Reference registry и manifests источников. |
 | `docs/` | Архитектурные, продуктовые, privacy, QA и evidence-документы. |

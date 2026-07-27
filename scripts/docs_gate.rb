@@ -22,6 +22,9 @@ module TrainRadar
     EXCLUDED_TOP_LEVEL = %w[.git .dart_tool .idea .omx .codex].freeze
     EXCLUDED_PATH_PARTS = %w[.DS_Store build coverage vendor node_modules .dart_tool .idea].freeze
     LARGE_BINARY_BYTES = 1_048_576
+    LARGE_BINARY_ALLOWLIST = Set.new([
+      "assets/brand/trainradar/master/trainradar-icon-master-1254.png"
+    ]).freeze
 
     def initialize(root: File.expand_path("..", __dir__), out: $stdout, err: $stderr)
       @root = root
@@ -360,7 +363,7 @@ module TrainRadar
         content = staged_blob(path)
         next if content.nil?
 
-        if content.bytesize > LARGE_BINARY_BYTES && binary?(content)
+        if content.bytesize > LARGE_BINARY_BYTES && binary?(content) && !allowed_large_binary?(path)
           @err.puts "Large staged binary exceeds #{LARGE_BINARY_BYTES} bytes: #{path}"
           return false
         end
@@ -525,6 +528,7 @@ module TrainRadar
     def module_description(name, tracked)
       descriptions = {
         "backend" => "Go modular-monolith API и доменная логика.",
+        "assets" => "Канонические brand assets и платформенные производные.",
         "data" => "Reference registry и manifests источников.",
         "docs" => "Архитектурные, продуктовые, privacy, QA и evidence-документы.",
         "infra" => "Инициализация local development data stores.",
@@ -576,6 +580,10 @@ module TrainRadar
 
     def binary?(content)
       content.include?("\x00")
+    end
+
+    def allowed_large_binary?(path)
+      LARGE_BINARY_ALLOWLIST.include?(path)
     end
 
     def tracked?(path)

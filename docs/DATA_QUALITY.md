@@ -12,6 +12,15 @@ Priority is not silent overwrite:
 Every conflict is retained as evidence and emitted with the winning source type. Fresh official
 data outranks crowd; implausible official points are quarantined, not silently trusted.
 
+## Registry usability
+
+M0 registry scope is accepted as 44 fixed slots: 43 current carrier stops plus Котляково as an
+approved planned-unused slot. `tr-pu-stop-008` has `operational_status: planned_not_built` and
+`project_usage.enabled: false`; validators must fail closed if it appears in a route, trip stop
+pattern or coverage calculation. Acceptance of registry scope does not verify its pending external
+properties (geometry, kilometre, tariff, direction rules or external IDs). Activation requires
+official commissioning evidence and a separate owner decision.
+
 ## Freshness buckets
 
 Each adapter declares a measured `source_ttl`. Until feed cadence is known, no numeric TTL is

@@ -9,6 +9,7 @@ decisions:
   - "go_modular_monolith"
   - "rest_plus_sse"
   - "separate_encrypted_raw_store_max_24h"
+  - "brand_concept_05_soft_3d"
   - "kotlyakovo_planned_unused_until_construction_verification_and_owner_approval"
 blockers: []
 risks:
@@ -19,6 +20,8 @@ evidence:
   - "data/reference/source_manifest.yaml"
   - "docs/evidence/README.md"
   - "docs/evidence/M0-startup.md"
+  - "docs/BRAND.md"
+  - "docs/evidence/brand-assets-2026-07-27.md"
   - "docs/evidence/M0-reference-verification.md"
 last_verified_at: "2026-07-28T01:01:13Z"
 next_action: "Получить отдельную авторизацию владельца на конкретный следующий milestone; M1–M6 не авторизованы."

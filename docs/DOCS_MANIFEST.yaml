@@ -282,6 +282,24 @@ documents:
     check_command: ruby scripts/docs_gate.rb check-impact --staged
     update_conditions: evidence index conventions change
     auto_stage: false
+  - path: docs/BRAND.md
+    audience: product-and-mobile
+    owner: product
+    type: human
+    source_paths: [assets/brand/trainradar/**, mobile/android/app/src/main/res/**, mobile/ios/Runner/Assets.xcassets/**, scripts/validate_brand_assets.rb]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: canonical brand master, platform derivatives, or visual-asset policy changes
+    auto_stage: false
+  - path: docs/evidence/brand-assets-2026-07-27.md
+    audience: team
+    owner: qa
+    type: human
+    source_paths: [assets/brand/trainradar/**, mobile/android/app/src/main/res/**, mobile/ios/Runner/Assets.xcassets/**, scripts/validate_brand_assets.rb, test/validate_brand_assets_test.rb]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: brand asset validation, platform build, or visual evidence changes
+    auto_stage: false
   - path: docs/research/open-questions.md
     audience: team
     owner: product

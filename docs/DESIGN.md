@@ -5,11 +5,14 @@
 - Status: Active for M0, implementation values subject to later visual approval.
 - Last refreshed: 2026-07-27.
 - Primary product surfaces: Flutter iOS/Android; web later.
-- Evidence reviewed: утверждённое ТЗ, `docs/PRODUCT.md`, `docs/MVP_SCOPE.md`, platform location guidance.
+- Evidence reviewed: утверждённое ТЗ, `docs/PRODUCT.md`, `docs/MVP_SCOPE.md`, platform location guidance,
+  `docs/BRAND.md`.
 
 ## Brand
 
 - Personality: спокойный диспетчер — точный, человечный, без «магии AI».
+- Icon and visual assets: `docs/BRAND.md` — единственный источник истины для фирменной иконки и
+  platform visual assets; утверждён концепт `05-soft-3d`.
 - Trust signals: источник, возраст, confidence, contributors и диапазон всегда рядом с позицией.
 - Avoid: авиационная метафора точности, мигающие тревоги, цвет как единственный носитель смысла,
   скрытый fallback, рейтинги при малой выборке.
@@ -44,6 +47,7 @@
 ## Visual language
 
 - Color: четыре состояния имеют разные цвет, иконку и текст; palette/contrast утверждаются позже.
+  Палитра и правила фирменной иконки закреплены в `docs/BRAND.md` и не являются токенами UI.
 - Typography: системный Flutter stack, минимум 16sp для основной информации.
 - Spacing/layout rhythm: базовый шаг 8dp, touch targets не меньше 48×48dp.
 - Shape/radius/elevation: спокойные карточки; elevation не кодирует достоверность.
@@ -97,6 +101,6 @@
 
 ## Open questions
 
-- [ ] Утвердить visual palette и icon set / owner / блокирует M1 visual baseline.
+- [ ] Утвердить UI visual palette / owner / блокирует M1 visual baseline; фирменный icon set уже закреплён в `docs/BRAND.md`.
 - [ ] Зафиксировать минимальные версии iOS/Android / owner / влияет на accessibility и background APIs.
 - [ ] Провести тест понятности четырёх truth states с 5–15 участниками / owner / блокирует M4.

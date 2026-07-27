@@ -31,3 +31,6 @@ rules:
   - id: visual-assets
     source_paths: [mobile/android/app/src/main/res/**, mobile/ios/Runner/Assets.xcassets/**]
     required_documents: [docs/DESIGN.md]
+  - id: brand-assets
+    source_paths: [assets/brand/trainradar/**, mobile/android/app/src/main/res/**, mobile/ios/Runner/Assets.xcassets/**, scripts/validate_brand_assets.rb, test/validate_brand_assets_test.rb]
+    required_documents: [docs/BRAND.md, docs/DESIGN.md, docs/QA_MATRIX.md, docs/evidence/brand-assets-2026-07-27.md]

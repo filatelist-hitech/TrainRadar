@@ -15,6 +15,8 @@ make ready
 Codex, сеть или внешние сервисы: они работают только с локальным index/worktree и доступными
 инструментами. `pre-commit` materialize-ит именно repository index во временном дереве, поэтому
 partial staging не проверяется случайным содержимым worktree; `pre-push` запускает полный локальный gate.
+Large binary по умолчанию блокируется; единственное узкое исключение — checksum-protected canonical
+master `assets/brand/trainradar/master/trainradar-icon-master-1254.png`.
 
 ## Generated и human-owned docs
 

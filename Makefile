@@ -1,6 +1,6 @@
 SHELL := /bin/sh
 
-.PHONY: setup compose-up validate-data schema-check format-check lint test build brand-assets \
+.PHONY: setup compose-up validate-data schema-check format-check lint test build brand-assets validate-brand \
 	docs-sync docs-check check-staged check-full install-hooks ready check
 
 setup:
@@ -32,6 +32,7 @@ lint:
 	ruby -c scripts/validate_reference_data.rb
 	ruby -c scripts/verify_corridor_sources.rb
 	ruby -c scripts/validate_openapi.rb
+	ruby -c scripts/validate_brand_assets.rb
 	ruby -c scripts/docs_gate.rb
 
 test:
@@ -44,7 +45,10 @@ build:
 	cd mobile && flutter build apk --debug
 
 brand-assets:
+	ruby scripts/validate_brand_assets.rb
 	ruby scripts/docs_gate.rb brand-assets
+
+validate-brand: brand-assets
 
 docs-sync:
 	ruby scripts/docs_gate.rb sync

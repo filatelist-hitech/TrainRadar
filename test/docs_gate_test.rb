@@ -164,6 +164,11 @@ class DocsGateTest < Minitest::Test
     assert gate.brand_assets
   end
 
+  def test_large_binary_allowlist_is_exactly_the_canonical_brand_master
+    assert gate.send(:allowed_large_binary?, "assets/brand/trainradar/master/trainradar-icon-master-1254.png")
+    refute gate.send(:allowed_large_binary?, "assets/brand/trainradar/master/replacement.png")
+  end
+
   private
 
   def fixture_entries
