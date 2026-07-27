@@ -21,7 +21,7 @@ jobs:
           ruby-version: "3.3"
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          flutter-version: "3.44.0"
       - run: cd backend && go mod download
       - run: cd mobile && flutter pub get
       - run: make format-check lint schema-check
@@ -39,7 +39,7 @@ jobs:
           ruby-version: "3.3"
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          flutter-version: "3.44.0"
       - run: cd backend && go mod download
       - run: cd mobile && flutter pub get
       - run: make test
@@ -54,7 +54,7 @@ jobs:
           go-version-file: backend/go.mod
       - uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          flutter-version: "3.44.0"
       - run: cd backend && go mod download
       - run: cd mobile && flutter pub get
       - run: make build

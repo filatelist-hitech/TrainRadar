@@ -71,6 +71,26 @@ class DocsGateTest < Minitest::Test
     assert_includes error_output, "docs/API_CONTRACT.md"
   end
 
+  def test_new_project_path_requires_project_map
+    FileUtils.mkdir_p(File.join(@root, "backend/new_module"))
+    File.write(File.join(@root, "backend/new_module/entry.txt"), "fixture\n")
+    run_git("add", "--", "backend/new_module/entry.txt")
+
+    assert_equal ["backend/new_module/entry.txt"], gate.send(:staged_added_paths)
+    refute gate.check_impact(staged: true)
+    assert_includes error_output, "rule project-structure"
+    assert_includes error_output, "docs/PROJECT_MAP.md"
+  end
+
+  def test_existing_project_path_does_not_require_project_map
+    validator_path = File.join(@root, "scripts/validate_openapi.rb")
+    File.open(validator_path, "a") { |file| file.puts "# implementation-only fixture change" }
+    run_git("add", "--", "scripts/validate_openapi.rb")
+
+    assert_empty gate.send(:staged_added_paths)
+    assert gate.check_impact(staged: true), error_output
+  end
+
   def test_sync_does_not_change_human_text_outside_markers
     path = File.join(@root, "docs/API_CONTRACT.md")
     original = File.read(path)
@@ -151,7 +171,7 @@ class DocsGateTest < Minitest::Test
       AGENTS.md Makefile README.md .env.example .gitignore backend data docs docker-compose.yml
       mobile/README.md mobile/pubspec.yaml mobile/analysis_options.yaml mobile/lib mobile/test
       mobile/android/app/src/main/res mobile/ios/Runner/Assets.xcassets
-      openapi scripts/docs_gate.rb .githooks
+      openapi scripts/docs_gate.rb scripts/validate_openapi.rb .githooks
     ]
   end
 

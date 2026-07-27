@@ -59,6 +59,7 @@ module TrainRadar
       files = staged ? staged_paths : tracked_changed_paths
       return true if files.empty?
 
+      new_paths = staged ? staged_added_paths : []
       root = staged ? stage_checkout : @root
       manifest = load_manifest(root)
       validate_manifest!(manifest, root)
@@ -70,6 +71,7 @@ module TrainRadar
       Array(impact.fetch("rules")).each do |rule|
         triggers = Array(rule.fetch("source_paths"))
         hits = files.select { |path| triggers.any? { |pattern| path_matches?(pattern, path) } }
+        hits &= new_paths if rule["new_paths_only"]
         next if hits.empty?
 
         missing = Array(rule.fetch("required_documents")) - changed.to_a
@@ -468,7 +470,11 @@ module TrainRadar
 
     def stage_checkout
       destination = Dir.mktmpdir("trainradar-index-")
-      success = run("git", "--work-tree=#{destination}", "checkout-index", "-a", chdir: @root)
+      index_path, status = Open3.capture2("git", "rev-parse", "--git-path", "index", chdir: @root)
+      raise ValidationError, "unable to resolve repository index" unless status.success?
+
+      absolute_index_path = File.expand_path(index_path.strip, @root)
+      success = run("git", "--work-tree=#{destination}", "checkout-index", "-a", chdir: @root, env: { "GIT_INDEX_FILE" => absolute_index_path })
       raise ValidationError, "unable to materialize staged index" unless success
 
       destination
@@ -482,6 +488,23 @@ module TrainRadar
       raise ValidationError, "cannot read staged paths" unless status.success?
 
       output.split("\0").reject(&:empty?).sort
+    end
+
+    def staged_added_paths
+      output, status = Open3.capture2("git", "diff", "--cached", "--name-status", "-z", "--diff-filter=ACMR", chdir: @root)
+      raise ValidationError, "cannot read staged change statuses" unless status.success?
+
+      parts = output.split("\0")
+      added = []
+      until parts.empty?
+        status = parts.shift
+        path = parts.shift
+        next unless status && path
+
+        added << path if status == "A"
+        parts.shift if status.start_with?("R") || status.start_with?("C")
+      end
+      added.sort
     end
 
     def tracked_changed_paths
@@ -568,7 +591,11 @@ module TrainRadar
     end
 
     def path_matches?(pattern, path)
-      File.fnmatch?(pattern, path, File::FNM_PATHNAME | File::FNM_EXTGLOB)
+      expression = Regexp.escape(pattern)
+                         .gsub("\\*\\*", ".*")
+                         .gsub("\\*", "[^/]*")
+                         .gsub("\\?", "[^/]")
+      Regexp.new("\\A#{expression}\\z").match?(path)
     end
 
     def excluded_path?(path)
@@ -584,9 +611,9 @@ module TrainRadar
       path.delete_prefix("#{root}/")
     end
 
-    def run(*command, chdir:)
+    def run(*command, chdir:, env: {})
       @out.puts "+ #{command.join(' ')}"
-      system(*command, chdir: chdir)
+      system(env, *command, chdir: chdir)
     end
   end
 end

@@ -13,7 +13,8 @@ make ready
 
 `make install-hooks` повторяемо задаёт локальный `core.hooksPath=.githooks`. Hooks не вызывают LLM,
 Codex, сеть или внешние сервисы: они работают только с локальным index/worktree и доступными
-инструментами. `pre-commit` проверяет staged scope; `pre-push` запускает полный локальный gate.
+инструментами. `pre-commit` materialize-ит именно repository index во временном дереве, поэтому
+partial staging не проверяется случайным содержимым worktree; `pre-push` запускает полный локальный gate.
 
 ## Generated и human-owned docs
 
@@ -49,3 +50,6 @@ make docs-check
 `pre-push` и CI повторяют formatter, lint, unit tests, build, schema validation и `docs-check`.
 Тяжёлых e2e с внешней инфраструктурой в M0 нет; physical iOS/Android/GPS evidence остаётся
 `NOT_RUN` до реального запуска и отдельного разрешения.
+
+CI использует Go из `backend/go.mod`, Ruby `3.3` и Flutter `3.44.0`; изменение этих версий требует
+обновления workflow и этого документа в одном срезе.

@@ -16,9 +16,16 @@ rules:
     source_paths: [backend/internal/rawgps/**, infra/raw-store/**, mobile/android/app/src/**, mobile/ios/Runner/**]
     required_documents: [docs/PRIVACY.md, docs/THREAT_MODEL.md]
   - id: delivery-workflow
-    source_paths: [Makefile, backend/go.mod, mobile/pubspec.yaml, .githooks/**, .github/workflows/**, scripts/docs_gate.rb]
+    source_paths: [Makefile, backend/go.mod, mobile/pubspec.yaml]
     required_documents: [README.md, AGENTS.md, docs/CONTRIBUTING.md]
+  - id: gate-implementation
+    source_paths: [.githooks/**, scripts/docs_gate.rb]
+    required_documents: [docs/CONTRIBUTING.md]
+  - id: ci-execution-environment
+    source_paths: [.github/workflows/**]
+    required_documents: [docs/CONTRIBUTING.md]
   - id: project-structure
+    new_paths_only: true
     source_paths: [backend/**, data/**, infra/**, mobile/**, openapi/**, scripts/**, test/**]
     required_documents: [docs/PROJECT_MAP.md]
   - id: visual-assets
