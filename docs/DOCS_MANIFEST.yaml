@@ -1,0 +1,302 @@
+version: 1
+documents:
+  - path: docs/PROJECT_MAP.md
+    audience: developers
+    owner: engineering
+    type: generated
+    source_paths: [AGENTS.md, Makefile, .env.example, backend/**, data/**, docs/**, infra/**, mobile/**, openapi/**, scripts/**, test/**, docker-compose.yml]
+    generation_command: ruby scripts/docs_gate.rb sync
+    check_command: ruby scripts/docs_gate.rb check
+    update_conditions: tracked repository structure, interfaces, configuration keys, or verification commands change
+    auto_stage: true
+  - path: README.md
+    audience: users-and-developers
+    owner: product-and-engineering
+    type: generated-sections
+    generated_sections: [root-commands-and-configuration]
+    source_paths: [Makefile, .env.example, docs/DOCS_MANIFEST.yaml]
+    generation_command: ruby scripts/docs_gate.rb sync
+    check_command: ruby scripts/docs_gate.rb check
+    update_conditions: canonical commands or documented configuration keys change
+    auto_stage: false
+  - path: mobile/README.md
+    audience: mobile-developers
+    owner: mobile-engineering
+    type: generated-sections
+    generated_sections: [mobile-capabilities]
+    source_paths: [mobile/pubspec.yaml, mobile/lib/main.dart, mobile/android/**, mobile/ios/**]
+    generation_command: ruby scripts/docs_gate.rb sync
+    check_command: ruby scripts/docs_gate.rb check
+    update_conditions: mobile package, supported platform, entrypoint, or module checks change
+    auto_stage: false
+  - path: docs/API_CONTRACT.md
+    audience: API-consumers
+    owner: backend-engineering
+    type: generated-sections
+    generated_sections: [api-reference]
+    source_paths: [openapi/openapi.yaml]
+    generation_command: ruby scripts/docs_gate.rb sync
+    check_command: ruby scripts/docs_gate.rb check
+    update_conditions: OpenAPI operation list changes
+    auto_stage: false
+  - path: AGENTS.md
+    audience: codex-agents
+    owner: engineering
+    type: human
+    source_paths: [AGENTS.md, Makefile, docs/CONTRIBUTING.md]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: development workflow or project invariants change
+    auto_stage: false
+  - path: docs/CONTRIBUTING.md
+    audience: developers
+    owner: engineering
+    type: human
+    source_paths: [Makefile, .githooks/**, .github/workflows/**, scripts/docs_gate.rb, docs/DOCS_MANIFEST.yaml, docs/CHANGE_IMPACT.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: commit gate, generated documentation workflow, CI gate, or recovery procedure changes
+    auto_stage: false
+  - path: docs/ARCHITECTURE.md
+    audience: developers
+    owner: architecture
+    type: human
+    source_paths: [backend/**, infra/**, docker-compose.yml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: service boundaries, storage, or runtime topology change
+    auto_stage: false
+  - path: docs/CORRIDOR_REGISTRY.md
+    audience: data-and-product
+    owner: data
+    type: human
+    source_paths: [data/reference/paveletsky_uzunovo_stations.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: corridor registry semantics change
+    auto_stage: false
+  - path: docs/DATA_DICTIONARY.md
+    audience: developers
+    owner: data
+    type: human
+    source_paths: [data/**, backend/internal/domain/**, openapi/openapi.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: data fields or schemas change
+    auto_stage: false
+  - path: docs/DATA_QUALITY.md
+    audience: data-and-product
+    owner: data
+    type: human
+    source_paths: [data/**, backend/internal/domain/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: quality, freshness, confidence, or verification rules change
+    auto_stage: false
+  - path: docs/DATA_SOURCES.md
+    audience: data-and-legal
+    owner: data
+    type: human
+    source_paths: [data/reference/source_manifest.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: source policy, rights, or provenance changes
+    auto_stage: false
+  - path: docs/DECISIONS.md
+    audience: team
+    owner: architecture
+    type: human
+    source_paths: [docs/adr/**, docs/EXECUTION_STATE.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: an approved decision changes
+    auto_stage: false
+  - path: docs/DELIVERY_PLAN.md
+    audience: team
+    owner: product
+    type: human
+    source_paths: [.omx/plans/**, docs/EXECUTION_STATE.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: milestone plan or execution state changes
+    auto_stage: false
+  - path: docs/DESIGN.md
+    audience: product-and-mobile
+    owner: product
+    type: human
+    source_paths: [mobile/lib/**, mobile/android/app/src/main/res/**, mobile/ios/Runner/Assets.xcassets/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: user flow, screen behavior, or visual assets change
+    auto_stage: false
+  - path: docs/DOMAIN_MODEL.md
+    audience: developers
+    owner: backend-engineering
+    type: human
+    source_paths: [backend/internal/domain/**, backend/internal/rawgps/**, openapi/openapi.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: domain entities or invariants change
+    auto_stage: false
+  - path: docs/MVP_SCOPE.md
+    audience: product-and-team
+    owner: product
+    type: human
+    source_paths: [AGENTS.md, .omx/plans/**, docs/EXECUTION_STATE.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: approved scope or exclusions change
+    auto_stage: false
+  - path: docs/OBSERVABILITY.md
+    audience: developers
+    owner: backend-engineering
+    type: human
+    source_paths: [backend/**, docker-compose.yml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: logging, metrics, tracing, or alerting changes
+    auto_stage: false
+  - path: docs/PRIVACY.md
+    audience: product-and-privacy
+    owner: owner-operator
+    type: human
+    source_paths: [backend/internal/rawgps/**, mobile/android/app/src/**, mobile/ios/Runner/**, infra/raw-store/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: location, consent, retention, encryption, or public-data boundary changes
+    auto_stage: false
+  - path: docs/PRODUCT.md
+    audience: product-and-users
+    owner: product
+    type: human
+    source_paths: [mobile/lib/**, backend/internal/httpapi/**, openapi/openapi.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: public behavior or user promise changes
+    auto_stage: false
+  - path: docs/QA_MATRIX.md
+    audience: engineering-and-qa
+    owner: qa
+    type: human
+    source_paths: [test/**, backend/**/*_test.go, mobile/test/**, scripts/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: verification coverage or manual boundary changes
+    auto_stage: false
+  - path: docs/RISK_REGISTER.md
+    audience: team
+    owner: product
+    type: human
+    source_paths: [docs/THREAT_MODEL.md, docs/PRIVACY.md, docs/ARCHITECTURE.md]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: material risk, mitigation, or owner changes
+    auto_stage: false
+  - path: docs/TEST_STRATEGY.md
+    audience: engineering-and-qa
+    owner: qa
+    type: human
+    source_paths: [test/**, backend/**/*_test.go, mobile/test/**, .omx/plans/test-spec-trainradar-mvp.md]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: test strategy, suite scope, or physical evidence boundary changes
+    auto_stage: false
+  - path: docs/THREAT_MODEL.md
+    audience: security-and-privacy
+    owner: owner-operator
+    type: human
+    source_paths: [backend/internal/rawgps/**, mobile/**, infra/raw-store/**, openapi/openapi.yaml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: trust boundary, asset, abuse case, or control changes
+    auto_stage: false
+  - path: docs/adr/0001-system-shape.md
+    audience: developers
+    owner: architecture
+    type: human
+    source_paths: [backend/**, mobile/**, infra/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: modular-monolith decision changes
+    auto_stage: false
+  - path: docs/adr/0002-backend-language.md
+    audience: developers
+    owner: architecture
+    type: human
+    source_paths: [backend/go.mod, backend/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: backend language or toolchain decision changes
+    auto_stage: false
+  - path: docs/adr/0003-realtime-transport.md
+    audience: developers
+    owner: architecture
+    type: human
+    source_paths: [openapi/openapi.yaml, backend/internal/httpapi/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: REST or SSE transport decision changes
+    auto_stage: false
+  - path: docs/adr/0004-location-privacy.md
+    audience: privacy-and-developers
+    owner: owner-operator
+    type: human
+    source_paths: [backend/internal/rawgps/**, infra/raw-store/**, mobile/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: raw-GPS or retention decision changes
+    auto_stage: false
+  - path: docs/adr/0005-map-data-and-licensing.md
+    audience: data-and-developers
+    owner: architecture
+    type: human
+    source_paths: [data/**, docs/DATA_SOURCES.md]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: map-data or licensing decision changes
+    auto_stage: false
+  - path: docs/evidence/M0-reference-verification.md
+    audience: team
+    owner: data
+    type: human
+    source_paths: [data/**, scripts/verify_corridor_sources.rb]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: M0 source-verification evidence changes
+    auto_stage: false
+  - path: docs/evidence/M0-startup.md
+    audience: team
+    owner: engineering
+    type: human
+    source_paths: [Makefile, backend/**, mobile/**, openapi/**, docker-compose.yml]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: reproducible M0 startup evidence changes
+    auto_stage: false
+  - path: docs/evidence/README.md
+    audience: team
+    owner: qa
+    type: human
+    source_paths: [docs/evidence/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: evidence index conventions change
+    auto_stage: false
+  - path: docs/research/open-questions.md
+    audience: team
+    owner: product
+    type: human
+    source_paths: [docs/EXECUTION_STATE.yaml, docs/research/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: a pending external unknown is added, resolved, or changes milestone impact
+    auto_stage: false
+  - path: docs/research/sources.md
+    audience: research-and-data
+    owner: data
+    type: human
+    source_paths: [data/reference/source_manifest.yaml, docs/research/**]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: research source, rights, or permitted-use conclusion changes
+    auto_stage: false

@@ -33,7 +33,8 @@ TrainRadar помогает пассажиру понять, где находи
 
 ## Сигналы ценности
 
-- corridor completeness: 44/44 во всех требуемых слоях;
+- corridor completeness: 44/44 registry slots accounted for; operational layers contain only
+  enabled stops (`Котляково` disabled until commissioning approval);
 - доля целевых рейсов с `official_actual` или `crowd_confirmed`;
 - position freshness и false confirmed-train rate;
 - precision/recall прибытия на остановку;

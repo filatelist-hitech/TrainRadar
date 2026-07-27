@@ -3,7 +3,9 @@
 - Status: Approved
 - Approved scope: M0–M6 roadmap; execution currently authorized only for M0
 - Corridor: Москва-Павелецкая → Узуново, exactly 44 passenger stop points
-- Last updated: 2026-07-27
+- Planned exception: `Котляково` remains registry slot 8 but is disabled until commissioning
+  evidence and separate owner approval
+- Last updated: 2026-07-28
 
 ## Fixed decisions
 
@@ -15,7 +17,8 @@ only; versioned OSM/ODbL; no production public OSM tiles; four non-mixed truth s
 
 ## Global invariants
 
-1. 44/44 in registry, graph, map, baseline tests and QA before a milestone that consumes corridor.
+1. Registry remains 44/44. Operational graph/map/stop patterns use 43 current points while
+   `Котляково` is `planned_unused`; activation requires commissioning evidence and owner approval.
 2. Registry is not a trip stop pattern; only `scheduled_stop`, `pass_through`, `conditional`,
    `cancelled`.
 3. No estimated/stale/unknown data in live coverage.
@@ -43,7 +46,7 @@ flowchart LR
 ### User outcome
 
 Владелец видит проверяемую архитектуру, источник неизвестностей и рабочий skeleton без ложных
-real-time claims.
+real-time claims; planned `Котляково` остаётся fail-closed.
 
 ### In scope
 
@@ -74,11 +77,13 @@ No external data exists to roll back. Skeleton reports realtime as 501 and regis
 
 ### User outcome
 
-Пассажир видит весь corridor and 44 stops from reproducible offline data with OSM attribution.
+Пассажир видит текущий 43-stop usable corridor from reproducible offline data with OSM attribution;
+planned `Котляково` не участвует в routing или coverage.
 
 ### Inputs
 
-Verified registry, lawful schedule snapshot, versioned OSM extract, provider/render decision.
+Verified 44-slot registry with 43 current usable stops, lawful schedule snapshot, versioned OSM
+extract, provider/render decision.
 
 ### Work
 
@@ -89,7 +94,8 @@ Verified registry, lawful schedule snapshot, versioned OSM extract, provider/ren
 
 ### Acceptance
 
-- 44/44 in registry, graph, map and QA;
+- 44/44 registry slots accounted for; 43 current stops in operational graph/map/QA;
+- `Котляково` excluded from routing, stop patterns and coverage until its activation gate passes;
 - topology has no forbidden branches;
 - exact OSM attribution and extract checksum/version;
 - map works with network disabled after approved packaging;

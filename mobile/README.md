@@ -15,3 +15,12 @@ flutter build ios --simulator
 ```
 
 Физические устройства, developer signing и реальные GPS-запуски требуют отдельного разрешения.
+
+<!-- BEGIN GENERATED: mobile-capabilities -->
+| Source of truth | Value |
+| --- | --- |
+| Package | `trainradar_mobile` |
+| Flutter platforms | `iOS`, `Android` |
+| Entrypoint | `mobile/lib/main.dart` |
+| Module checks | `flutter analyze`, `flutter test` |
+<!-- END GENERATED: mobile-capabilities -->

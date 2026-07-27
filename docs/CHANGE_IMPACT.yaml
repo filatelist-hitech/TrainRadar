@@ -1,0 +1,33 @@
+version: 1
+rules:
+  - id: public-api
+    source_paths: [openapi/openapi.yaml, backend/internal/httpapi/**, backend/cmd/api/**]
+    required_documents: [docs/API_CONTRACT.md, README.md, docs/PRODUCT.md]
+  - id: runtime-configuration
+    source_paths: [.env.example, backend/internal/config/**, docker-compose.yml, infra/**]
+    required_documents: [README.md, docs/ARCHITECTURE.md, docs/CONTRIBUTING.md]
+  - id: mobile-public-behavior
+    source_paths: [mobile/lib/**, mobile/android/app/src/**, mobile/ios/Runner/**]
+    required_documents: [mobile/README.md, README.md, docs/PRODUCT.md, docs/DESIGN.md]
+  - id: domain-and-reference-data
+    source_paths: [data/reference/**, backend/internal/domain/**]
+    required_documents: [docs/CORRIDOR_REGISTRY.md, docs/DATA_DICTIONARY.md, docs/DOMAIN_MODEL.md, docs/DATA_QUALITY.md]
+  - id: privacy-sensitive-behavior
+    source_paths: [backend/internal/rawgps/**, infra/raw-store/**, mobile/android/app/src/**, mobile/ios/Runner/**]
+    required_documents: [docs/PRIVACY.md, docs/THREAT_MODEL.md]
+  - id: delivery-workflow
+    source_paths: [Makefile, backend/go.mod, mobile/pubspec.yaml]
+    required_documents: [README.md, AGENTS.md, docs/CONTRIBUTING.md]
+  - id: gate-implementation
+    source_paths: [.githooks/**, scripts/docs_gate.rb]
+    required_documents: [docs/CONTRIBUTING.md]
+  - id: ci-execution-environment
+    source_paths: [.github/workflows/**]
+    required_documents: [docs/CONTRIBUTING.md]
+  - id: project-structure
+    new_paths_only: true
+    source_paths: [backend/**, data/**, infra/**, mobile/**, openapi/**, scripts/**, test/**]
+    required_documents: [docs/PROJECT_MAP.md]
+  - id: visual-assets
+    source_paths: [mobile/android/app/src/main/res/**, mobile/ios/Runner/Assets.xcassets/**]
+    required_documents: [docs/DESIGN.md]
