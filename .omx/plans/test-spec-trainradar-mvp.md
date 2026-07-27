@@ -31,6 +31,7 @@ actually executed. Test data must be synthetic or irreversibly anonymized and ap
 | DATA-012 | Tutu constraints | import/scheduler/cache/redistribution explicitly forbidden |
 | DATA-013 | planned `Котляково` | slot 8 retained; `planned_not_built`; project usage disabled |
 | DATA-014 | activation guard | owner decision checksum present; enabling planned station fails |
+| DATA-015 | read-only CPPK map cross-check | 42 map matches, `32 км` schedule-only, airport branch objects excluded |
 | DATA-NEG | mutate count/ID/ordinal/state/special/branch | validator fails each mutation |
 
 Command: `make validate-data` and `ruby test/validate_reference_data_test.rb`.

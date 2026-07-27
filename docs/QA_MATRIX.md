@@ -4,10 +4,10 @@
 |---|---|---|---|
 | 44 unique IDs and ordinals 1..44 | `make validate-data` | carrier + owner decision | registry 44/44 PASS; usable 43; `Котляково` disabled |
 | exact endpoints | validator negative tests | carrier route both directions | automated PASS; carrier PASS |
-| aliases/direction for 32/85 | schema guard | two carrier routes + exact service rules | checkpoints PASS; full aliases/directions `pending` |
-| source manifest provenance | manifest/checksum guards | rights and infrastructure-source review | structure/checksums PASS; rights/source `pending` |
+| aliases/direction for 32/85 | schema guard | route views, owner direction assertion | checkpoints PASS; one-way platform assertion recorded as `supplied_not_independently_verified` |
+| source manifest provenance | manifest/checksum guards + live CPPK map verifier | rights and infrastructure-source review | 43/43 route, 42/43 map, 1 `schedule_only`; rights/source remain M1 inputs |
 | allowed stop-pattern states | exact enum test | real trip patterns | enum PASS; patterns `NOT_RUN` |
-| forbidden branches absent | exact seed/scope negative test | map review | automated PASS; map `NOT_RUN` |
+| forbidden branches absent | exact seed/scope negative test + map-object exclusion | map review | automated PASS; three airport-branch map objects excluded |
 | Go skeleton | `go vet`, `go test`, race/build, HTTP smoke | process smoke | PASS |
 | Flutter skeleton | analyze/widget + APK/iOS simulator builds | physical iOS/Android | automated PASS; physical `NOT_RUN` |
 | OpenAPI skeleton | semantic validator + HTTP tests | client review | PASS |

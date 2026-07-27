@@ -2,9 +2,10 @@
 
 - Carrier check: 2026-07-27T20:43:34Z / 2026-07-27 23:43 MSK
 - Owner decision: 2026-07-27T21:14:32Z / 2026-07-28 00:14 MSK
-- Scope: manual verification of the approved 44-stop seed and `source_manifest`
-- Source: official АО «Центральная ППК» schedule UI and its route views
-- Method boundary: manual point-check only; no persistent raw response, import, scheduler or cache
+- Automated map check: 2026-07-27T21:49:22Z / 2026-07-28 00:49 MSK
+- Scope: source-backed verification of the approved 44-stop seed and `source_manifest`
+- Source: official АО «Центральная ППК» schedule UI, route views and interactive map
+- Method boundary: human-triggered read-only checks; no dataset import, persistent raw response or cache
 - Verdict: `PASS_M0_SCOPE_WITH_PLANNED_EXCEPTION`
 
 ## Reproducible source views
@@ -14,6 +15,7 @@
 | Москва (Павелецкий вокзал) → Узуново, train 6001, schedule 3333886, 2026-07-27 | 43 ordered route points | `sha256:aa022372d4ebd56eaa2b8d4cdca518a68fa544c928fefdd9c61c2fe997d65041` |
 | Узуново → Москва (Павелецкий вокзал), train 6002, schedule 3343569, 2026-07-27 | the same 43 points in reverse order | `sha256:ca82081638411caf4c5f816d56e88457a3fad08d6c4786025fb3659e982bf708` |
 | Exact station search `Котляково` | empty JSON array `[]` | `sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945` |
+| CPPK interactive map | 42 current registry matches; `32 км` schedule-only; three airport-branch objects excluded | `sha256:ea7a151fb05e5fe6d8a388dd05dae50aae0675bf9236055629e32a894acda276` |
 
 Checksum projection is compact UTF-8 JSON with `tripId`, `trainNumber`, endpoint IDs and ordered
 `stationId`/`name`/`direction`/`skip`. Volatile times, delay and fare fields are excluded. Raw
@@ -26,8 +28,9 @@ unknown.
 - After removing seed slot `tr-pu-stop-008` (`Котляково`), all remaining 43 identities occur in the
   same order in both carrier route views.
 - Both route views contain `32 км` and `85 км`, each represented as a route checkpoint.
-- The sampled trains pass both special points without stopping. This does not establish their full
-  direction-dependent service rules, so both directions remain `pending`.
+- The sampled trains pass both special points without stopping. Owner supplied the rule that both
+  platforms exist only toward Узуново; it is recorded as `supplied_not_independently_verified`, not
+  promoted to a universal per-trip stop pattern.
 - Carrier spelling yields alias candidates such as `ТУЛЬСКАЯ (ЗИЛ)`, `ПЛАТФОРМА КАЛИНИНА`,
   `Ост.Пункт 85 км (снт Земляничка)`, `КАШИРА`, `Колменка (д. Железня)`,
   `Ост.Пункт 137 км (снт Родник 2)` and `ОСТ.ПУНКТ 146 КМ (Мос.обл.)`. They are not promoted to
@@ -51,14 +54,27 @@ Therefore:
 
 ## Source-manifest verdict
 
-`source_manifest.yaml` records the carrier review, stable checksums, allowed/prohibited use and the
-checksummed owner decision for `Котляково`. Carrier licence/redistribution rights, official
-infrastructure inventory, versioned OSM extract, GTFS availability and Tutu MCP point-check remain
-unresolved M1 inputs. The manifest is structurally verified, but it is not an import authorization.
+`source_manifest.yaml` records the schedule/map reviews, stable checksums, allowed/prohibited use,
+the checksummed owner decision for `Котляково`, the explicitly non-independent direction assertion,
+the MediaWiki discovery boundary and a Tutu manual point-check. Carrier licence/redistribution
+rights, official infrastructure inventory, versioned OSM extract and GTFS availability remain M1
+inputs. The manifest is structurally verified, but it is not an import authorization.
+
+## Automated validation run
+
+Run at `2026-07-27T21:49:22Z`:
+
+| Command | Result |
+|---|---|
+| `ruby scripts/verify_corridor_sources.rb` | PASS_WITH_GAPS: route evidence 43/43; map 42/43; `32 км` schedule-only; no unexpected in-scope gaps |
+| `make check` | PASS: Go, Flutter, data/OpenAPI validators and test suites |
+| `ruby test/verify_corridor_sources_test.rb` | PASS: parser and no-block gap semantics |
+| `git diff --check` | PASS |
 
 ## NOT_RUN
 
-- Tutu MCP manual point-check: `NOT_RUN` — no callable Tutu tool was available.
+- Tutu MCP manual point-check: `PASS_LIMITED` — 9 direct Москва-Павелецкая → Узуново offers on
+  2026-07-28; response had endpoints only, not intermediate stops.
 - Official infrastructure registry comparison: `NOT_RUN` — source not yet identified.
 - Versioned OSM corridor extract/topology review: `NOT_RUN` — belongs to the M1 input gate.
 - Physical corridor/train ride and real GPS: `NOT_RUN` and prohibited in M0.

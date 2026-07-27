@@ -83,6 +83,16 @@ class ReferenceValidatorTest < Minitest::Test
     assert_includes @validator.validate_manifest(manifest).join("\n"), "requires a SHA-256 checksum"
   end
 
+  def test_rejects_missing_cppk_map_cross_check
+    registry = deep_copy(@registry)
+    registry["verification"].delete("automation")
+
+    assert_includes(
+      @validator.validate_registry(registry).join("\n"),
+      "verification.automation must describe the CPPK map cross-check"
+    )
+  end
+
   def test_rejects_enabling_unbuilt_kotlyakovo
     registry = deep_copy(@registry)
     stop = registry["stops"].find { |candidate| candidate["stop_id"] == "tr-pu-stop-008" }

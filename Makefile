@@ -22,6 +22,7 @@ lint:
 	cd backend && go vet ./...
 	cd mobile && flutter analyze
 	ruby -c scripts/validate_reference_data.rb
+	ruby -c scripts/verify_corridor_sources.rb
 	ruby -c scripts/validate_openapi.rb
 	ruby scripts/validate_openapi.rb
 	docker compose config --quiet
@@ -30,6 +31,7 @@ test:
 	cd backend && go test ./...
 	cd mobile && flutter test
 	ruby test/validate_reference_data_test.rb
+	ruby test/verify_corridor_sources_test.rb
 	ruby test/validate_openapi_test.rb
 
 check: validate-data lint test

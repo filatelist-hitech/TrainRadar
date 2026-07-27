@@ -1,11 +1,13 @@
 # Corridor Registry
 
 Source of truth для машинной проверки:
-`data/reference/paveletsky_uzunovo_stations.yaml`. В M0 все 44 записи имеют
-`verification_status: pending`; stable internal IDs фиксируют seed slots, а не утверждают все
-внешние свойства. Ручная сверка ЦППК от 2026-07-27 подтвердила порядок 43 текущих пунктов.
-`Котляково` сохранено пунктом №8 как ещё не построенная станция с `project_usage.enabled: false`.
-Итого: M0 registry scope 44/44 принят, текущий usable corridor содержит 43 пункта.
+`data/reference/paveletsky_uzunovo_stations.yaml`. Ручная сверка route view ЦППК подтвердила
+43 текущих пункта в обоих направлениях; автоматический read-only map cross-check ЦППК сопоставил
+42 из них с текущей картой. `32 км` есть в route view, но не возвращается картой, поэтому отмечен
+как `schedule_only`, а не как ошибка. Вложенные поля остаются `pending`, пока их нельзя законно
+импортировать как отдельный dataset. `Котляково` сохранено пунктом №8 как ещё не построенная
+станция с `project_usage.enabled: false`. Итого: M0 registry scope 44/44 принят, текущий usable
+corridor содержит 43 пункта.
 
 | # | stop_id | Каноническое имя | Seed alias | Status |
 |---:|---|---|---|---|
@@ -63,5 +65,6 @@ Source of truth для машинной проверки:
 | express | все 44 остаются graph checkpoints | ограниченный набор `scheduled_stop`; pending |
 
 `32 км` и `85 км` присутствуют в проверенных маршрутах ЦППК как checkpoints, но оба выбранных
-рейса проходят их без остановки. Их полные aliases и direction-specific boarding/alighting rules
-остаются блокирующими open questions M0.
+рейса проходят их без остановки. В registry добавлено owner-supplied правило: платформы есть
+только в сторону Узуново; оно явно помечено `supplied_not_independently_verified` и не создаёт
+stop pattern для всех рейсов.

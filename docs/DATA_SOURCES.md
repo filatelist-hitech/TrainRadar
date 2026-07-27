@@ -21,14 +21,22 @@ allowed/prohibited use и verification status. Snapshot получает immutab
 - Seed-ТЗ имеет локальный SHA-256 и даёт только 44 названия, порядок и продуктовые ограничения.
 - Страница и два route view ЦППК вручную проверены 2026-07-27: 43 пункта совпадают с seed после
   исключения `Котляково`; стабильные projection checksums записаны в manifest.
+- Read-only автоматическая сверка интерактивной карты ЦППК от 2026-07-28 сопоставила 42 из 43
+  текущих пунктов с именем, ID и координатами; `32 км` подтверждён route view, но не выдан картой.
+  Три объекта аэропортовой ветки обнаружены и исключены scope guard'ом.
 - `Котляково` отсутствует в обоих route view и в текущем station search ЦППК; это согласуется с
   owner decision о ещё не построенной станции.
 - Owner decision от 2026-07-28 сохраняет `Котляково` в registry, но запрещает использование до
   подтверждения ввода в эксплуатацию и отдельного разрешения.
 - Лицензия/redistribution rights ЦППК не подтверждены; raw response не сохранён и import запрещён.
+- MediaWiki API подключён только как вторичный discovery source: автоматическое сопоставление
+  страниц с неоднозначными названиями запрещено.
+- Tutu MCP выполнил только разрешённую ручную endpoint point-check; промежуточных остановок он
+  в ответе не дал и источником registry не является.
 - Official infrastructure source не идентифицирован.
 - OSM data extract не получен; лицензия и tile policy зафиксированы как constraints.
 - Публичный/партнёрский GTFS(-RT) feed для коридора не подтверждён.
 
-Поэтому никакие coordinates, external IDs, aliases, полные stop patterns или operational statuses
-не считаются verified. M0 scope принят как 43 текущих пункта плюс один fail-closed planned slot.
+Поэтому coordinates/IDs из карты считаются только read-only verification evidence, а не импортом;
+полные stop patterns, infrastructure types и fare statuses не считаются verified. M0 scope принят
+как 43 текущих пункта плюс один fail-closed planned slot.

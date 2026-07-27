@@ -44,8 +44,10 @@ module TrainRadar
       cppk_station_search_kotlyakovo_2026-07-27
     ].freeze
     KOTLYAKOVO_DECISION_REF = "owner_decision_kotlyakovo_2026-07-28"
+    CPPK_MAP_SOURCE_REF = "cppk_interactive_map_2026-07-28"
+    OWNER_DIRECTION_OBSERVATION_REF = "owner_observation_one_way_platforms_2026-07-28"
     REQUIRED_M0_VERIFICATION_SOURCE_REFS = (
-      REQUIRED_CPPK_SOURCE_REFS + [KOTLYAKOVO_DECISION_REF]
+      REQUIRED_CPPK_SOURCE_REFS + [KOTLYAKOVO_DECISION_REF, CPPK_MAP_SOURCE_REF]
     ).freeze
 
     def validate_registry(document)
@@ -195,6 +197,26 @@ module TrainRadar
         errors << "verification.#{key} must equal #{value.inspect}" unless verification[key] == value
       end
 
+      expected_automation = {
+        "verification_status" => "accepted_read_only_source_enrichment",
+        "source_ref" => CPPK_MAP_SOURCE_REF,
+        "map_matched_stop_count" => 42,
+        "map_schedule_only_stop_ids" => ["tr-pu-stop-015"],
+        "map_missing_stop_ids" => [],
+        "map_excluded_out_of_scope_object_names" => ["Аэропорт Домодедово", "Космос", "Авиационная"]
+      }
+      automation = verification["automation"]
+      unless automation.is_a?(Hash)
+        errors << "verification.automation must describe the CPPK map cross-check"
+        return
+      end
+      expected_automation.each do |key, value|
+        errors << "verification.automation.#{key} must equal #{value.inspect}" unless automation[key] == value
+      end
+      errors << "verification.automation.checked_at must be an ISO-8601 UTC timestamp" unless
+        automation["checked_at"].is_a?(String) &&
+        automation["checked_at"].match?(/\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\z/)
+
       errors << "verification.checked_at must be an ISO-8601 UTC timestamp" unless
         verification["checked_at"].is_a?(String) &&
         verification["checked_at"].match?(/\A\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z\z/)
@@ -222,6 +244,19 @@ module TrainRadar
         unless checksum.is_a?(String) && checksum.match?(/\Asha256:[0-9a-f]{64}\z/)
           errors << "#{source_ref} requires a SHA-256 checksum"
         end
+      end
+
+      map = sources.find { |source| source["source_id"] == CPPK_MAP_SOURCE_REF }
+      unless map &&
+             map["verification_status"] == "reviewed_live_surface" &&
+             map["checksum"] == "sha256:ea7a151fb05e5fe6d8a388dd05dae50aae0675bf9236055629e32a894acda276"
+        errors << "#{CPPK_MAP_SOURCE_REF} must preserve the reviewed projection checksum and status"
+      end
+
+      direction_observation = sources.find { |source| source["source_id"] == OWNER_DIRECTION_OBSERVATION_REF }
+      unless direction_observation &&
+             direction_observation["verification_status"] == "supplied_not_independently_verified"
+        errors << "#{OWNER_DIRECTION_OBSERVATION_REF} must remain explicitly non-independent"
       end
 
       decision = sources.find { |source| source["source_id"] == KOTLYAKOVO_DECISION_REF }
@@ -278,6 +313,6 @@ if $PROGRAM_NAME == __FILE__
   puts "PASS: corridor registry has 44 unique ordered stops and required scope guards"
   puts "PASS: M0 registry scope is 44/44 with Котляково fail-closed as planned_unused"
   puts "PASS: source manifest structure, CPPK snapshots, owner decision and Tutu restrictions"
-  puts "INFO: #{pending_count}/44 stop records remain verification_status=pending"
+  puts "INFO: #{pending_count}/44 records retain non-imported per-field status; root carrier verification is source-backed"
   puts "INFO: current carrier surface has 43 usable stops; Котляково activation requires a new approval"
 end
