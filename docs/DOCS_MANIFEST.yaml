@@ -291,6 +291,15 @@ documents:
     check_command: ruby scripts/docs_gate.rb check-impact --staged
     update_conditions: public M1 schedule source, cache boundary, attribution or test contract changes
     auto_stage: false
+  - path: docs/evidence/M1-02b-osm-map-and-yandex-cache.md
+    audience: team
+    owner: data-and-qa
+    type: human
+    source_paths: [data/reference/source_manifest.yaml, mobile/assets/data/**, mobile/lib/**, backend/internal/schedule/yandex/**, scripts/validate_m1_osm_map.rb, test/validate_m1_osm_map_test.rb]
+    generation_command: manual
+    check_command: ruby scripts/docs_gate.rb check-impact --staged
+    update_conditions: M1-02b OSM source, offline map, cache-only adapter or verification evidence changes
+    auto_stage: false
   - path: docs/evidence/README.md
     audience: team
     owner: qa

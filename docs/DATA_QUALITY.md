@@ -29,7 +29,10 @@ admitted source требует immutable version/reference, SHA-256, reviewed im
 `verified_m1_import`.
 Для OSM обязательны `ODbL 1.0`, visible attribution и запрет public OSM tiles как production backend.
 При checksum/right/topology failure слой не обновляется: остаётся последняя valid version либо слой
-отключается. На 2026-07-28 список admitted sources пуст.
+отключается. На 2026-07-28 admitted OSM snapshot — `central-fed-district-260726` from Geofabrik:
+его SHA-256, byte-size, 43 enabled stops, fixed corridor envelope, planned `Котляково` and forbidden
+branches are deterministic checks. Это admission read-only schematic projection, не заявление о
+verified rail topology beyond this bounded display scope.
 
 Исключение M1 — Яндекс.Расписания API: это не import, а public read-only cache-only adapter. Response
 держится только в памяти не более 300 секунд, не пишется на диск и не выдаётся при отсутствии сети.

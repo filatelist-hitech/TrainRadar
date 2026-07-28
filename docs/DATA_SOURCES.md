@@ -47,8 +47,14 @@ import: для него отдельно фиксируются terms, attributi
 - Tutu MCP выполнил только разрешённую ручную endpoint point-check; промежуточных остановок он
   в ответе не дал и источником registry не является.
 - Official infrastructure source не идентифицирован.
-- OSM data extract не получен; лицензия и tile policy зафиксированы как constraints. M1 admission
-  list остаётся пустым до версии extract, checksum, topology review и ODbL attribution.
+- `osm_corridor_extract` admitted 2026-07-28: Geofabrik dated PBF
+  `central-fed-district-260726.osm.pbf`, immutable URL, local SHA-256
+  `4ab28c4d1bc42f890731bb8943b9f8158ca491d458f01442f5c9552476e49d9f` and upstream MD5
+  `541e19bb16f1c6386d4986854720305e` are recorded in the manifest. Raw PBF lives only in ignored
+  `data/runtime/osm/`; `make verify-m1-osm-runtime` recomputes SHA-256 and byte-size. Its lawful use
+  in this slice is the 43-stop offline schematic projection with `© OpenStreetMap contributors` and
+  ODbL 1.0 visible in the app. It is not a production public-tiles backend, a train-position source
+  or proof that every rail/infrastructure attribute is verified.
 - Публичный/партнёрский GTFS(-RT) feed для коридора не подтверждён.
 
 Поэтому coordinates/IDs из карты считаются только read-only verification evidence, а не импортом;

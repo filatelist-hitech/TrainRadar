@@ -12,6 +12,7 @@
 | `RailSegment` | направленное ребро versioned graph | endpoints, geometry version, topology |
 | `SourceSnapshot` | допущенный immutable input M1 | source ref, version, immutable ref, SHA-256, rights review, licence |
 | `ScheduleCacheEntry` | transient M1 API response | source ref, fetched_at, expires_at, attribution; без disk persistence |
+| `OfflineMapProjection` | packaged M1 read-only map surface | pinned source version, ODbL attribution, 43 enabled stops, fixed corridor envelope |
 | `Observation` | неизменяемое входное свидетельство | pseudonym, time, encrypted payload, consent |
 | `TrainTrack` | версия агрегированного трека рейса | input refs, algorithm version, uncertainty |
 | `Prediction` | ETA/delay result | checkpoint, interval, confidence, model version |
@@ -43,3 +44,6 @@
   source не создаёт graph, station, platform, tariff object или stop pattern.
 - `ScheduleCacheEntry` допустим только для Яндекс.Расписания в M1: in-memory ≤300 секунд,
   без offline serving, immutable storage или API key в mobile client.
+- `OfflineMapProjection` содержит только 43 enabled current registry points. `Котляково` является
+  display-only `planned_unused`, не может войти в map routing, coverage или stop pattern; projection
+  не содержит train/GPS/ETA/schedule data и не зависит от public OSM tiles.

@@ -1,16 +1,21 @@
 # TrainRadar
 
-TrainRadar — прототип live-карты пригородных поездов. M0 создаёт проверяемый фундамент для
-единственного пилотного коридора Москва-Павелецкая → Узуново и не реализует отслеживание поездов.
+TrainRadar — прототип read-only карты пригородного коридора. M1-02b фиксирует проверяемый
+offline map для единственного направления Москва-Павелецкая → Узуново и не реализует
+отслеживание поездов.
 
 ## Текущее состояние
 
-- milestone: `M0 Discovery / startup package`;
-- registry: 44/44 project scope; 43 текущих пункта, `Котляково` planned/disabled;
-- mobile: собираемый Flutter shell для iOS/Android без location permissions и GPS SDK;
-- backend: Go modular monolith с health/status endpoints и зарезервированным SSE endpoint;
+- milestone: `M1`, active slice `M1-02b`;
+- registry/map: 44/44 project scope; 43 current stops on read-only offline schematic map,
+  `Котляково` planned/disabled;
+- OSM: Geofabrik `central-fed-district-260726`, SHA-256 and ODbL attribution are pinned; raw PBF is
+  local runtime data, not Git; `make verify-m1-osm-runtime` verifies it;
+- mobile: Flutter offline map without location permissions, GPS SDK, network tiles or API client;
+- backend: Go modular monolith with health/status endpoints, reserved SSE and internal cache-only
+  Яндекс.Расписания adapter (`YANDEX_RASP_API_KEY` stays in backend environment only);
 - storage: отдельные dev-контейнеры operational PostGIS и raw-GPS ciphertext store;
-- realtime, map matching, ETA, schedule import и фактический GPS: не реализованы.
+- realtime, map matching, ETA, schedule integration, import scheduler и фактический GPS: не реализованы.
 
 ## Быстрый старт
 

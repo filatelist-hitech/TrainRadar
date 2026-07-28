@@ -48,6 +48,8 @@
 make setup
 make compose-up
 make validate-data
+make validate-m1-osm
+make verify-m1-osm-runtime
 make lint
 make test
 make check

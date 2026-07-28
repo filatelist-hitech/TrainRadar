@@ -35,7 +35,9 @@
 - Primary navigation: Карта, Моя поездка, Настройки/privacy.
 - Core screens: corridor overview, trip detail, active-trip consent/control, own trip history.
 - Content hierarchy: state → freshness → next stop/ETA range → provenance details.
-- M0 shell показывает только pending registry и выключенный GPS; карта отсутствует.
+- M1-02b показывает offline read-only schematic map Москва-Павелецкая → Узуново: 43 current stops,
+  visible source version and ODbL attribution. `Котляково` остаётся disabled planned slot, а не
+  actionable stop. Карта не показывает schedule, ETA, live trains или passenger location.
 
 ## Design principles
 
@@ -84,6 +86,8 @@
 - Success: подтверждается тип источника и время.
 - Disabled: объясняет, что нужно и какое privacy-последствие.
 - Offline/slow network: последний state с фиксированным timestamp, live coverage выключено после TTL.
+- M1 offline map: packaged projection остаётся доступной без сети; если asset не читается, экран
+  сообщает «Карта недоступна» и не рисует фиктивный маршрут или schedule.
 
 ## Content voice
 

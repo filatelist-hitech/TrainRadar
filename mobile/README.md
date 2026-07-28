@@ -1,10 +1,11 @@
 # TrainRadar Mobile
 
-Flutter shell для iOS/Android milestone M0.
+Flutter read-only M1 map для iOS/Android.
 
-Сейчас экран показывает только corridor scope, pending data и явно выключенный GPS. Проект не
-содержит location package, platform permissions, background capability, map, API client или
-realtime implementation.
+Экран показывает встроенную offline-схему Москва-Павелецкая → Узуново: 43 current stops, disabled
+planned slot `Котляково`, versioned OSM source и ODbL attribution. Проект не содержит location
+package, platform permissions, background capability, API client, schedule integration или realtime
+implementation; public OSM tiles не используются.
 
 ```bash
 flutter pub get

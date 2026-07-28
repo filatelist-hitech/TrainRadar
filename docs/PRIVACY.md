@@ -5,6 +5,9 @@
 M1 — публичный read-only map/schedule surface без аккаунтов, location permissions, GPS,
 install-capability или персональных данных. Яндекс API key остаётся server-side secret; schedule
 cache существует только в памяти backend не более 300 секунд и не содержит user identity.
+M1-02b map packaged as an offline schematic contains only public corridor/stop projection and ODbL
+attribution; it makes no network tile request, records no interaction and does not turn a train or
+passenger into a location signal.
 
 Пилот M2–M6 проводится только в России, invite-only, 5–15 участников. Зафиксированное продуктовое
 решение: оператор персональных данных — владелец как физическое лицо. Это не заключение о

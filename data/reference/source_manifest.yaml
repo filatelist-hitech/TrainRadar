@@ -5,8 +5,8 @@ policy:
   every_dataset_requires_checksum: true
   pending_sources_are_not_importable: true
 m1_source_admission:
-  status: no_sources_admitted
-  importable_source_refs: []
+  status: partially_admitted
+  importable_source_refs: [osm_corridor_extract]
   cache_only_source_refs: [yandex_rasp_api]
   required_source_roles:
     - role: schedule_cache
@@ -14,10 +14,7 @@ m1_source_admission:
       admission_status: cache_only
     - role: osm_geometry
       source_ref: osm_corridor_extract
-      admission_status: blocked
-      blocking_reasons:
-        - versioned OSM corridor extract with replication/version and checksum is absent
-        - extract topology and visible ODbL attribution have not been reviewed
+      admission_status: admitted
 sources:
   - source_id: approved_seed_spec
     identifier: "/Users/filatelist/.codex/attachments/b161d6d6-a249-442e-b4af-2251b046d4a2/pasted-text.txt"
@@ -149,15 +146,29 @@ sources:
     prohibited_use: [fabrication, unsourced merge]
     verification_status: pending
   - source_id: osm_corridor_extract
-    url: "https://www.openstreetmap.org/copyright"
-    owner: "OpenStreetMap contributors"
+    url: "https://download.geofabrik.de/russia/central-fed-district-260726.osm.pbf"
+    owner: "Geofabrik GmbH; OpenStreetMap contributors"
     license: "ODbL 1.0"
-    retrieved_at: null
-    checksum: null
-    update_method: "versioned corridor extract with timestamp, replication sequence and checksum"
-    allowed_use: "planned rail geometry and object cross-check with visible OSM attribution"
-    prohibited_use: [unversioned production geometry, removal of attribution]
-    verification_status: pending
+    retrieved_at: "2026-07-28T00:28:17Z"
+    checksum: "sha256:4ab28c4d1bc42f890731bb8943b9f8158ca491d458f01442f5c9552476e49d9f"
+    checksum_scope: "entire local Geofabrik central-fed-district-260726.osm.pbf, 870364656 bytes; upstream MD5 541e19bb16f1c6386d4986854720305e is cross-checked"
+    update_method: "manual human-triggered HTTPS retrieval of the dated Geofabrik PBF; SHA-256 recomputed locally with shasum -a 256; no scheduler"
+    allowed_use: "M1 offline read-only schematic corridor projection and rail-geometry/topology review with visible ODbL attribution"
+    prohibited_use: [public OSM tile production backend, unversioned geometry, removal of attribution, train-position inference, GPS matching before M2]
+    attribution: "© OpenStreetMap contributors"
+    snapshot:
+      version: "central-fed-district-260726"
+      immutable_ref: "https://download.geofabrik.de/russia/central-fed-district-260726.osm.pbf"
+      upstream_md5: "541e19bb16f1c6386d4986854720305e"
+      runtime_path: "data/runtime/osm/central-fed-district-260726.osm.pbf"
+      byte_size: 870364656
+    rights:
+      import_allowed: true
+      reviewed_at: "2026-07-28"
+      note: "ODbL attribution is rendered in the M1 map; raw PBF remains outside Git."
+    rendering:
+      public_osm_tiles_production: false
+    verification_status: verified_m1_import
   - source_id: osm_tile_policy
     url: "https://operations.osmfoundation.org/policies/tiles/"
     owner: "OpenStreetMap Foundation Operations Working Group"
