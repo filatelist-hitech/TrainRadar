@@ -19,8 +19,12 @@
   ключ не хранить в Git/mobile/evidence.
 - [ ] Получить sourced ordinary/accelerated/express patterns через runtime API contract; до этого
   не создавать persistent stop patterns из API response.
-- [ ] Получить versioned OSM corridor extract с replication/version, SHA-256, ODbL attribution и
-  topology review; до admission он не попадает в graph или map.
+- [x] Получить versioned OSM source snapshot for read-only map: Geofabrik
+  `central-fed-district-260726`, SHA-256/MD5, ODbL attribution and deterministic 43-stop boundary
+  guards are recorded (2026-07-28). This admits only the offline schematic projection, not a claim
+  that all rail topology/infrastructure properties are independently verified.
+- [ ] Выполнить manual source/topology review of the admitted OSM snapshot, including `32 км`/`85 км`,
+  and visual iOS/Android review of the offline map before calling the geometry fully verified.
 - [ ] Законно импортировать или independently re-check coordinates, object type, kilometer,
   operational/fare status и external IDs после admission соответствующего source snapshot.
 - [ ] Подтвердить aliases всех пунктов, особенно `32 км` и `85 км`, независимым источником.

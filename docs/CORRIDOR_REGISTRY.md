@@ -9,10 +9,11 @@ Source of truth для машинной проверки:
 станция с `project_usage.enabled: false`. Итого: M0 registry scope 44/44 принят, текущий usable
 corridor содержит 43 пункта.
 
-M1 source admission пока содержит пустой allowlist: это не меняет registry и не создаёт graph/map
-из carrier display checks. Только после lawful schedule и versioned OSM geometry snapshots с
-version, SHA-256, rights и ODbL attribution operational graph/map/QA смогут использовать те же
-43 enabled current stops; `Котляково` останется исключённым.
+M1 source admission допускает `osm_corridor_extract`: dated Geofabrik PBF `central-fed-district-260726`
+с SHA-256, reviewed ODbL rights и visible attribution. Он питает только read-only schematic map
+и её deterministic scope guard; это не подтверждает все pending infrastructure properties и не
+создаёт trip stop patterns. Operational map использует те же 43 enabled current stops;
+`Котляково` остаётся исключённым.
 
 Публичное M1 schedule приходит только как cache-only Яндекс API response и не меняет registry:
 не создаёт persistent stop pattern, не активирует `Котляково` и при отсутствии сети исчезает с

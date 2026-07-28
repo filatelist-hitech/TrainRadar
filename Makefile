@@ -1,6 +1,6 @@
 SHELL := /bin/sh
 
-.PHONY: setup compose-up validate-data schema-check format-check lint test build brand-assets validate-brand \
+.PHONY: setup compose-up validate-data validate-m1-osm verify-m1-osm-runtime schema-check format-check lint test build brand-assets validate-brand \
 	docs-sync docs-check check-staged check-full install-hooks ready check
 
 setup:
@@ -17,7 +17,13 @@ compose-up:
 validate-data:
 	ruby scripts/validate_reference_data.rb
 
-schema-check: validate-data
+validate-m1-osm:
+	ruby scripts/validate_m1_osm_map.rb
+
+verify-m1-osm-runtime: validate-m1-osm
+	ruby scripts/validate_m1_osm_map.rb --require-runtime
+
+schema-check: validate-data validate-m1-osm
 	ruby scripts/validate_openapi.rb
 	docker compose config --quiet
 
@@ -30,6 +36,7 @@ lint:
 	cd backend && go vet ./...
 	cd mobile && flutter analyze
 	ruby -c scripts/validate_reference_data.rb
+	ruby -c scripts/validate_m1_osm_map.rb
 	ruby -c scripts/verify_corridor_sources.rb
 	ruby -c scripts/validate_openapi.rb
 	ruby -c scripts/validate_brand_assets.rb

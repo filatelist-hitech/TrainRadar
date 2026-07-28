@@ -6,6 +6,8 @@
 make install-hooks
 make docs-sync
 make docs-check
+make validate-m1-osm
+make verify-m1-osm-runtime
 make check-staged
 make check-full
 make ready

@@ -45,6 +45,17 @@ OSM tiles в production. Эти поля не создают geometry и не я
 сбрасываемый при остановке процесса. При offline/API failure data отсутствует, а не становится stale
 offline schedule.
 
+## M1 offline map projection
+
+| Field | Type | Semantics |
+|---|---|---|
+| `map_kind` | string | fixed `offline_schematic_rail_corridor`; this is not a live or tile map |
+| `source.version` | string | pinned OSM/Geofabrik snapshot version, cross-checked with source manifest |
+| `source.attribution` / `source.licence` | string | visible `© OpenStreetMap contributors` and `ODbL 1.0` |
+| `corridor.boundary` | WGS84 envelope | deterministic display envelope Москва-Павелецкая → Узуново; no branch may become a stop through it |
+| `stops` | array | exactly 43 enabled current registry projections in fixed ordinal order |
+| `planned_disabled_slots` | array | only `tr-pu-stop-008` / `Котляково` / `planned_unused`; display-only, never usable |
+
 ## Public position
 
 | Field | Meaning |

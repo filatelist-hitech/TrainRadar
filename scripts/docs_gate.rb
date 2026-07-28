@@ -150,6 +150,7 @@ module TrainRadar
       endpoints = api_endpoints(root)
       env_keys = environment_keys(root)
       generated = tracked.select { |path| path.include?("generated") || path.include?(".g.") }
+      mobile_assets = tracked.grep(%r{\Amobile/assets/})
 
       lines = [
         "# Project Map",
@@ -179,6 +180,14 @@ module TrainRadar
         "| Local services | `docker-compose.yml` — operational PostGIS и отдельный raw-GPS store |",
         "| Validators | `scripts/validate_reference_data.rb`, `scripts/validate_openapi.rb` |",
         "",
+      ])
+      unless mobile_assets.empty?
+        lines.concat([
+          "| Flutter resources | #{mobile_assets.map { |path| "`#{path}`" }.join(", ")} |",
+          ""
+        ])
+      end
+      lines.concat([
         "## Internal Go packages",
         "",
         "| Package |",

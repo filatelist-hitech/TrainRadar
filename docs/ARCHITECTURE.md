@@ -46,6 +46,12 @@ flowchart TB
 persistence, schedule snapshot, БД-кэша или offline serving. Compose проверяет только изоляцию dev
 stores. Локальный volume сам по себе не является production encryption-at-rest.
 
+M1-02b mobile map — встроенная Flutter offline-схема из компактной derived projection, а не новый
+HTTP endpoint и не tile client. Она показывает только последовательность 43 enabled current stops,
+явно помечает `Котляково` как disabled planned slot и не имеет network fetch, accounts, GPS,
+train position, ETA или schedule surface. Versioned raw PBF остаётся в `data/runtime/` вне Git;
+map asset хранит только необходимую для read-only display проекцию, version и ODbL attribution.
+
 ## Модули backend
 
 - `corridor`: registry, rail graph versions, stop patterns;

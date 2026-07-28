@@ -32,6 +32,8 @@
 | Local services | `docker-compose.yml` — operational PostGIS и отдельный raw-GPS store |
 | Validators | `scripts/validate_reference_data.rb`, `scripts/validate_openapi.rb` |
 
+| Flutter resources | `mobile/assets/data/m1_corridor_map.json` |
+
 ## Internal Go packages
 
 | Package |

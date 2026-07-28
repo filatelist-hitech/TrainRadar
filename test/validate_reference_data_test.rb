@@ -106,7 +106,11 @@ class ReferenceValidatorTest < Minitest::Test
 
   def test_rejects_listing_blocked_m1_source_as_importable
     manifest = deep_copy(@manifest)
-    manifest["m1_source_admission"]["importable_source_refs"] << "osm_corridor_extract"
+    entry = manifest["m1_source_admission"]["required_source_roles"].find do |candidate|
+      candidate["role"] == "osm_geometry"
+    end
+    entry["admission_status"] = "blocked"
+    entry["blocking_reasons"] = ["fixture blocks the source"]
 
     assert_includes(
       @validator.validate_manifest(manifest).join("\n"),
@@ -139,13 +143,11 @@ class ReferenceValidatorTest < Minitest::Test
 
   def test_rejects_admitted_osm_source_without_attribution_or_snapshot
     manifest = deep_copy(@manifest)
-    entry = manifest["m1_source_admission"]["required_source_roles"].find do |candidate|
-      candidate["role"] == "osm_geometry"
-    end
-    entry["admission_status"] = "admitted"
-    entry.delete("blocking_reasons")
-    manifest["m1_source_admission"]["importable_source_refs"] << "osm_corridor_extract"
-    manifest["m1_source_admission"]["status"] = "partially_admitted"
+    source = manifest["sources"].find { |candidate| candidate["source_id"] == "osm_corridor_extract" }
+    source["verification_status"] = "pending"
+    source["checksum"] = nil
+    source.delete("snapshot")
+    source.delete("attribution")
 
     errors = @validator.validate_manifest(manifest).join("\n")
 
