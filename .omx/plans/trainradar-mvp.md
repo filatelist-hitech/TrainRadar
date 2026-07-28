@@ -13,7 +13,8 @@ Flutter iOS/Android; Go modular monolith; operational PostgreSQL/PostGIS plus se
 raw-GPS store; REST + SSE; Russia-only accountless invite pilot 5–15; owner as individual PD
 operator; foreground plus separate active-trip background opt-in; exact raw GPS ≤24h then hard
 delete/key destruction; `crowd_confirmed` ≥3 independent install-capability; Tutu manual point-check
-only; versioned OSM/ODbL; no production public OSM tiles; four non-mixed truth states.
+only; versioned OSM/ODbL; no production public OSM tiles; four non-mixed truth states. M1 alone is
+public and read-only; M2–M6 remain the invite-only pilot.
 
 ## Global invariants
 
@@ -73,21 +74,23 @@ Schedule/OSM import, map, permissions/GPS, matching, grouping, SSE stream, ETA, 
 
 No external data exists to roll back. Skeleton reports realtime as 501 and registry as pending.
 
-## M1 — Offline rail map
+## M1 — Offline rail map + cached public schedule
 
 ### User outcome
 
-Пассажир видит текущий 43-stop usable corridor from reproducible offline data with OSM attribution;
-planned `Котляково` не участвует в routing или coverage.
+Любой пользователь видит текущий 43-stop usable corridor from reproducible offline OSM data;
+плановое расписание доступно online через Яндекс.Расписания API с коротким cache. Planned
+`Котляково` не участвует в routing или coverage.
 
 ### Inputs
 
-Verified 44-slot registry with 43 current usable stops, lawful schedule snapshot, versioned OSM
-extract, provider/render decision.
+Verified 44-slot registry with 43 current usable stops, versioned OSM extract, provider/render
+decision и Яндекс.Расписания API key в server-side secret store. Расписание не является snapshot:
+оно доступно только при сети через cache-only adapter.
 
 ### Work
 
-- import boundary and source snapshots;
+- cache-only Яндекс adapter с mandatory attribution и без persistent schedule storage;
 - PostGIS rail graph with stations/platforms/tariff/technical objects separated;
 - Flutter MapLibre offline/dev map;
 - stop-pattern fixtures for sourced ordinary/accelerated/express trips.
@@ -98,12 +101,15 @@ extract, provider/render decision.
 - `Котляково` excluded from routing, stop patterns and coverage until its activation gate passes;
 - topology has no forbidden branches;
 - exact OSM attribution and extract checksum/version;
-- map works with network disabled after approved packaging;
+- карта works with network disabled after approved packaging; расписание при этом явно unavailable,
+  а не выдаётся из cache;
+- schedule cache не пишет на диск, живёт не более 300 секунд и не содержит API key в клиенте;
 - source reviewer checks `32 км`/`85 км`.
 
 ### Rollback/degradation
 
-Serve previous valid source version; disable changed layer on checksum/topology failure.
+Serve previous valid OSM version; disable changed layer on checksum/topology failure. При network/API
+failure скрыть расписание с явным состоянием unavailable, не подменяя его stale snapshot.
 
 ## M2 — Single rider track
 

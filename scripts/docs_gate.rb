@@ -146,6 +146,7 @@ module TrainRadar
       tracked = tracked_files(root)
       top_levels = tracked.select { |path| path.include?("/") }.map { |path| path.split("/").first }.uniq.sort
       modules = top_levels.map { |name| module_description(name, tracked) }.compact
+      internal_packages = backend_internal_packages(tracked)
       endpoints = api_endpoints(root)
       env_keys = environment_keys(root)
       generated = tracked.select { |path| path.include?("generated") || path.include?(".g.") }
@@ -177,6 +178,15 @@ module TrainRadar
         "| Flutter | `mobile/lib/main.dart` — iOS/Android shell |",
         "| Local services | `docker-compose.yml` — operational PostGIS и отдельный raw-GPS store |",
         "| Validators | `scripts/validate_reference_data.rb`, `scripts/validate_openapi.rb` |",
+        "",
+        "## Internal Go packages",
+        "",
+        "| Package |",
+        "| --- |"
+      ])
+      internal_packages.each { |package| lines << "| `#{package}` |" }
+
+      lines.concat([
         "",
         "## Публичные интерфейсы",
         "",
@@ -433,8 +443,7 @@ module TrainRadar
       if changed_go
         files.grep(%r{\Abackend/.+\.go\z}).each do |path|
           content = File.binread(File.join(stage_root, path))
-          formatted, status = Open3.capture2("gofmt", stdin_data: content)
-          unless status.success? && formatted == content
+          unless gofmt_formatted?(content)
             @err.puts "Staged Go file is not gofmt-formatted: #{path}"
             return false
           end
@@ -523,6 +532,15 @@ module TrainRadar
       raise ValidationError, "cannot list tracked files" unless status.success?
 
       output.lines(chomp: true).reject { |path| excluded_path?(path) }.sort
+    end
+
+    def backend_internal_packages(tracked)
+      tracked.grep(%r{\Abackend/internal/.+\.go\z}).map { |path| File.dirname(path) }.uniq.sort
+    end
+
+    def gofmt_formatted?(content)
+      formatted, status = Open3.capture2("gofmt", stdin_data: content)
+      status.success? && formatted.b == content
     end
 
     def module_description(name, tracked)

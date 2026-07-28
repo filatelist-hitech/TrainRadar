@@ -11,6 +11,7 @@
 | `Stop` | канонический объект registry | stable ID, aliases, object type, provenance |
 | `RailSegment` | направленное ребро versioned graph | endpoints, geometry version, topology |
 | `SourceSnapshot` | допущенный immutable input M1 | source ref, version, immutable ref, SHA-256, rights review, licence |
+| `ScheduleCacheEntry` | transient M1 API response | source ref, fetched_at, expires_at, attribution; без disk persistence |
 | `Observation` | неизменяемое входное свидетельство | pseudonym, time, encrypted payload, consent |
 | `TrainTrack` | версия агрегированного трека рейса | input refs, algorithm version, uncertainty |
 | `Prediction` | ETA/delay result | checkpoint, interval, confidence, model version |
@@ -40,3 +41,5 @@
 - `TrainTrack` не содержит публично доступной связи с участником.
 - `SourceSnapshot` может питать import boundary только после M1 admission; pending или blocked
   source не создаёт graph, station, platform, tariff object или stop pattern.
+- `ScheduleCacheEntry` допустим только для Яндекс.Расписания в M1: in-memory ≤300 секунд,
+  без offline serving, immutable storage или API key в mobile client.

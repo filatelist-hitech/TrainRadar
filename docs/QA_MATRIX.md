@@ -6,7 +6,8 @@
 | exact endpoints | validator negative tests | carrier route both directions | automated PASS; carrier PASS |
 | aliases/direction for 32/85 | schema guard | route views, owner direction assertion | checkpoints PASS; one-way platform assertion recorded as `supplied_not_independently_verified` |
 | source manifest provenance | manifest/checksum guards + live CPPK map verifier | rights and infrastructure-source review | 43/43 route, 42/43 map, 1 `schedule_only`; rights/source remain M1 inputs |
-| M1 source admission boundary | `make validate-data`: empty allowlist, blocked-source rejection, immutable snapshot/rights/SHA-256/ODbL contract | lawful schedule/OSM snapshot, rights, topology and attribution review | PASS: zero sources admitted; import and map packaging `NOT_RUN` |
+| M1 source admission boundary | `make validate-data`: immutable import allowlist remains empty; Яндекс cache-only source rejects disk/offline persistence and requires attribution | OSM topology/attribution review; public M1 source/map review | PASS: schedule import disabled; cache-only runtime and map packaging `NOT_RUN` |
+| public M1 schedule contract | source-policy validator + deterministic Go tests: missing key, TTL boundary, miss/hit/expiry, upstream failure, mutex cache, secret-safe error/log/response and no persistence dependency | real Yandex live probe, public attribution and network-loss review | adapter contract PASS; client/API/manual review `NOT_RUN` |
 | allowed stop-pattern states | exact enum test | real trip patterns | enum PASS; patterns `NOT_RUN` |
 | forbidden branches absent | exact seed/scope negative test + map-object exclusion | map review | automated PASS; three airport-branch map objects excluded |
 | Go skeleton | `go vet`, `go test`, race/build, HTTP smoke | process smoke | PASS |

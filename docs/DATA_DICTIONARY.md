@@ -29,15 +29,21 @@ separate owner decision.
 
 | Field | Type | Semantics |
 |---|---|---|
-| `m1_source_admission.status` | enum | `no_sources_admitted`, `partially_admitted` или `fully_admitted`; вычисляется из immutable allowlist |
+| `m1_source_admission.status` | enum | `no_sources_admitted`, `partially_admitted` или `fully_admitted`; относится только к immutable import allowlist |
 | `importable_source_refs` | array | только source IDs, прошедшие local admission gate; пустой список означает запрет import |
-| `required_source_roles` | array | exactly `schedule` → `carrier_schedule`, затем `osm_geometry` → `osm_corridor_extract` |
-| `admission_status` | enum | `blocked` или `admitted`; blocked source обязан иметь конкретные reasons |
+| `cache_only_source_refs` | array | source IDs, разрешённые только для временного API cache; они не являются dataset/snapshot |
+| `required_source_roles` | array | exactly `schedule_cache` → `yandex_rasp_api`, затем `osm_geometry` → `osm_corridor_extract` |
+| `admission_status` | enum | `blocked`, `cache_only` или `admitted`; blocked source обязан иметь конкретные reasons |
 | `snapshot` | object | для admitted source: immutable reference и source version |
 | `rights` | object | для admitted source: `import_allowed: true` и дата review |
+| `cache_policy` | object | storage, TTL, offline rule и имя server-side environment variable без значения ключа |
 
 Admitted OSM geometry требует SHA-256, `ODbL 1.0`, видимого attribution и явного запрета public
 OSM tiles в production. Эти поля не создают geometry и не являются разрешением на external fetch.
+
+Яндекс schedule data не получает `snapshot`: M1 использует только in-memory cache до 300 секунд,
+сбрасываемый при остановке процесса. При offline/API failure data отсутствует, а не становится stale
+offline schedule.
 
 ## Public position
 

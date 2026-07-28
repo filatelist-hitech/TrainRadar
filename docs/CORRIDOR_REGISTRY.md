@@ -14,6 +14,10 @@ M1 source admission пока содержит пустой allowlist: это н�
 version, SHA-256, rights и ODbL attribution operational graph/map/QA смогут использовать те же
 43 enabled current stops; `Котляково` останется исключённым.
 
+Публичное M1 schedule приходит только как cache-only Яндекс API response и не меняет registry:
+не создаёт persistent stop pattern, не активирует `Котляково` и при отсутствии сети исчезает с
+явным состоянием unavailable.
+
 | # | stop_id | Каноническое имя | Seed alias | Status |
 |---:|---|---|---|---|
 | 1 | tr-pu-stop-001 | Москва-Павелецкая | Павелецкий вокзал | pending |

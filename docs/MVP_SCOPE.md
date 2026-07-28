@@ -19,7 +19,7 @@ usable stop patterns, routing или coverage. Активация требует
 
 ## Продуктовый MVP M1–M6
 
-После отдельных утверждений MVP может включить offline rail map, schedule import, stop patterns,
+После отдельных утверждений MVP может включить offline rail map, cache-only schedule display, stop patterns,
 режим «Я в этом поезде», consented GPS, map matching, multi-rider aggregation, delay, интервальный
 ETA, incident detection, историю своей поездки и уведомление о приближении.
 
@@ -31,13 +31,16 @@ M0 принят владельцем, M1 отдельно авторизован
 В scope текущего пакета:
 
 - M1 source admission boundary и воспроизводимые source snapshots;
-- offline rail graph/map только после lawful schedule и versioned OSM admission;
+- публичный read-only M1 map/schedule без аккаунтов, GPS или персональных данных;
+- offline rail graph/map после versioned OSM admission; schedule приходит только online через
+  cache-only Яндекс API, без persistent import;
 - 44/44 registry, 43 enabled operational stops и fail-closed `Котляково`;
 - ODbL attribution и provider/render decision без public OSM tiles в production.
 
 Вне scope M1:
 
-- import без source manifest/rights/version/checksum;
+- persistent import или offline snapshot Яндекс schedule data;
+- cache Яндекс schedule data на диске, дольше 300 секунд, без attribution или без сети;
 - GPS permissions, SDK, реальные/синтетические треки;
 - map matching, grouping, realtime stream, ETA и notifications (M2+);
 - production hosting, tiles, KMS/HSM и developer accounts.
