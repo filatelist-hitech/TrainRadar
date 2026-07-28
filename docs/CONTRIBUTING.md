@@ -29,6 +29,10 @@ master `assets/brand/trainradar/master/trainradar-icon-master-1254.png`.
 `mobile/README.md` и `docs/API_CONTRACT.md` также обновляются через генератор, но не auto-stageятся:
 их нужно проверить и добавить в index явно. Product copy, onboarding, ADR, privacy/security,
 troubleshooting, migration guides и evidence остаются human-owned.
+Generated project map перечисляет tracked internal Go package directories, поэтому новый backend
+package требует синхронизации и staging `docs/PROJECT_MAP.md` в том же срезе.
+Go formatter gate сравнивает байты, поэтому UTF-8 комментарии и строковые литералы не дают ложный
+сигнал о неотформатированном файле.
 
 Чтобы добавить документ, внесите его в `docs/DOCS_MANIFEST.yaml` с аудиторией, владельцем, типом,
 source paths, командами и условиями обновления. Для нового класса изменения добавьте узкое правило в

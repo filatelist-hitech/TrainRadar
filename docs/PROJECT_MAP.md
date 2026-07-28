@@ -32,6 +32,16 @@
 | Local services | `docker-compose.yml` — operational PostGIS и отдельный raw-GPS store |
 | Validators | `scripts/validate_reference_data.rb`, `scripts/validate_openapi.rb` |
 
+## Internal Go packages
+
+| Package |
+| --- |
+| `backend/internal/config` |
+| `backend/internal/domain` |
+| `backend/internal/httpapi` |
+| `backend/internal/rawgps` |
+| `backend/internal/schedule/yandex` |
+
 ## Публичные интерфейсы
 
 | Method | Path | Operation ID |

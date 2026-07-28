@@ -36,10 +36,15 @@ flowchart TB
     Raw -. "hard delete + key destruction" .-> Keys
 ```
 
-В M0 API не подключён к БД и SSE отвечает `501`. В M1 future schedule adapter использует
-Яндекс.Расписания API через Go backend: ключ только server-side, in-memory cache ≤300 секунд,
-без persistence и без offline schedule. Compose проверяет только изоляцию dev stores.
-Локальный volume сам по себе не является production encryption-at-rest.
+В M0 API не подключён к БД и SSE отвечает `501`. M1-02b добавляет локальный internal adapter
+`backend/internal/schedule/yandex`: ключ читается только из environment backend-процесса
+`YANDEX_RASP_API_KEY`; без ключа он возвращает safe `unavailable` без fake data. Реальный upstream
+клиент — внедряемый интерфейс, поэтому adapter не открывает сеть сам и unit-тесты детерминированы.
+Единственный cache находится в памяти процесса, защищён mutex, живёт от положительного TTL до 300
+секунд включительно, не имеет refresh job и не отдаёт expired/stale response. Его internal output
+содержит Yandex attribution, source timestamp и cache metadata, но не credential. Нет файловой
+persistence, schedule snapshot, БД-кэша или offline serving. Compose проверяет только изоляцию dev
+stores. Локальный volume сам по себе не является production encryption-at-rest.
 
 ## Модули backend
 

@@ -53,6 +53,13 @@ class DocsGateTest < Minitest::Test
     assert_equal module_rows.sort, module_rows
   end
 
+  def test_project_map_lists_internal_go_packages
+    project_map = gate.project_map
+
+    assert_includes project_map, "| `backend/internal/schedule/yandex` |"
+    assert_includes project_map, "| `backend/internal/rawgps` |"
+  end
+
   def test_source_path_change_updates_generated_sections
     File.open(File.join(@root, ".env.example"), "a") { |file| file.puts "DOC_GATE_TEST_SETTING=1" }
 
@@ -141,6 +148,12 @@ class DocsGateTest < Minitest::Test
     run_git("add", "--", "docs/PROJECT_MAP.md")
 
     assert gate.pre_commit
+  end
+
+  def test_pre_commit_accepts_utf8_go_source
+    source = "package example\n\n// кириллица остаётся корректным Go-комментарием\n".b
+
+    assert gate.send(:gofmt_formatted?, source)
   end
 
   def test_hook_returns_nonzero_for_rejected_staged_content
